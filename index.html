@@ -86,6 +86,7 @@
             cursor: pointer;
             z-index: 999;
             transition: background-color 0.3s;
+            text-decoration: none;
         }
 
         .feedback-button:hover {
@@ -120,6 +121,8 @@
             }
         }
     </style>
+    <!-- Load jQuery (required for custom trigger function) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -127,7 +130,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Welcome to the ARC - NARC Beta Testing Program</h1>
-            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button at the top to share your insights.</p>
+            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button at the bottom to share your insights.</p>
         </div>
     </section>
 
@@ -137,27 +140,20 @@
     </div>
 
     <!-- Custom Feedback Button (fixed position for mobile and desktop) -->
-    <button class="feedback-button" onclick="openFeedback()">Provide Feedback</button>
+    <a href="#" id="myCustomTrigger" class="feedback-button">Provide Feedback</a>
 
     <!-- Jira Issue Collector Script -->
     <script type="text/javascript" src="https://sonancelabs.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/8/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=5b154121"></script>
 
     <!-- Custom Trigger Script for Jira Collector -->
     <script type="text/javascript">
-        // Define the custom trigger function
-        function openFeedback() {
-            if (typeof window.showCollectorDialog === 'function') {
-                window.showCollectorDialog();
-            } else {
-                console.warn("Jira collector script not loaded yet.");
-            }
-        }
-
-        // Use ATL_JQ_PAGE_PROPS to initialize the collector dialog
         window.ATL_JQ_PAGE_PROPS = {
             "triggerFunction": function(showCollectorDialog) {
-                // Attaches the showCollectorDialog to the custom button for mobile and desktop
-                window.showCollectorDialog = showCollectorDialog; // Make it available globally
+                // Attach the showCollectorDialog to our custom button's click event
+                jQuery("#myCustomTrigger").click(function(e) {
+                    e.preventDefault();
+                    showCollectorDialog();
+                });
             }
         };
     </script>
