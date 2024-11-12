@@ -25,7 +25,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('https://source.unsplash.com/random/1600x900');
+            background-image: url('ARC_NARC.jpg'); /* Use the ARC_NARC.jpg as hero image */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -67,24 +67,6 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        /* Feedback Button Style */
-        .feedback-button {
-            font-size: 1em;
-            padding: 15px 30px;
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .feedback-button:hover {
-            background-color: #005bb5;
-        }
-
         /* Footer */
         .footer {
             text-align: center;
@@ -112,8 +94,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Welcome to the ARC - NARC Beta Testing Program</h1>
-            <p>Your feedback is invaluable in helping us create exceptional products. Please share your insights with us.</p>
-            <a href="#" class="feedback-button" onclick="openFeedback()">Provide Feedback</a>
+            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button at the top to share your insights.</p>
         </div>
     </section>
 
@@ -124,16 +105,5 @@
 
     <!-- Jira Issue Collector Script -->
     <script type="text/javascript" src="https://sonancelabs.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/8/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=5b154121"></script>
-
-    <!-- Custom JavaScript to Trigger Feedback -->
-    <script type="text/javascript">
-        function openFeedback() {
-            if (typeof window.showCollectorDialog === 'function') {
-                window.showCollectorDialog();
-            } else {
-                console.warn("Jira collector script not loaded yet.");
-            }
-        }
-    </script>
 </body>
 </html>
