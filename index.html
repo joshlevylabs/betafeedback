@@ -73,20 +73,18 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        /* Custom Feedback Button */
+        /* Custom Feedback Button Centered Below Title */
         .feedback-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             background-color: #0073e6;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
             font-size: 1em;
             cursor: pointer;
-            z-index: 999;
             transition: background-color 0.3s;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 20px; /* Add some space above the button */
         }
 
         .feedback-button:hover {
@@ -130,7 +128,9 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Welcome to the ARC - NARC Beta Testing Program</h1>
-            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button at the bottom to share your insights.</p>
+            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button below to share your insights.</p>
+            <!-- Custom Feedback Button Positioned Below Title -->
+            <a href="#" id="myCustomTrigger" class="feedback-button">Provide Feedback</a>
         </div>
     </section>
 
@@ -138,9 +138,6 @@
     <div class="footer">
         &copy; 2024 Sonance Labs. All rights reserved.
     </div>
-
-    <!-- Custom Feedback Button (fixed position for mobile and desktop) -->
-    <a href="#" id="myCustomTrigger" class="feedback-button">Provide Feedback</a>
 
     <!-- Jira Issue Collector Script -->
     <script type="text/javascript" src="https://sonancelabs.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/8/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=5b154121"></script>
