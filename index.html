@@ -5,59 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARC - NARC Beta Tester Feedback</title>
     <style>
-        /* Center the button on the page */
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body {
             font-family: Arial, sans-serif;
             text-align: center;
-        }
-
-        #myCustomTrigger {
-            padding: 15px 30px;
-            font-size: 20px;
-            color: white;
-            background-color: #0073e6;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        #myCustomTrigger:hover {
-            background-color: #005bb5;
+            margin: 0;
+            padding-top: 50px;
         }
     </style>
-    <!-- Load jQuery (required for custom trigger) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div>
-        <h1>ARC - NARC Beta Tester Feedback</h1>
-        <p>Please select "Report an Issue" button to send feedback to the Sonance engineering team.</p>
+    <h1>ARC - NARC Beta Tester Feedback</h1>
+    <p>Please select "Provide Feedback" at the top of the page to send feedback to the Sonance engineering team.</p>
 
-        <!-- Jira Collector Button -->
-        <button id="myCustomTrigger">Report an Issue</button>
-    </div>
-
-    <!-- Custom Trigger Script for Jira Collector -->
-    <script type="text/javascript">
-        window.ATL_JQ_PAGE_PROPS = {
-            "triggerFunction": function(showCollectorDialog) {
-                // Requires that jQuery is available
-                jQuery("#myCustomTrigger").click(function(e) {
-                    e.preventDefault();
-                    showCollectorDialog();
-                });
-            }
-        };
-    </script>
-
-    <!-- Jira Issue Collector Script -->
+    <!-- Jira Issue Collector Script (default "Provide feedback" trigger) -->
     <script type="text/javascript" src="https://sonancelabs.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/8/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=5b154121"></script>
 </body>
 </html>
