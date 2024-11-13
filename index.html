@@ -30,7 +30,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('ARC_NARC.jpg'); /* Use the ARC_NARC.jpg as hero image */
+            background-image: url('ARC_NARC.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -38,7 +38,7 @@
             align-items: center;
             text-align: center;
             color: white;
-            z-index: 0; /* Set lower z-index */
+            z-index: 0;
         }
 
         /* Overlay for darkening the hero image */
@@ -49,8 +49,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-            z-index: 1; /* Lower z-index to stay below the feedback button */
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
         /* Hero Content */
@@ -75,7 +75,7 @@
 
         /* Custom Buttons */
         .button {
-            background-color: #0073e6; /* Blue for feedback button */
+            background-color: #0073e6;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -91,9 +91,9 @@
             background-color: #005bb5;
         }
 
-        /* Quick Start Guide Button Style (Green) */
+        /* Quick Start Guide Button Style */
         .qsg-button {
-            background-color: #28a745; /* Green */
+            background-color: #28a745;
         }
 
         .qsg-button:hover {
@@ -105,20 +105,44 @@
             padding: 40px 20px;
             background-color: #f8f8f8;
             text-align: left;
+            max-width: 800px;
+            margin: auto;
         }
 
         .faq-section h2 {
             font-size: 1.8em;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .faq-item {
-            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .faq-item h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .faq-item p {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .faq-item.open p {
+            display: block;
+        }
+
+        .faq-toggle {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0073e6;
         }
 
         /* Footer */
@@ -133,11 +157,11 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
-                padding-top: 80px; /* Increase padding on mobile to show the feedback button */
+                padding-top: 80px;
             }
 
             .hero {
-                height: 80vh; /* Reduce hero height to make space for the feedback button */
+                height: 80vh;
             }
 
             .hero h1 {
@@ -149,7 +173,6 @@
             }
         }
     </style>
-    <!-- Load jQuery (required for custom trigger function) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -176,16 +199,19 @@
 
         <div class="faq-item">
             <h3>What is the purpose of this beta program?</h3>
+            <span class="faq-toggle">+</span>
             <p>The SONANCE Beta Program is designed to gather valuable feedback on our products to help us enhance performance, usability, and quality.</p>
         </div>
 
         <div class="faq-item">
             <h3>How do I submit feedback?</h3>
+            <span class="faq-toggle">+</span>
             <p>Click on the "Provide Feedback" button above to send your insights and suggestions directly to our team.</p>
         </div>
 
         <div class="faq-item">
             <h3>Where can I find the Quick Start Guide?</h3>
+            <span class="faq-toggle">+</span>
             <p>You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
         </div>
     </section>
@@ -202,13 +228,25 @@
     <script type="text/javascript">
         window.ATL_JQ_PAGE_PROPS = {
             "triggerFunction": function(showCollectorDialog) {
-                // Attach the showCollectorDialog to our custom button's click event
                 jQuery("#myCustomTrigger").click(function(e) {
                     e.preventDefault();
                     showCollectorDialog();
                 });
             }
         };
+        
+        // FAQ Toggle Functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            const faqItems = document.querySelectorAll(".faq-item");
+
+            faqItems.forEach(item => {
+                item.addEventListener("click", function() {
+                    this.classList.toggle("open");
+                    const toggle = this.querySelector(".faq-toggle");
+                    toggle.textContent = this.classList.contains("open") ? "-" : "+";
+                });
+            });
+        });
     </script>
 </body>
 </html>
