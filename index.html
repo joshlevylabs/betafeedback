@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARC - NARC Beta Tester Feedback</title>
+    <title>SONANCE Beta Program</title>
     <style>
         /* Reset */
         * {
@@ -73,8 +73,8 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        /* Custom Feedback Button Centered Below Title */
-        .feedback-button {
+        /* Custom Buttons */
+        .button {
             background-color: #0073e6;
             color: white;
             padding: 10px 20px;
@@ -84,11 +84,32 @@
             transition: background-color 0.3s;
             text-decoration: none;
             display: inline-block;
-            margin-top: 20px; /* Add some space above the button */
+            margin: 10px 0;
         }
 
-        .feedback-button:hover {
+        .button:hover {
             background-color: #005bb5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 40px 20px;
+            background-color: #f8f8f8;
+            text-align: left;
+        }
+
+        .faq-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
         }
 
         /* Footer */
@@ -127,10 +148,37 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to the ARC - NARC Beta Testing Program</h1>
-            <p>Your feedback is invaluable in helping us create exceptional products. Please use the "Provide Feedback" button below to share your insights.</p>
-            <!-- Custom Feedback Button Positioned Below Title -->
-            <a href="#" id="myCustomTrigger" class="feedback-button">Provide Feedback</a>
+            <h1>Welcome to the SONANCE Beta Program</h1>
+            <p>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</p>
+            
+            <!-- Quick Start Guide Button with Image -->
+            <a href="path_to_qsg.pdf" class="button" target="_blank">
+                <img src="qsg_icon.png" alt="Quick Start Guide" style="vertical-align: middle; width: 24px; margin-right: 8px;">
+                View Quick Start Guide
+            </a>
+
+            <!-- Custom Feedback Button Positioned Below QSG -->
+            <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h3>What is the purpose of this beta program?</h3>
+            <p>The SONANCE Beta Program is designed to gather valuable feedback on our products to help us enhance performance, usability, and quality.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I submit feedback?</h3>
+            <p>Click on the "Provide Feedback" button above to send your insights and suggestions directly to our team.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Where can I find the Quick Start Guide?</h3>
+            <p>You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
         </div>
     </section>
 
