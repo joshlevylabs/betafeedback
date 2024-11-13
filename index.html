@@ -75,7 +75,7 @@
 
         /* Custom Buttons */
         .button {
-            background-color: #0073e6;
+            background-color: #0073e6; /* Blue for feedback button */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -89,6 +89,15 @@
 
         .button:hover {
             background-color: #005bb5;
+        }
+
+        /* Quick Start Guide Button Style (Green) */
+        .qsg-button {
+            background-color: #28a745; /* Green */
+        }
+
+        .qsg-button:hover {
+            background-color: #218838;
         }
 
         /* FAQ Section */
@@ -151,14 +160,13 @@
             <h1>Welcome to the SONANCE Beta Program</h1>
             <p>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</p>
             
-            <!-- Quick Start Guide Button with Image -->
-            <a href="path_to_qsg.pdf" class="button" target="_blank">
-                <img src="qsg_icon.png" alt="Quick Start Guide" style="vertical-align: middle; width: 24px; margin-right: 8px;">
+            <!-- Custom Feedback Button -->
+            <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
+
+            <!-- Quick Start Guide Button Below Feedback Button -->
+            <a href="2024_UA2-125_QuickstartGuide.pdf" class="button qsg-button" target="_blank">
                 View Quick Start Guide
             </a>
-
-            <!-- Custom Feedback Button Positioned Below QSG -->
-            <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
         </div>
     </section>
 
