@@ -18,6 +18,7 @@
             color: #333;
             height: 100%;
             overflow-x: hidden;
+            background-color: #323f48; /* Set the background color for the whole page */
         }
 
         /* Add padding-top to prevent the hero section from covering the feedback button */
@@ -30,27 +31,15 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('BETA_AMP_PAGE.jpg');
+            background-image: url('ARC_NARC.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: black; /* Changed title color to black */
+            color: black;
             z-index: 0;
-        }
-
-        /* Overlay for darkening the hero image */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
         }
 
         /* Hero Content */
@@ -64,19 +53,19 @@
         .hero h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            color: black; /* Title color set to black */
-            text-shadow: none; /* Remove text shadow */
+            color: black;
+            text-shadow: none;
         }
 
         .hero p {
             font-size: 1.2em;
             margin-bottom: 30px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            color: white;
         }
 
         /* Custom Buttons */
         .button {
-            background-color: #1e94c2; /* Updated button color */
+            background-color: #1e94c2;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -94,7 +83,7 @@
 
         /* Quick Start Guide Button Style */
         .qsg-button {
-            background-color: #1e94c2; /* Updated button color */
+            background-color: #1e94c2;
         }
 
         .qsg-button:hover {
@@ -108,6 +97,7 @@
             text-align: left;
             max-width: 800px;
             margin: auto;
+            color: #333;
         }
 
         .faq-section h2 {
@@ -152,9 +142,9 @@
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: #f8f8f8;
+            background-color: #323f48;
             font-size: 0.9em;
-            color: #666;
+            color: #ccc;
         }
 
         /* Responsive Design */
