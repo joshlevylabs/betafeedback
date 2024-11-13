@@ -30,14 +30,14 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('ARC_NARC.jpg');
+            background-image: url('BETA_AMP_PAGE.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
+            color: black; /* Changed title color to black */
             z-index: 0;
         }
 
@@ -64,7 +64,8 @@
         .hero h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            color: black; /* Title color set to black */
+            text-shadow: none; /* Remove text shadow */
         }
 
         .hero p {
@@ -75,7 +76,7 @@
 
         /* Custom Buttons */
         .button {
-            background-color: #0073e6;
+            background-color: #1e94c2; /* Updated button color */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -88,16 +89,16 @@
         }
 
         .button:hover {
-            background-color: #005bb5;
+            background-color: #166b8e;
         }
 
         /* Quick Start Guide Button Style */
         .qsg-button {
-            background-color: #28a745;
+            background-color: #1e94c2; /* Updated button color */
         }
 
         .qsg-button:hover {
-            background-color: #218838;
+            background-color: #166b8e;
         }
 
         /* FAQ Section */
@@ -144,7 +145,7 @@
         .faq-toggle {
             font-size: 1.5em;
             font-weight: bold;
-            color: #0073e6;
+            color: #1e94c2;
         }
 
         /* Footer */
@@ -182,8 +183,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to the SONANCE Beta Program</h1>
-            <p>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</p>
+            <h1>Sonance UA 2-125 ARC<br>Sonance UA 2-125</h1>
             
             <!-- Custom Feedback Button -->
             <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
