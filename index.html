@@ -18,7 +18,7 @@
             color: #333;
             height: 100%;
             overflow-x: hidden;
-            background-color: #323f48; /* Set the background color for the whole page */
+            background-color: #323f48;
         }
 
         /* Hero Section */
@@ -27,7 +27,7 @@
             width: 100%;
             height: 100vh;
             background-image: url('BETA_AMP_PAGE.jpg');
-            background-size: cover; /* Covers full height and width */
+            background-size: cover;
             background-position: top center;
             display: flex;
             justify-content: center;
@@ -39,7 +39,7 @@
         .hero-content {
             max-width: 700px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Light background for better readability */
+            background-color: rgba(255, 255, 255, 0.8);
             border: 2px solid #ffffff;
             border-radius: 10px;
         }
@@ -62,9 +62,9 @@
             cursor: pointer;
             transition: background-color 0.3s;
             text-decoration: none;
-            display: block; /* Stack buttons vertically */
+            display: block;
             margin: 10px auto;
-            width: 60%; /* Adjust button width */
+            width: 60%;
         }
 
         .button:hover {
@@ -131,8 +131,8 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero {
-                background-position: center center; /* Center the image on mobile */
-                background-size: cover; /* Ensure it covers the screen properly */
+                height: 75vh; /* Make the hero section 25% smaller */
+                background-position: center center;
             }
 
             .hero h1 {
