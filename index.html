@@ -27,8 +27,7 @@
             width: 100%;
             height: 100vh;
             background-image: url('BETA_AMP_PAGE.jpg');
-            background-size: contain; /* Ensure the full image fits within the container */
-            background-repeat: no-repeat;
+            background-size: cover; /* Covers full height and width */
             background-position: top center;
             display: flex;
             justify-content: center;
@@ -131,6 +130,11 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .hero {
+                background-position: center center; /* Center the image on mobile */
+                background-size: cover; /* Ensure it covers the screen properly */
+            }
+
             .hero h1 {
                 font-size: 1.5em;
             }
