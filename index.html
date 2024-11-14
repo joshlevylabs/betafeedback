@@ -182,7 +182,7 @@
                 What should I be testing?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div style="display: none;">
+            <div class="faq-answer" style="display: none;">
                 <p>We want feedback on the installer and end-user perspective across several critical use cases:</p>
                 <ul>
                     <li><strong>TV Speaker Amplifier (ARC)</strong> - Testing in behind or near TV mounting applications.</li>
@@ -198,7 +198,7 @@
                 How do I set up the app?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div style="display: none;">
+            <div class="faq-answer" style="display: none;">
                 <p><strong>For iOS users:</strong></p>
                 <ol>
                     <li>Download and install TestFlight from the App Store.</li>
@@ -218,7 +218,9 @@
                 What is the purpose of this beta program?
                 <span class="faq-toggle">+</span>
             </h3>
-            <p style="display: none;">The SONANCE Beta Program is designed to gather valuable feedback on our products to help us enhance performance, usability, and quality.</p>
+            <div class="faq-answer" style="display: none;">
+                <p>The SONANCE Beta Program is designed to gather valuable feedback on our products to help us enhance performance, usability, and quality.</p>
+            </div>
         </div>
     
         <div class="faq-item">
@@ -226,7 +228,9 @@
                 How do I submit feedback?
                 <span class="faq-toggle">+</span>
             </h3>
-            <p style="display: none;">Click on the "Provide Feedback" button above to send your insights and suggestions directly to our team.</p>
+            <div class="faq-answer" style="display: none;">
+                <p>Click on the "Provide Feedback" button above to send your insights and suggestions directly to our team.</p>
+            </div>
         </div>
     
         <div class="faq-item">
@@ -234,7 +238,9 @@
                 Where can I find the Quick Start Guide?
                 <span class="faq-toggle">+</span>
             </h3>
-            <p style="display: none;">You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
+            <div class="faq-answer" style="display: none;">
+                <p>You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
+            </div>
         </div>
     </section>
     
@@ -258,24 +264,25 @@
         };
         
         document.addEventListener("DOMContentLoaded", function() {
-    const faqItems = document.querySelectorAll(".faq-item");
+            const faqItems = document.querySelectorAll(".faq-item");
 
-    faqItems.forEach(item => {
-        item.addEventListener("click", function() {
-            this.classList.toggle("open");
-            const toggle = this.querySelector(".faq-toggle");
-            const answer = this.querySelector("p, ul, ol");
+            faqItems.forEach(item => {
+                const toggle = item.querySelector(".faq-toggle");
+                const answer = item.querySelector(".faq-answer");
 
-            // Toggle visibility of the answer
-            this.querySelectorAll("p, ul, ol").forEach(element => {
-                element.style.display = this.classList.contains("open") ? "block" : "none";
+                item.addEventListener("click", function() {
+                    const isOpen = answer.style.display === "block";
+
+                    // Close all answers
+                    document.querySelectorAll(".faq-answer").forEach(answer => answer.style.display = "none");
+                    document.querySelectorAll(".faq-toggle").forEach(toggle => toggle.textContent = "+");
+
+                    // Toggle the clicked answer
+                    answer.style.display = isOpen ? "none" : "block";
+                    toggle.textContent = isOpen ? "+" : "-";
+                });
             });
-
-            // Change toggle symbol
-            toggle.textContent = this.classList.contains("open") ? "-" : "+";
         });
-    });
-});
 
     </script>
 </body>
