@@ -104,9 +104,13 @@
         .faq-item .faq-answer {
             display: none;
             margin-top: 15px;
-            padding: 10px 0;
             font-size: 0.95em;
             color: #555;
+            line-height: 1.6;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
         }
 
         .faq-toggle {
@@ -115,14 +119,21 @@
             color: #1e94c2;
         }
 
-        /* Indentation for lists inside FAQ answers */
-        .faq-item .faq-answer p, .faq-item .faq-answer ul, .faq-item .faq-answer ol {
-            margin-left: 20px;
+        /* Indentation and Styling for Lists */
+        .faq-answer ul, .faq-answer ol {
             padding-left: 20px;
+            margin: 10px 0;
         }
 
-        .faq-item .faq-answer ul, .faq-item .faq-answer ol {
-            list-style-position: inside;
+        .faq-answer ul li, .faq-answer ol li {
+            margin-bottom: 10px;
+        }
+
+        /* Emphasis for subheadings */
+        .faq-answer .section-title {
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.05em;
         }
 
         /* Footer */
@@ -137,7 +148,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero {
-                height: 75vh; /* Make the hero section 25% smaller */
+                height: 75vh;
                 background-position: center center;
             }
 
@@ -146,7 +157,7 @@
             }
 
             .button {
-                width: 80%; /* Adjust button width for mobile */
+                width: 80%;
             }
         }
     </style>
@@ -188,7 +199,7 @@
                     <li><strong>Outdoor Amplification</strong> - Connect to your outdoor speakers</li>
                 </ul>
 
-                <p>Specific areas to test and provide feedback include:</p>
+                <p class="section-title">Specific areas to test and provide feedback include:</p>
 
                 <ol>
                     <li><strong>Mounting:</strong> What issues or suggestions do you have related to the mounting hardware available to you?</li>
@@ -251,7 +262,7 @@
                 });
             }
         };
-
+        
         document.addEventListener("DOMContentLoaded", function() {
             const faqItems = document.querySelectorAll(".faq-item");
 
