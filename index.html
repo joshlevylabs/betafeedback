@@ -119,6 +119,16 @@
             color: #1e94c2;
         }
 
+        /* Indentation for lists inside FAQ answers */
+        .faq-item p, .faq-item ul, .faq-item ol {
+            margin-left: 20px;
+            padding-left: 20px;
+        }
+
+        .faq-item ul, .faq-item ol {
+            list-style-position: inside;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -172,17 +182,15 @@
                 What should I be testing?
                 <span class="faq-toggle">+</span>
             </h3>
-            <p>
-                We want feedback on the installer and end-user perspective across several critical use cases:
-            </p>
-            <ul style="display: none;">
-                <li><strong>TV Speaker Amplifier (ARC)</strong> - Testing in behind or near TV mounting applications.</li>
-                <li><strong>Zone Amplification</strong> - Using the amp to amplify a small indoor zone.</li>
-                <li><strong>Outdoor Amplification</strong> - Connecting to outdoor speakers.</li>
-            </ul>
-            <p style="display: none;">
-                Specific areas to test and provide feedback include mounting, connection, setup, app usage, the user guide, and normal usage scenarios. Please note any issues or suggestions encountered in these areas.
-            </p>
+            <div style="display: none;">
+                <p>We want feedback on the installer and end-user perspective across several critical use cases:</p>
+                <ul>
+                    <li><strong>TV Speaker Amplifier (ARC)</strong> - Testing in behind or near TV mounting applications.</li>
+                    <li><strong>Zone Amplification</strong> - Using the amp to amplify a small indoor zone.</li>
+                    <li><strong>Outdoor Amplification</strong> - Connecting to outdoor speakers.</li>
+                </ul>
+                <p>Specific areas to test and provide feedback include mounting, connection, setup, app usage, the user guide, and normal usage scenarios. Please note any issues or suggestions encountered in these areas.</p>
+            </div>
         </div>
     
         <div class="faq-item">
@@ -200,9 +208,7 @@
                 <ol>
                     <li>Download and install the APK linked here: <a href="Sonance_1.1.7_2024-09-29-11-31.apk" target="_blank">Sonance_1.1.7_2024-09-29-11-31.apk</a></li>
                 </ol>
-                <p>
-                    Make sure Bluetooth is enabled on your phone. The amp will communicate with the phone via BLE and will appear in the app's home screen if powered on and within range. Select the amp in the app to access available settings for testing.
-                </p>
+                <p>Make sure Bluetooth is enabled on your phone. The amp will communicate with the phone via BLE and will appear in the app's home screen if powered on and within range. Select the amp in the app to access available settings for testing.</p>
             </div>
         </div>
     
@@ -231,7 +237,6 @@
             <p style="display: none;">You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
         </div>
     </section>
-    
     
     <!-- Footer -->
     <div class="footer">
