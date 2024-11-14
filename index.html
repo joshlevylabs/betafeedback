@@ -101,16 +101,12 @@
             justify-content: space-between;
         }
 
-        .faq-item p {
+        .faq-item .faq-answer {
             display: none;
             margin-top: 15px;
             padding: 10px 0;
             font-size: 0.95em;
             color: #555;
-        }
-
-        .faq-item.open p {
-            display: block;
         }
 
         .faq-toggle {
@@ -120,12 +116,12 @@
         }
 
         /* Indentation for lists inside FAQ answers */
-        .faq-item p, .faq-item ul, .faq-item ol {
+        .faq-item .faq-answer p, .faq-item .faq-answer ul, .faq-item .faq-answer ol {
             margin-left: 20px;
             padding-left: 20px;
         }
 
-        .faq-item ul, .faq-item ol {
+        .faq-item .faq-answer ul, .faq-item .faq-answer ol {
             list-style-position: inside;
         }
 
@@ -173,27 +169,28 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section class="faq-section">
         <h2>Frequently Asked Questions</h2>
-    
-        <!-- New FAQ Questions at the Top -->
+
+        <!-- First FAQ Item -->
         <div class="faq-item">
             <h3>
                 What should I be testing?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div class="faq-answer" style="display: none;">
+            <div class="faq-answer">
                 <p>We want an installer and end user perspective on the following critical use cases. Please use the amp in one or more of these scenarios if possible and note issues or suggestions in the beta interface.</p>
-    
-                <ul style="margin-left: 20px;">
+
+                <ul>
                     <li><strong>TV Speaker Amplifier (ARC)</strong> - Behind or near TV mounting applications</li>
                     <li><strong>Zone Amplification</strong> - Use the amp to amplify a small indoor zone</li>
                     <li><strong>Outdoor Amplification</strong> - Connect to your outdoor speakers</li>
                 </ul>
-    
-                <p style="margin-top: 10px;">Specific areas to test and provide feedback include:</p>
-    
-                <ol style="margin-left: 20px;">
+
+                <p>Specific areas to test and provide feedback include:</p>
+
+                <ol>
                     <li><strong>Mounting:</strong> What issues or suggestions do you have related to the mounting hardware available to you?</li>
                     <li><strong>Connection:</strong> Note any issues connecting or limitations that make the use scenario you are attempting challenging.</li>
                     <li><strong>Setup:</strong> Utilize the app to configure the settings to optimize your use case. What challenges or difficulties are you having related to setup?</li>
@@ -203,34 +200,14 @@
                 </ol>
             </div>
         </div>
-    
-        <!-- Existing FAQ Questions -->
-        <div class="faq-item">
-            <h3>
-                How do I set up the app?
-                <span class="faq-toggle">+</span>
-            </h3>
-            <div class="faq-answer" style="display: none;">
-                <p><strong>For iOS users:</strong></p>
-                <ol>
-                    <li>Download and install TestFlight from the App Store.</li>
-                    <li>Access the iOS version of the Sonance app at: <a href="https://testflight.apple.com/join/vCtfzYcV" target="_blank">https://testflight.apple.com/join/vCtfzYcV</a></li>
-                </ol>
-                <p style="margin-top: 10px;"><strong>For Android users:</strong></p>
-                <ol>
-                    <li>Download and install the APK linked here: <a href="Sonance_1.1.7_2024-09-29-11-31.apk" target="_blank">Sonance_1.1.7_2024-09-29-11-31.apk</a></li>
-                </ol>
-                <p>Make sure Bluetooth is enabled on your phone. The amp will communicate with the phone via BLE and will appear in the app's home screen if powered on and within range. Select the amp in the app to access available settings for testing.</p>
-            </div>
-        </div>
-    
-        <!-- Remaining FAQ Questions -->
+
+        <!-- Other FAQ Items -->
         <div class="faq-item">
             <h3>
                 What is the purpose of this beta program?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div class="faq-answer" style="display: none;">
+            <div class="faq-answer">
                 <p>The SONANCE Beta Program is designed to gather valuable feedback on our products to help us enhance performance, usability, and quality.</p>
             </div>
         </div>
@@ -240,7 +217,7 @@
                 How do I submit feedback?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div class="faq-answer" style="display: none;">
+            <div class="faq-answer">
                 <p>Click on the "Provide Feedback" button above to send your insights and suggestions directly to our team.</p>
             </div>
         </div>
@@ -250,12 +227,12 @@
                 Where can I find the Quick Start Guide?
                 <span class="faq-toggle">+</span>
             </h3>
-            <div class="faq-answer" style="display: none;">
+            <div class="faq-answer">
                 <p>You can view the Quick Start Guide by clicking on the "View Quick Start Guide" button above.</p>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <div class="footer">
         &copy; 2024 Sonance Labs. All rights reserved.
@@ -274,7 +251,7 @@
                 });
             }
         };
-        
+
         document.addEventListener("DOMContentLoaded", function() {
             const faqItems = document.querySelectorAll(".faq-item");
 
@@ -295,7 +272,6 @@
                 });
             });
         });
-
     </script>
 </body>
 </html>
