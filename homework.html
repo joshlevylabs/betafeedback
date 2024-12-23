@@ -31,7 +31,7 @@
             display: block;
         }
         .button {
-            margin: 20px 0;
+            margin: 20px 10px;
             padding: 15px 30px;
             font-size: 1em;
             color: white;
@@ -54,7 +54,8 @@
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
-        <p><strong>Firmware Version:</strong> 1.75</p> <!-- Display Firmware Version -->
+        <p><strong>Firmware Version:</strong> 1.75</p> <!-- Firmware Version -->
+        
         <form id="homeworkForm">
             <!-- Device Selection (ARC or NARC) -->
             <div class="question active" id="q1">
@@ -84,14 +85,14 @@
                 <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
             </div>
 
-            <!-- Navigation and Progress -->
+            <!-- Progress and Navigation -->
             <div class="progress" id="progress">Question 1 of 3</div>
-            <button type="button" class="button" id="prevButton" onclick="prevQuestion()">Go Back</button>
+            <button type="button" class="button" id="prevButton" onclick="prevQuestion()" style="display: none;">Previous</button>
 
             <!-- Submit Page -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
-                <button type="submit" class="button">Submit</button>
+                <button type="submit" class="button">Submit Responses</button>
             </div>
         </form>
     </div>
@@ -100,6 +101,7 @@
         let responses = {};
         let currentIndex = 0;
         let currentPath = [];
+        let questionAnswered = false;
 
         const arcQuestions = ['mobileSelection', 'arc1'];
         const narcQuestions = ['mobileSelection', 'narc1'];
@@ -113,6 +115,7 @@
 
         function recordAnswer(questionId, answer) {
             responses[questionId] = answer;
+            questionAnswered = true;
             navigate(1);
         }
 
@@ -125,6 +128,12 @@
             currentIndex += direction;
             document.getElementById(currentPath[currentIndex]).classList.add('active');
             updateProgress();
+            togglePrevButton();
+        }
+
+        function togglePrevButton() {
+            const prevButton = document.getElementById('prevButton');
+            prevButton.style.display = currentIndex > 0 ? 'inline-block' : 'none';
         }
 
         function updateProgress() {
@@ -138,7 +147,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(responses)
             });
-            alert("Your responses have been submitted!");
+            window.location.href = '/thank-you.html';
         };
     </script>
 </body>
