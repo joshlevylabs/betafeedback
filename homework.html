@@ -57,12 +57,33 @@
         <p><strong>Firmware Version:</strong> 1.75</p> <!-- Firmware Version -->
         
         <form id="homeworkForm">
+            <!-- Device Selection -->
             <div class="question active" id="q1">
                 <p>Are you using an ARC or a NARC?</p>
                 <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
                 <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
-        
+
+            <!-- ARC Questions -->
+            <div class="question" id="arc1">
+                <p>1. Enable low brightness mode. Is the LED brightness acceptable?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+            </div>
+
+            <div class="question" id="arc2">
+                <p>2. Verify the protection LED. Is it working without delays?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
+            </div>
+
+            <!-- NARC Questions -->
+            <div class="question" id="narc1">
+                <p>1. Is the NARC connecting to Bluetooth properly?</p>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
+            </div>
+
             <!-- Submit Page -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
@@ -77,33 +98,33 @@
             let responses = {};
             let currentIndex = 0;
             let currentPath = [];
-        
+
             const arcQuestions = ['arc1', 'arc2'];
             const narcQuestions = ['narc1'];
             const submitPage = 'submitPage';
-        
+
             function nextQuestion(device) {
                 document.getElementById('q1').classList.remove('active');
                 currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
                 document.getElementById(currentPath[currentIndex]).classList.add('active');
-                document.getElementById('prevButton').style.display = 'inline-block';  // Show 'Previous' Button Immediately
+                document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
-        
+
             function recordAnswer(questionId, answer) {
                 responses[questionId] = answer;
                 navigate(1);
             }
-        
+
             function prevQuestion() {
                 navigate(-1);
             }
-        
+
             function navigate(direction) {
                 document.getElementById(currentPath[currentIndex]).classList.remove('active');
                 currentIndex += direction;
-        
+
                 if (currentIndex >= currentPath.length) {
                     document.getElementById(submitPage).classList.add('active');
                 } else {
@@ -112,11 +133,11 @@
                 
                 updateProgress();
             }
-        
+
             function updateProgress() {
                 document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
-        
+
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
                 const response = await fetch('http://localhost:3000/submit-homework', {
@@ -131,6 +152,6 @@
                 }
             };
         </script>
-        
+    </div>
 </body>
 </html>
