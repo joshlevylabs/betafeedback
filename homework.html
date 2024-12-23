@@ -149,20 +149,22 @@
                         body: JSON.stringify(responses)
                     });
 
-                    console.log('Fetch response:', response);  // Log the full response
+                    console.log('Raw response:', response);  // Log the entire response
 
-                    const result = await response.json();
-                    console.log('Result:', result);  // Log the parsed response
+                    const textResponse = await response.text();
+                    console.log('Response Text:', textResponse);  // Log raw text to inspect errors
 
+                    // Try to parse JSON only if the response is ok and has correct content type
                     if (response.ok) {
-                        console.log('Form submitted successfully');
+                        const result = JSON.parse(textResponse);
+                        console.log('Result:', result);  // Log parsed JSON
                         window.location.href = '/thank-you.html';
                     } else {
-                        console.error('Submission Error:', result.error || 'Unknown error');
-                        alert(result.error || 'Error submitting. Please try again.');
+                        console.error('Submission Error:', textResponse);
+                        alert('Submission failed: ' + textResponse);
                     }
                 } catch (error) {
-                    console.error('Submission Error (catch block):', error);  // Log network errors
+                    console.error('Submission Error (catch block):', error);
                     alert('Error submitting. Please check your connection and try again.');
                 }
             };
