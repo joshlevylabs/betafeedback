@@ -140,17 +140,21 @@
 
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
-                const response = await fetch('http://localhost:3000/submit-homework', {
+                
+                // Use a relative path or point to your live API endpoint
+                const response = await fetch('/submit-homework', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(responses)
                 });
+                
                 if (response.ok) {
                     window.location.href = '/thank-you.html';
                 } else {
                     alert('Error submitting. Please try again.');
                 }
             };
+
         </script>
     </div>
 </body>
