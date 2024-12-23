@@ -1,0 +1,450 @@
+[33mcommit 5a2cad7b9a5c770897692ae9422fb9a2ab767edc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 15:38:28 2024 -0800
+
+    .env file creation
+
+[33mcommit 33914576690f718abd83d598db7bcc4d484e9957[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 15:31:22 2024 -0800
+
+    sendgrid implementation
+
+[33mcommit 3406d330ad87aea16197771ff6af183ebde1fdb9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:39:55 2024 -0800
+
+    moved package.json to parent directory
+
+[33mcommit 95efd94af7e3b9e8494eff893098ca3de73c654c[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:34:51 2024 -0800
+
+    more debugging logs
+
+[33mcommit 8ae1016b4e0b46dfb34aea207208ad2e79d7fd4a[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:29:53 2024 -0800
+
+    debugging logs
+
+[33mcommit c9a451bed09e4e7ea446a85c70fc9f87f07ac8cc[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:25:46 2024 -0800
+
+    Duplicate API Routes, Server Export Issue, Path
+    Errors.
+
+[33mcommit 15612021c9d28e50af054b57146731ca6737365c[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:20:54 2024 -0800
+
+    new routes
+
+[33mcommit fdb8dd33909aade163b2251a6b9cf64672a4d62e[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:19:04 2024 -0800
+
+    Diagnose the Issue:
+    CORS (Cross-Origin Resource Sharing) Issue
+    Server Not Handling the Request Correctly
+    Incorrect Fetch URL (Ensure Proper Domain)
+    API Route Misconfiguration
+    Server-Side Error (Email Configuration or Nodemailer Issue)
+
+[33mcommit 55e1e78eb968be070580e9efb6c1873e12baed65[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:15:13 2024 -0800
+
+    Redirect Fix:
+    The fetch now waits for a JSON response from the server. If the email is sent successfully, the user is redirected to /thank-you.html.
+    
+    Error Handling:
+    If the email fails to send, an alert informs the user of the issue.
+
+[33mcommit 8b8039d7fe1fe890b9a7af443925f6ca5a6cad53[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:10:24 2024 -0800
+
+    moved hmtl files to root directory
+
+[33mcommit ee13bcbf4fe7cef32be32b26ae0ae66fdf0b45d7[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:07:26 2024 -0800
+
+    change to fecth homework
+
+[33mcommit 54e9ec53182811c031b2bd61684e8e9f68bb1d4f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:04:21 2024 -0800
+
+    index.html rout in vercel.json
+
+[33mcommit 1b5481935d7d4d749dc5cd550114e17128dc551e[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:03:16 2024 -0800
+
+    vercel.js change
+
+[33mcommit f6d988645c04369d8516526e676808a8e4661d55[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 14:01:32 2024 -0800
+
+    new server.js change
+
+[33mcommit 1d25b3823532a029d02a790115468d472a9f8e60[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 13:29:06 2024 -0800
+
+    updates 12.23-1:28
+
+[33mcommit 3e11a392bcd85cbf028f865cccdbf9147e7b1341[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 13:14:16 2024 -0800
+
+    Updated for Vercel/Production:
+    
+    Replaced localhost with the actual production domain: www.sonance-beta.info.
+    Fixed Email Endpoint:
+    
+    /submit-homework now returns JSON to avoid the frontend thinking there's an HTML page error.
+    Thank You Page:
+    
+    Access /thank-you instead of /thank-you.html for cleaner routing.
+    Catch-All for Undefined Routes:
+    
+    If the user accesses an invalid API route, return a 404 response with a JSON message.
+
+[33mcommit be3f87a6629af5521882ffc780165eb60233a91f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 13:02:36 2024 -0800
+
+    Relative path in fetch request (/submit-homework) will hit the Node.js endpoint on the same domain.
+    Static files (like thank-you.html and homework.html) are served directly by the Node.js server.
+    The submit-homework route sends email automatically without opening the user's email client.
+
+[33mcommit 7be76f66b43db9720e6c6832d3d6d38136e6d7fa[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:54:24 2024 -0800
+
+    Added ARC and NARC Questions after the initial selection.
+    Navigation Logic updated to properly show the next question.
+    Submit Page appears after all questions are answered.
+
+[33mcommit e6094bda523182c1c46a70bc289603745051ea2c[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:49:53 2024 -0800
+
+    Create the thank-you.html page to confirm submission.
+    Fix the Submit Button logic in homework.html to ensure it communicates with server.js.
+    Update the Previous Button to show immediately after the user selects ARC or NARC.
+    Ensure the backend (server.js) handles email submission properly using nodemailer.
+
+[33mcommit eeae80be91f50eac5e79e5780a73abf77c8b029f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:43:11 2024 -0800
+
+    Previous Button After First Question (ARC or NARC Selection):
+
+[33mcommit 75cff2b0348934065cc3b5d18751c0e14cb42169[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:38:27 2024 -0800
+
+    Conditional "Previous" Button:
+    The “Previous” button will only appear after the user selects a mobile device (iOS or Android) and starts answering questions. It will dynamically show/hide based on the user’s progress.
+    Submit Button and Confirmation:
+    A “Submit Responses” button will be placed at the end of the form.
+    After successful submission, the user will be redirected to a “Thank you” page that confirms the submission.
+
+[33mcommit 2df5e2e73ec93ae897b3fb431890c29ef1a17206[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:32:30 2024 -0800
+
+    Filter Questions by Device Type:
+    The script will now ensure that ARC users only see ARC questions and NARC users only see NARC questions.
+    Email Automation with Node.js:
+    Replaced the mailto with a POST request that directly sends the data to the server for processing and auto-emailing.
+    Progress Bar and Navigation:
+    A dynamic progress bar (x of y) is added, along with a “Go Back” button to navigate to the previous question.
+    Firmware Version and Mobile Device Prompt:
+    Added a firmware version prompt at the beginning and a question about the user’s mobile device (iOS or Android).
+
+[33mcommit 2fd6899c79fb78cc0536b81469b5388002e857a8[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:22:25 2024 -0800
+
+    Submit Button: Removed from the initial view. It will now only appear after all questions are answered.
+    Question Navigation: The script has been corrected to ensure that selecting "ARC" or "NARC" leads to the first corresponding question.
+    Flow Fix: The navigation logic now hides the first screen (q1) and transitions properly to the correct question set.
+    html
+    Copy code
+
+[33mcommit 9d46915a0c7377e9960399b3ede7a3fe583cbf70[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 12:18:10 2024 -0800
+
+    ARC questions
+
+[33mcommit dcfb5a424235440056c924816192b2141f7a23f0[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 11:50:58 2024 -0800
+
+    nodejs implementation
+
+[33mcommit 2ef20c0755663cb96e13aea2cf8b009001b17113[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 11:45:56 2024 -0800
+
+    auto email
+
+[33mcommit cb32533fd378e6ea3bb4448e92eba247f154e697[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Mon Dec 23 11:37:56 2024 -0800
+
+    homework html added
+
+[33mcommit 6e2e514862d2cb2d809ecc4f7f0ef315de87c5c1[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 13:20:13 2024 -0800
+
+    New Jira collector
+
+[33mcommit a70c5f32bb5a2d85ec78007be22f4e6da98c6f75[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 11:43:00 2024 -0800
+
+    robots.txt file inclusion
+
+[33mcommit 81194ae0dfc820428b728a8a0ba2b67e5a7d533f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 11:39:33 2024 -0800
+
+    ico file and broken link fix
+
+[33mcommit 664ffd26ae753e2d1158e0f15d005897b6b706aa[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 11:15:14 2024 -0800
+
+    Update FAQ with extra question
+
+[33mcommit 7dfd66f68b371fcb3d491d9f65541d6de669e5c7[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 11:10:40 2024 -0800
+
+    Update format of FAQ section
+
+[33mcommit 3094048865bde1eac3a838abd146d32501d7fcd1[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 11:06:05 2024 -0800
+
+    Updated FAW r6
+
+[33mcommit 91c6062d82ec5d2fd68098b42cf0369d106d2e54[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:57:30 2024 -0800
+
+    Updated FAQ section r5
+
+[33mcommit 5c34720a29dced18d434599c0746e8f77c975b4f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:55:58 2024 -0800
+
+    updated first FAQ question r2
+
+[33mcommit e55f63da925048f73e6e8fb9adc9f7c1b19e7d30[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:52:24 2024 -0800
+
+    updated first question contents in FAQ
+
+[33mcommit aa38bdb4d86bb80db1f9f53cf0553f92b74d3332[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:47:51 2024 -0800
+
+    Fixes to FAQ section r4
+
+[33mcommit 39d007f191593b674cecaefcb7b0963ce4b03faf[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:42:44 2024 -0800
+
+    updated FAQ r3
+
+[33mcommit fc73963d625f8198c68fde9f5866557f7d6d1de9[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:36:17 2024 -0800
+
+    updated FAQ section r3
+
+[33mcommit e8b43457b15f4aa966b9084864c2d022cf339fd4[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:21:06 2024 -0800
+
+    update FAQ section r2
+
+[33mcommit 5c37f6f1072d267f064aa13c063e74769bfde4ad[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Thu Nov 14 10:17:39 2024 -0800
+
+    updated FAQ section
+
+[33mcommit d1ba75876d460d7f2474f2d6a3bcaf013a8f1865[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:51:07 2024 -0800
+
+    make hero image smaller on mobile
+
+[33mcommit 3417616531f085778aa3be6993347aed1e2dc039[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:44:25 2024 -0800
+
+    mobile friendly
+
+[33mcommit a1274fc15c091c627f0dd892649837f85bef4d69[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:41:06 2024 -0800
+
+    background positioning
+
+[33mcommit 4986ff94220edf13383451e774e7d61486cb66ff[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:34:31 2024 -0800
+
+    Updated text and hero image size
+
+[33mcommit 0b86460df2e84b804581f88ccd4d50b637b8c169[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:26:13 2024 -0800
+
+    Make text smaller to fit on mobile
+
+[33mcommit 75ff06ac969641ca031239be142a221e74313ccb[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:22:46 2024 -0800
+
+    Sonance blue #02a0dd
+
+[33mcommit d317cc6f4ac2b2d22170e4e913e60562d0123535[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:19:41 2024 -0800
+
+    image name update
+
+[33mcommit fb1003ff90654d272c41b742e22e2726567debdd[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:18:00 2024 -0800
+
+    Removed Overlay
+
+[33mcommit 54803eff72537da88b6a65710fc72838e67f5f47[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 14:06:20 2024 -0800
+
+    New hero image and sonance blue buttons
+
+[33mcommit 08392c1810e436a310b094669de7f918e542af84[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 11:15:15 2024 -0800
+
+    more padding on FAQ answer section
+
+[33mcommit cc0e5f737192c9530712b8f2f773f05118dffb36[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 11:11:53 2024 -0800
+
+    added qsg pdf
+
+[33mcommit 7078b5e271672a2534e8a0da3136bba796c8de6e[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 11:10:46 2024 -0800
+
+    modernized FAQ section
+
+[33mcommit db56be0c02f07d6ec5b689605bc75f3105d96917[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 11:07:10 2024 -0800
+
+    Update Quick Start Guide button with new PDF and styling
+
+[33mcommit e9ddb025c0feb1dab71f9be2e2e3d4f56b9f100f[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Wed Nov 13 11:01:15 2024 -0800
+
+    Update welcome text, add QSG button, and add FAQ section
+
+[33mcommit bf678383898c68f8f21c0a86119cb739a1d24b34[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:52:25 2024 -0800
+
+    Move feedback button to middle below title
+
+[33mcommit 2724a8754ffcd38eac6f7288eace011264318fbb[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:45:11 2024 -0800
+
+    Use custom trigger for feedback button and remove default button
+
+[33mcommit 753419a516a4ec0c31204c0242735e19e426c124[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:39:58 2024 -0800
+
+    Add custom feedback button for mobile compatibility
+
+[33mcommit c6a959707acc66084ade41184435cac5fc3a3478[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:18:22 2024 -0800
+
+    Adjust padding and hero height for mobile feedback button visibility
+
+[33mcommit a57b1213a35b508f3ec78a9ee717bab7b451df43[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:14:18 2024 -0800
+
+    Adjust z-index and padding for feedback button visibility
+
+[33mcommit 2fa66e9a0774f1721e45691eaf466232f03262e4[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:12:14 2024 -0800
+
+    Update hero image and remove custom feedback button
+
+[33mcommit f6f096e9ef6457243b06fdb716a4ccd63780a61d[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:07:30 2024 -0800
+
+    modern UI
+
+[33mcommit e6c0bf000b03e25068ecf485ed2a9819c305a7ca[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:04:11 2024 -0800
+
+    Use default Jira collector trigger button
+
+[33mcommit 0e4757e20395a42647cd938248518d5b90277f08[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 15:02:29 2024 -0800
+
+    Use custom Jira collector trigger button
+
+[33mcommit 18cd03843766c151de9de00fc91adf94f8081433[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 14:59:35 2024 -0800
+
+    Add centered Jira collector button
+
+[33mcommit 838ffe822b693c0c7db7ae01f52bee77a1026684[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 14:53:19 2024 -0800
+
+    Add Jira issue collector script
+
+[33mcommit 28c3569da03d2c91f86ceed234f6d36df99ead9b[m
+Author: joshlevylabs <josh@joshlevylabs.com>
+Date:   Tue Nov 12 14:50:35 2024 -0800
+
+    add hello world page
+
+[33mcommit ff733b788776187a08d8274439dd230e363f2f5d[m
+Author: joshlevylabs <70048914+joshlevylabs@users.noreply.github.com>
+Date:   Tue Nov 12 14:47:44 2024 -0800
+
+    Initial commit
