@@ -141,17 +141,23 @@
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
                 
-                // Use a relative path or point to your live API endpoint
-                const response = await fetch('https://sonance-beta.info/submit-homework', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(responses)
-                });
-                
-                if (response.ok) {
-                    window.location.href = '/thank-you.html';
-                } else {
-                    alert('Error submitting. Please try again.');
+                try {
+                    const response = await fetch('https://www.sonance-beta.info/submit-homework', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(responses)
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        alert(result.error || 'Error submitting. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Submission Error:', error);
+                    alert('Error submitting. Please check your connection and try again.');
                 }
             };
 
