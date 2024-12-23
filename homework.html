@@ -140,24 +140,29 @@
 
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
-                
+                console.log('Form submission initiated');
+
                 try {
-                    const response = await fetch('https://www.sonance-beta.info/submit-homework', {
+                    const response = await fetch('/submit-homework', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(responses)
                     });
 
+                    console.log('Fetch response:', response);  // Log the full response
 
                     const result = await response.json();
-                    
+                    console.log('Result:', result);  // Log the parsed response
+
                     if (response.ok) {
+                        console.log('Form submitted successfully');
                         window.location.href = '/thank-you.html';
                     } else {
+                        console.error('Submission Error:', result.error || 'Unknown error');
                         alert(result.error || 'Error submitting. Please try again.');
                     }
                 } catch (error) {
-                    console.error('Submission Error:', error);
+                    console.error('Submission Error (catch block):', error);  // Log network errors
                     alert('Error submitting. Please check your connection and try again.');
                 }
             };
