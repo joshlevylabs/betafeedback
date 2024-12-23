@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -8,16 +9,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// Nodemailer transporter setup
+// Serve static files (like homework.html and thank-you.html)
+app.use(express.static(path.join(__dirname)));
+
+// Nodemailer setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'your-email@gmail.com',
-        pass: 'your-app-password'  // Ensure you use an app-specific password
+        pass: 'your-app-password'  // Use an app-specific password
     }
 });
 
-// POST endpoint to receive form submissions
+// Handle form submission from homework.html
 app.post('/submit-homework', (req, res) => {
     const formData = req.body;
 
@@ -30,7 +34,7 @@ app.post('/submit-homework', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.log('Error:', error);
+            console.error('Error:', error);
             res.status(500).send('Error sending email.');
         } else {
             console.log('Email sent:', info.response);
@@ -39,13 +43,18 @@ app.post('/submit-homework', (req, res) => {
     });
 });
 
-// Helper function to format email content
+// Helper to format the email content
 function formatEmail(data) {
     return Object.entries(data).map(([key, value]) => `${key}: ${value}`).join('\n');
 }
 
-// Start server
-const PORT = 3000;
+// Serve thank-you.html after form submission
+app.get('/thank-you.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'thank-you.html'));
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
