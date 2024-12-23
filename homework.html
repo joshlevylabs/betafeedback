@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Assignments</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .button {
+            margin: 20px 0;
+            padding: 15px 30px;
+            font-size: 1em;
+            color: white;
+            background-color: #1e94c2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #166b8e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Homework Assignments</h1>
+        <form id="homeworkForm">
+            <!-- Question 1 -->
+            <div class="question active" id="q1">
+                <p>Are you using an ARC or a NARC?</p>
+                <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
+                <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
+            </div>
+            
+            <!-- ARC Questions -->
+            <div class="question" id="arc1">
+                <p>Is the ARC working as expected?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+            </div>
+            <div class="question" id="arc2">
+                <p>Describe any issues you encountered with the ARC:</p>
+                <textarea id="arc2_input" rows="4" style="width: 100%;"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc2')">Next</button>
+            </div>
+
+            <!-- NARC Questions -->
+            <div class="question" id="narc1">
+                <p>Is the NARC connecting to Bluetooth properly?</p>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc2">
+                <p>What feature do you find most useful on the NARC?</p>
+                <textarea id="narc2_input" rows="4" style="width: 100%;"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('narc2')">Next</button>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="question" id="submitPage">
+                <p>Thank you for completing the questions!</p>
+                <button type="submit" class="button">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let responses = {};
+
+        function nextQuestion(device) {
+            document.getElementById('q1').classList.remove('active');
+            if (device === 'ARC') {
+                document.getElementById('arc1').classList.add('active');
+            } else {
+                document.getElementById('narc1').classList.add('active');
+            }
+        }
+
+        function recordAnswer(questionId, answer) {
+            responses[questionId] = answer;
+            document.getElementById(questionId).classList.remove('active');
+
+            const nextQuestionId = getNextQuestion(questionId);
+            if (nextQuestionId) {
+                document.getElementById(nextQuestionId).classList.add('active');
+            } else {
+                document.getElementById('submitPage').classList.add('active');
+            }
+        }
+
+        function recordTextAnswer(questionId) {
+            const input = document.getElementById(`${questionId}_input`).value;
+            responses[questionId] = input;
+            document.getElementById(questionId).classList.remove('active');
+            
+            const nextQuestionId = getNextQuestion(questionId);
+            if (nextQuestionId) {
+                document.getElementById(nextQuestionId).classList.add('active');
+            } else {
+                document.getElementById('submitPage').classList.add('active');
+            }
+        }
+
+        function getNextQuestion(current) {
+            const order = ['arc1', 'arc2', 'narc1', 'narc2'];
+            const index = order.indexOf(current);
+            return index !== -1 && index < order.length - 1 ? order[index + 1] : null;
+        }
+
+        document.getElementById('homeworkForm').onsubmit = function(e) {
+            e.preventDefault();
+            sendEmail(responses);
+            alert("Your responses have been submitted!");
+        };
+
+        function sendEmail(data) {
+            const mailtoLink = `mailto:joshual@sonance.com?subject=Homework%20Responses&body=${encodeURIComponent(JSON.stringify(data, null, 2))}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
