@@ -64,18 +64,17 @@
                 <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
 
-            <!-- Mobile Device Selection -->
-            <div class="question" id="mobileSelection">
-                <p>What mobile device are you using?</p>
-                <button type="button" class="button" onclick="recordAnswer('device', 'iOS')">iOS</button>
-                <button type="button" class="button" onclick="recordAnswer('device', 'Android')">Android</button>
-            </div>
-            
             <!-- ARC Questions -->
             <div class="question" id="arc1">
                 <p>1. Enable low brightness mode in the app. Is the LED brightness acceptable?</p>
                 <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
                 <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+            </div>
+
+            <div class="question" id="arc2">
+                <p>2. Verify that the protection LED functions without delays. Is it working correctly?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
             </div>
 
             <!-- NARC Questions -->
@@ -85,15 +84,15 @@
                 <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
             </div>
 
-            <!-- Progress and Navigation -->
-            <div class="progress" id="progress">Question 1 of 3</div>
-            <button type="button" class="button" id="prevButton" onclick="prevQuestion()" style="display: none;">Previous</button>
-
             <!-- Submit Page -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
                 <button type="submit" class="button">Submit Responses</button>
             </div>
+
+            <!-- Progress and Navigation -->
+            <div class="progress" id="progress">Question 1 of 3</div>
+            <button type="button" class="button" id="prevButton" onclick="prevQuestion()" style="display: none;">Previous</button>
         </form>
     </div>
 
@@ -101,21 +100,22 @@
         let responses = {};
         let currentIndex = 0;
         let currentPath = [];
-        let questionAnswered = false;
 
-        const arcQuestions = ['mobileSelection', 'arc1'];
-        const narcQuestions = ['mobileSelection', 'narc1'];
+        const arcQuestions = ['arc1', 'arc2'];
+        const narcQuestions = ['narc1'];
+        const submitPage = 'submitPage';
 
         function nextQuestion(device) {
             document.getElementById('q1').classList.remove('active');
             currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
-            document.getElementById(currentPath[0]).classList.add('active');
+            currentIndex = 0;
+            document.getElementById(currentPath[currentIndex]).classList.add('active');
             updateProgress();
+            togglePrevButton();
         }
 
         function recordAnswer(questionId, answer) {
             responses[questionId] = answer;
-            questionAnswered = true;
             navigate(1);
         }
 
@@ -126,7 +126,13 @@
         function navigate(direction) {
             document.getElementById(currentPath[currentIndex]).classList.remove('active');
             currentIndex += direction;
-            document.getElementById(currentPath[currentIndex]).classList.add('active');
+
+            if (currentIndex >= currentPath.length) {
+                document.getElementById(submitPage).classList.add('active');
+            } else {
+                document.getElementById(currentPath[currentIndex]).classList.add('active');
+            }
+            
             updateProgress();
             togglePrevButton();
         }
@@ -147,7 +153,11 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(responses)
             });
-            window.location.href = '/thank-you.html';
+            if (response.ok) {
+                window.location.href = '/thank-you.html';
+            } else {
+                alert('Error submitting. Please try again.');
+            }
         };
     </script>
 </body>
