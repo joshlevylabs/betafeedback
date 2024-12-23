@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-// Nodemailer Config
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -14,7 +13,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Endpoint for Homework Submission
 app.post('/submit-homework', (req, res) => {
     const formData = req.body;
 
