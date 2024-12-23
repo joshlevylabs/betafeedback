@@ -21,8 +21,11 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Handle form submission from homework.html
 app.post('/submit-homework', (req, res) => {
+    if (!req.body) {
+        return res.status(400).json({ error: 'Invalid data submitted' });
+    }
+    
     const formData = req.body;
 
     const mailOptions = {
@@ -36,13 +39,11 @@ app.post('/submit-homework', (req, res) => {
         if (error) {
             console.error('Error:', error);
             return res.status(500).json({ error: 'Failed to send email.' });
-        } else {
-            console.log('Email sent:', info.response);
-            res.status(200).json({ message: 'Email sent successfully.' });
         }
+        console.log('Email sent:', info.response);
+        res.status(200).json({ message: 'Email sent successfully.' });
     });
 });
-
 
 // Helper to format the email content
 function formatEmail(data) {
