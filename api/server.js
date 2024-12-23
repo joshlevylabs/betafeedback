@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'sonance991@gmail.com',  // Use your Gmail address
-        pass: 'S0n@nce991!'      // Use app-specific password
+        pass: 'S0n@nce991!'            // App-specific password
     }
 });
 
@@ -26,7 +26,7 @@ app.post('/submit-homework', (req, res) => {
     const formData = req.body;
 
     const mailOptions = {
-        from: 'your-email@gmail.com',
+        from: 'sonance991@gmail.com',  // Use the same email as the transporter
         to: 'joshual@sonance.com',
         subject: 'Homework Assignment Submission',
         text: formatEmail(formData)
@@ -35,7 +35,7 @@ app.post('/submit-homework', (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error('Error:', error);
-            return res.status(500).send('Failed to send email.');
+            return res.status(500).json({ error: 'Failed to send email.' });
         } else {
             console.log('Email sent:', info.response);
             res.status(200).json({ message: 'Email sent successfully.' });
@@ -53,5 +53,5 @@ app.get('/thank-you', (req, res) => {
     res.sendFile(path.join(__dirname, '../thank-you.html'));
 });
 
-// Export for Vercel (no need for app.listen)
+// Export for Vercel
 module.exports = app;
