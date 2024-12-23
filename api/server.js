@@ -26,7 +26,7 @@ app.post('/submit-homework', (req, res) => {
     const formData = req.body;
 
     const mailOptions = {
-        from: 'sonance991@gmail.com',  // Use the same email as the transporter
+        from: 'sonance991@gmail.com',
         to: 'joshual@sonance.com',
         subject: 'Homework Assignment Submission',
         text: formatEmail(formData)
@@ -42,6 +42,7 @@ app.post('/submit-homework', (req, res) => {
         }
     });
 });
+
 
 // Helper to format the email content
 function formatEmail(data) {
