@@ -15,10 +15,7 @@
       {
         "src": "thank-you.html",
         "use": "@vercel/static"
-      },
-      { "src": "api/server.js", 
-      "use": "@vercel/node"
-    }
+      }
     ],
     "routes": [
       {
@@ -36,10 +33,6 @@
       {
         "src": "/thank-you",
         "dest": "/thank-you.html"
-      },
-      { "src": "/submit-homework",
-       "dest": "/api/server.js" 
-    }
+      }
     ]
-  }
-  
+}
