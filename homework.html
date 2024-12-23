@@ -44,72 +44,112 @@
         .button:hover {
             background-color: #166b8e;
         }
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
         <form id="homeworkForm">
+            <!-- Question 1 -->
             <div class="question active" id="q1">
                 <p>Are you using an ARC or a NARC?</p>
                 <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
                 <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
-
-            <!-- ARC Questions -->
+            
+            <!-- ARC Homework Assignments -->
             <div class="question" id="arc1">
-                <p>Is the ARC working as expected?</p>
-                <select name="arcWorking">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+                <p>1. Enable low brightness mode in the Sonance app. How would you rate the LED brightness in 'LOW' mode?</p>
+                <textarea id="arc1_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc1')">Next</button>
             </div>
-
             <div class="question" id="arc2">
-                <p>Describe any issues you encountered with the ARC:</p>
-                <textarea name="arcIssues" rows="4"></textarea>
+                <p>2. Verify that the protection LED flashes without delays. Does it stop excessive playtime while flashing?</p>
+                <textarea id="arc2_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc2')">Next</button>
             </div>
-
-            <!-- NARC Questions -->
-            <div class="question" id="narc1">
-                <p>Is the NARC connecting to Bluetooth properly?</p>
-                <select name="narcBluetooth">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+            <div class="question" id="arc3">
+                <p>3. Test the mute function. Does the mute unlock correctly when adjusting volume?</p>
+                <textarea id="arc3_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc3')">Next</button>
             </div>
-
-            <div class="question" id="narc2">
-                <p>What feature do you find most useful on the NARC?</p>
-                <textarea name="narcFeatures" rows="4"></textarea>
+            <div class="question" id="arc4">
+                <p>4. Verify the TV mute CEC command. Does the ARC unmute after 30 seconds without user input?</p>
+                <textarea id="arc4_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc4')">Next</button>
             </div>
-
-            <!-- Submit -->
-            <button type="submit" class="button">Submit</button>
+            <div class="question" id="arc5">
+                <p>5. Check the STATUS LED for correct color changes when switching inputs (HDMI, RCA, etc.).</p>
+                <textarea id="arc5_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc5')">Next</button>
+            </div>
+            <div class="question" id="arc6">
+                <p>6. Test the line-out feature. Do you hear any popping sounds when modifying the delay setting?</p>
+                <textarea id="arc6_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc6')">Next</button>
+            </div>
+            <div class="question" id="arc7">
+                <p>7. Measure the time it takes for audio to resume from standby mode. Does the delay seem acceptable?</p>
+                <textarea id="arc7_input" rows="4"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('arc7')">Next</button>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="question" id="submitPage">
+                <p>Thank you for completing the questions!</p>
+                <button type="submit" class="button">Submit</button>
+            </div>
         </form>
     </div>
 
     <script>
-        const form = document.getElementById('homeworkForm');
+        let responses = {};
 
-        form.onsubmit = async function (e) {
+        function nextQuestion(device) {
+            document.getElementById('q1').classList.remove('active');
+            if (device === 'ARC') {
+                document.getElementById('arc1').classList.add('active');
+            }
+        }
+
+        function recordTextAnswer(questionId) {
+            const input = document.getElementById(`${questionId}_input`).value;
+            responses[questionId] = input;
+            document.getElementById(questionId).classList.remove('active');
+            
+            const nextQuestionId = getNextQuestion(questionId);
+            if (nextQuestionId) {
+                document.getElementById(nextQuestionId).classList.add('active');
+            } else {
+                document.getElementById('submitPage').classList.add('active');
+            }
+        }
+
+        function getNextQuestion(current) {
+            const order = ['arc1', 'arc2', 'arc3', 'arc4', 'arc5', 'arc6', 'arc7'];
+            const index = order.indexOf(current);
+            return index !== -1 && index < order.length - 1 ? order[index + 1] : null;
+        }
+
+        document.getElementById('homeworkForm').onsubmit = function(e) {
             e.preventDefault();
+            sendEmail(responses);
+            alert("Your responses have been submitted!");
+        };
 
-            const formData = new FormData(form);
-            const jsonData = {};
-            formData.forEach((value, key) => jsonData[key] = value);
-
-            const response = await fetch('http://localhost:3000/submit-homework', {
+        function sendEmail(data) {
+            fetch('https://sonance-homework.vercel.app/submit-homework', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(jsonData)
+                body: JSON.stringify(data)
             });
-
-            const message = await response.text();
-            alert(message);
-        };
+        }
     </script>
 </body>
 </html>
