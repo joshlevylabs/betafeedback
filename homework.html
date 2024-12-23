@@ -49,18 +49,13 @@
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
-        
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <!-- Question 1 -->
+        <form id="homeworkForm">
             <div class="question active" id="q1">
                 <p>Are you using an ARC or a NARC?</p>
-                <select name="ampType" required>
-                    <option value="">Select One</option>
-                    <option value="ARC">ARC</option>
-                    <option value="NARC">NARC</option>
-                </select>
+                <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
+                <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
-            
+
             <!-- ARC Questions -->
             <div class="question" id="arc1">
                 <p>Is the ARC working as expected?</p>
@@ -69,9 +64,10 @@
                     <option value="No">No</option>
                 </select>
             </div>
+
             <div class="question" id="arc2">
                 <p>Describe any issues you encountered with the ARC:</p>
-                <textarea name="arcIssues" rows="4" style="width: 100%;"></textarea>
+                <textarea name="arcIssues" rows="4"></textarea>
             </div>
 
             <!-- NARC Questions -->
@@ -85,19 +81,35 @@
 
             <div class="question" id="narc2">
                 <p>What feature do you find most useful on the NARC?</p>
-                <textarea name="narcFeatures" rows="4" style="width: 100%;"></textarea>
+                <textarea name="narcFeatures" rows="4"></textarea>
             </div>
 
-            <!-- Hidden Email Metadata -->
-            <input type="hidden" name="_replyto" value="joshual@sonance.com">
-            <input type="hidden" name="_subject" value="Homework Assignment Submission">
-
-            <!-- Submit Button -->
-            <div class="question active" id="submitPage">
-                <p>Thank you for completing the questions!</p>
-                <button type="submit" class="button">Submit</button>
-            </div>
+            <!-- Submit -->
+            <button type="submit" class="button">Submit</button>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('homeworkForm');
+
+        form.onsubmit = async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const jsonData = {};
+            formData.forEach((value, key) => jsonData[key] = value);
+
+            const response = await fetch('http://localhost:3000/submit-homework', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const message = await response.text();
+            alert(message);
+        };
+    </script>
 </body>
 </html>
