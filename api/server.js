@@ -22,12 +22,17 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/submit-homework', (req, res) => {
-    if (!req.body) {
-        return res.status(400).json({ error: 'Invalid data submitted' });
+    console.log('Received POST request to /submit-homework');
+    console.log('Request body:', req.body);  // Log incoming data
+
+    if (!req.body || Object.keys(req.body).length === 0) {
+        console.error('Error: Empty request body');
+        return res.status(400).json({ error: 'Invalid or empty data submitted' });
     }
     
     const formData = req.body;
-
+    console.log('Form Data:', formData);  // Log formatted data
+    
     const mailOptions = {
         from: 'sonance991@gmail.com',
         to: 'joshual@sonance.com',
@@ -37,10 +42,10 @@ app.post('/submit-homework', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error:', error);
+            console.error('Error sending email:', error);  // Log email error
             return res.status(500).json({ error: 'Failed to send email.' });
         }
-        console.log('Email sent:', info.response);
+        console.log('Email sent successfully:', info.response);  // Log success
         res.status(200).json({ message: 'Email sent successfully.' });
     });
 });
