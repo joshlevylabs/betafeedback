@@ -44,61 +44,52 @@
         .button:hover {
             background-color: #166b8e;
         }
-        textarea {
-            width: 100%;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
         <form id="homeworkForm">
-            <!-- Question 1 -->
+            <!-- Device Selection (ARC or NARC) -->
             <div class="question active" id="q1">
                 <p>Are you using an ARC or a NARC?</p>
                 <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
                 <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
             
-            <!-- ARC Homework Assignments -->
+            <!-- ARC Questions -->
             <div class="question" id="arc1">
-                <p>1. Enable low brightness mode in the Sonance app. How would you rate the LED brightness in 'LOW' mode?</p>
-                <textarea id="arc1_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc1')">Next</button>
+                <p>1. Enable low brightness mode in the app. Is the LED brightness acceptable?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
             </div>
+
             <div class="question" id="arc2">
-                <p>2. Verify that the protection LED flashes without delays. Does it stop excessive playtime while flashing?</p>
-                <textarea id="arc2_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc2')">Next</button>
+                <p>2. Verify that the protection LED functions without delays. Is it working correctly?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
             </div>
+
             <div class="question" id="arc3">
-                <p>3. Test the mute function. Does the mute unlock correctly when adjusting volume?</p>
-                <textarea id="arc3_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc3')">Next</button>
+                <p>3. Does the mute function unlock correctly with the volume control?</p>
+                <button type="button" class="button" onclick="recordAnswer('arc3', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc3', 'No')">No</button>
             </div>
-            <div class="question" id="arc4">
-                <p>4. Verify the TV mute CEC command. Does the ARC unmute after 30 seconds without user input?</p>
-                <textarea id="arc4_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc4')">Next</button>
+
+            <!-- NARC Questions -->
+            <div class="question" id="narc1">
+                <p>1. Is the NARC connecting to Bluetooth properly?</p>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
             </div>
-            <div class="question" id="arc5">
-                <p>5. Check the STATUS LED for correct color changes when switching inputs (HDMI, RCA, etc.).</p>
-                <textarea id="arc5_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc5')">Next</button>
+
+            <div class="question" id="narc2">
+                <p>2. What feature do you find most useful on the NARC?</p>
+                <textarea id="narc2_input" rows="4" style="width: 100%;"></textarea>
+                <button type="button" class="button" onclick="recordTextAnswer('narc2')">Next</button>
             </div>
-            <div class="question" id="arc6">
-                <p>6. Test the line-out feature. Do you hear any popping sounds when modifying the delay setting?</p>
-                <textarea id="arc6_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc6')">Next</button>
-            </div>
-            <div class="question" id="arc7">
-                <p>7. Measure the time it takes for audio to resume from standby mode. Does the delay seem acceptable?</p>
-                <textarea id="arc7_input" rows="4"></textarea>
-                <button type="button" class="button" onclick="recordTextAnswer('arc7')">Next</button>
-            </div>
-            
-            <!-- Submit Button -->
+
+            <!-- Submit Page (Final Step) -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
                 <button type="submit" class="button">Submit</button>
@@ -109,13 +100,31 @@
     <script>
         let responses = {};
 
+        // Navigate to the next question based on the selected device
         function nextQuestion(device) {
             document.getElementById('q1').classList.remove('active');
+            
             if (device === 'ARC') {
                 document.getElementById('arc1').classList.add('active');
+            } else {
+                document.getElementById('narc1').classList.add('active');
             }
         }
 
+        // Record "Yes" or "No" answers and move to the next question
+        function recordAnswer(questionId, answer) {
+            responses[questionId] = answer;
+            document.getElementById(questionId).classList.remove('active');
+
+            const nextQuestionId = getNextQuestion(questionId);
+            if (nextQuestionId) {
+                document.getElementById(nextQuestionId).classList.add('active');
+            } else {
+                document.getElementById('submitPage').classList.add('active');
+            }
+        }
+
+        // Record text answers for textarea inputs
         function recordTextAnswer(questionId) {
             const input = document.getElementById(`${questionId}_input`).value;
             responses[questionId] = input;
@@ -129,26 +138,24 @@
             }
         }
 
+        // Determine the next question in sequence
         function getNextQuestion(current) {
-            const order = ['arc1', 'arc2', 'arc3', 'arc4', 'arc5', 'arc6', 'arc7'];
+            const order = ['arc1', 'arc2', 'arc3', 'narc1', 'narc2'];
             const index = order.indexOf(current);
             return index !== -1 && index < order.length - 1 ? order[index + 1] : null;
         }
 
+        // Handle form submission to send an email
         document.getElementById('homeworkForm').onsubmit = function(e) {
             e.preventDefault();
             sendEmail(responses);
             alert("Your responses have been submitted!");
         };
 
+        // Send the form data to email using mailto
         function sendEmail(data) {
-            fetch('https://sonance-homework.vercel.app/submit-homework', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
+            const mailtoLink = `mailto:joshual@sonance.com?subject=Homework%20Responses&body=${encodeURIComponent(JSON.stringify(data, null, 2))}`;
+            window.location.href = mailtoLink;
         }
     </script>
 </body>
