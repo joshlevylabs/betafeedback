@@ -86,141 +86,130 @@
             </div>
 
             <div class="question" id="arc2">
-                <p>2. Protection LED timing. Was the protection LED delayed, potentially confusing users?</p>
-                <p><strong>Procedure:</strong><br>
-                - Use amp in normal mode with audio playback.<br>
-                - Short circuit left and right speakers together.<br>
-                - Record time between audio OFF and protection LED displayed.</p>
-                <p>How long was the delay?</p>
+                <p>2. Was the protection LED delayed, potentially confusing users?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc2', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc2', 'No', this)">No</button>
+                <p>How long was the delay? (optional)</p>
                 <input type="text" id="arc2_text" placeholder="Enter time in seconds...">
-                <button type="button" class="button" onclick="recordAnswer('arc2', 'Completed')">Submit</button>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="arc3">
-                <p>3. Mute volume release. Ensure that when the amp is muted, pressing volume up or down unmutes the amp.</p>
-                <p><strong>Procedure:</strong><br>
-                - Use amp in normal mode with audio playback.<br>
-                - Select MUTE option with TV remote.<br>
-                - Press volume up or down.</p>
-                <p><strong>Question:</strong> Did the amp unmute successfully when the volume up or down button was pressed?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc3', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc3', 'No')">No</button>
+                <p>3. Did the amp unmute successfully when the volume up or down button was pressed?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc3', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc3_text" placeholder="Enter details..."></textarea>
-            </div>            
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
 
             <div class="question" id="arc4">
-                <p>4. TV mute CEC command. Ensure the TV remains muted after 30 seconds of activating the mute command.</p>
-                <p><strong>Procedure:</strong><br>
-                - Mute the TV using the remote.<br>
-                - Wait for 30 seconds and check if the TV remains muted.</p>
-                <p><strong>Question:</strong> Did the TV remain muted after 30 seconds of activating the mute command?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc4', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc4', 'No')">No</button>
+                <p>4. Did the TV remain muted after 30 seconds of activating the mute command?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
                 <p>Explain if you faced issues (optional):</p>
                 <textarea id="arc4_text" placeholder="Explain issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
-            
+
             <div class="question" id="arc5">
-                <p>5. IR Learning Setup</p>
-                <p><strong>Procedure:</strong><br>
-                - Program the remote and test the power ON/OFF functionality.</p>
-                <p><strong>Question:</strong> Was the remote successfully programmed to control the amp's power ON/OFF?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc5', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc5', 'No')">No</button>
+                <p>5. Was the remote successfully programmed to control the amp's power ON/OFF?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc5', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc5', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc5_text" placeholder="Describe any issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="arc6">
-                <p>6. Input Switchover Behavior</p>
-                <p><strong>Procedure:</strong><br>
-                - Test the amp's dual-source switchover behavior by switching between two active input sources.</p>
-                <p><strong>Question:</strong> Did the amp switch inputs correctly when testing the dual-source switchover?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc6', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc6', 'No')">No</button>
+                <p>6. Did the amp switch inputs correctly when testing the dual-source switchover?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc6', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc6', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc6_text" placeholder="Describe any switchover issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="arc7">
-                <p>7. DSP EQ Frequency Adjustment</p>
-                <p><strong>Procedure:</strong><br>
-                - Rapidly adjust the EQ settings to monitor for any performance issues.</p>
-                <p><strong>Question:</strong> Were there any issues observed during rapid DSP EQ frequency adjustments?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc7', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc7', 'No')">No</button>
+                <p>7. Were there any issues observed during rapid DSP EQ frequency adjustments?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc7', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc7', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc7_text" placeholder="Describe observed issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="arc8">
-                <p>8. Factory Reset</p>
-                <p><strong>Procedure:</strong><br>
-                - Perform a factory reset on the amp and verify that all settings return to default.</p>
-                <p><strong>Question:</strong> Did the amp reset to factory defaults successfully?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc8', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc8', 'No')">No</button>
+                <p>8. Did the amp reset to factory defaults successfully?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc8', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc8_text" placeholder="Describe any reset issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
-
 
             <!-- NARC Questions -->
             <div class="question" id="narc1">
-                <p>1. LED brightness check. The LED can be distracting for users who prefer a more subdued lighting environment.</p>
-                <p><strong>Procedure:</strong><br>
-                - Go into your Sonance app and select low brightness mode to enable this feature.<br>
-                - Please gauge the brightness of the status LED in 'LOW' brightness mode.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+                <p>1. Is the LED brightness acceptable in low brightness mode?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc1', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc1', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc1_text" placeholder="Enter details..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc2">
-                <p>2. Protection LED timing. The protection LED was delayed in previous builds, causing a delay potentially confusing users.</p>
-                <p><strong>Procedure:</strong><br>
-                - Use amp in normal mode with audio playback<br>
-                - Short circuit left and right speaker together<br>
-                - Record time between audio OFF and protection LED displayed.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
+                <p>2. Was the protection LED delayed, potentially confusing users?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc2', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc2', 'No', this)">No</button>
+                <p>How long was the delay? (optional)</p>
+                <input type="text" id="narc2_text" placeholder="Enter time in seconds...">
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc3">
-                <p>4. Mute command stays in mute state after 30 seconds of mute.</p>
-                <p><strong>Procedure:</strong><br>
-                - Verify that the mute command operates correctly.<br>
-                - Wait 30 seconds and ensure NARC does not restore output automatically.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc4', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc4', 'No')">No</button>
+                <p>3. Did the mute command stay active after 30 seconds?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc3', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc3', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc3_text" placeholder="Explain any issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc4">
-                <p>5. IR Learning Setup</p>
-                <p>Procedure: Program remote and test power ON/OFF.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc5', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc5', 'No')">No</button>
+                <p>4. Was the remote successfully programmed to control the amp's power ON/OFF?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc4', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc4', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc4_text" placeholder="Describe any programming issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc5">
-                <p>6. Input Switchover Behavior</p>
-                <p>Procedure: Test dual source switchover.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc6', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc6', 'No')">No</button>
+                <p>5. Did the amp switch inputs correctly during dual-source switchover?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc5', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc5', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc5_text" placeholder="Describe any switchover issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc6">
-                <p>7. DSP EQ Frequency Adjustment</p>
-                <p>Procedure: Rapidly adjust EQ and monitor for issues.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc7', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc7', 'No')">No</button>
+                <p>6. Were there any issues observed during rapid DSP EQ frequency adjustments?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc6', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc6', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc6_text" placeholder="Describe observed issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="narc7">
-                <p>8. Factory Reset</p>
-                <p>Procedure: Reset amp and verify settings.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc8', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc8', 'No')">No</button>
+                <p>7. Did the amp reset to factory defaults successfully?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc7', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc7', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc7_text" placeholder="Describe any reset issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <!-- Submit Page -->
