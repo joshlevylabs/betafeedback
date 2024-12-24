@@ -215,7 +215,8 @@
             <!-- Submit Page -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
-                <button type="submit" class="button">Submit Responses</button>
+                <input type="email" id="emailInput" placeholder="Enter your email" oninput="validateEmail()">
+                <button type="submit" class="button" id="submitButton" disabled>Submit Responses</button>
             </div>
 
             <div class="progress" id="progress">Question 1 of 3</div>
@@ -228,17 +229,10 @@
             let currentPath = [];
             let deviceType = '';
 
-            const arcQuestions = [
-                'arc1', 'arc2', 'arc3', 'arc4', 'arc5', 'arc6', 'arc7', 'arc8'
-            ];
-            const narcQuestions = [
-                'narc1', 'narc2', 'narc3', 'narc4', 'narc5', 'narc6', 'narc7'
-            ];
+            const arcQuestions = ['arc1', 'arc2', 'arc3', 'arc4', 'arc5', 'arc6', 'arc7', 'arc8'];
+            const narcQuestions = ['narc1', 'narc2', 'narc3', 'narc4', 'narc5', 'narc6', 'narc7'];
             
-            const firmwareVersions = {
-                ARC: '1.59',
-                NARC: '1.58b'
-            };
+            const firmwareVersions = { ARC: '1.59', NARC: '1.58b' };
             
             function nextQuestion(device) {
                 deviceType = device;
@@ -299,9 +293,36 @@
                 updateProgress();
             }
 
+            function validateEmail() {
+                const email = document.getElementById('emailInput').value;
+                const submitButton = document.getElementById('submitButton');
+                const isValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+                submitButton.disabled = !isValid;
+            }
+            
             function updateProgress() {
                 document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
+
+            document.getElementById('homeworkForm').onsubmit = async function(e) {
+                e.preventDefault();
+                responses['deviceType'] = deviceType;
+                responses['email'] = document.getElementById('emailInput').value;
+                try {
+                    const response = await fetch('/submit-homework', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(responses)
+                    });
+                    if (response.ok) {
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        alert('Submission failed.');
+                    }
+                } catch (error) {
+                    alert('Error submitting.');
+                }
+            };
         </script>
     </div>
 </body>
