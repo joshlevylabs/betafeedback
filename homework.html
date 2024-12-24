@@ -54,7 +54,7 @@
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
-        <p><strong>Firmware Version:</strong> 1.75</p> <!-- Firmware Version -->
+        <p><strong>Firmware Version:</strong> 1.59</p> <!-- Firmware Version -->
         
         <form id="homeworkForm">
             <!-- Device Selection -->
@@ -127,12 +127,20 @@
             let deviceType = '';
 
             const arcQuestions = ['arc1', 'arc2', 'arc3', 'arc4'];
-            const submitPage = 'submitPage';
+            const narcQuestions = ['narc1', 'narc2'];
+            const firmwareVersions = {
+                ARC: '1.59',
+                NARC: '1.58b'
+            };
 
             function nextQuestion(device) {
                 deviceType = device;
                 document.getElementById('q1').classList.remove('active');
-                currentPath = arcQuestions;
+
+                // Update firmware version dynamically
+                document.getElementById('firmwareVersion').textContent = firmwareVersions[device];
+
+                currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
                 document.getElementById(currentPath[currentIndex]).classList.add('active');
                 document.getElementById('prevButton').style.display = 'inline-block';
