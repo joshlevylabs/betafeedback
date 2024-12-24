@@ -4,7 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework Assignments</title>
-    <style>
+    <style><style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .button {
+            margin: 20px 10px;
+            padding: 15px 30px;
+            font-size: 1em;
+            color: white;
+            background-color: #1e94c2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #166b8e;
+        }
+        .progress {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+            display: none;  /* Hide progress initially */
+        }
+    </style>
         body, html {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -223,11 +269,14 @@
                 firmwareVersion.textContent = firmwareVersions[device];
                 firmwareInfo.style.display = 'block';
 
+                // Show progress bar
+                document.getElementById('progress').style.display = 'block';
+
                 document.getElementById('q1').classList.remove('active');
 
                 currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
-                document.getElementById(currentPath[currentIndex]).classList.add('active');  // Show first question immediately
+                document.getElementById(currentPath[currentIndex]).classList.add('active');
                 document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
