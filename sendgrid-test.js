@@ -5,7 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);  // Load API key from .env
 
 const msg = {
   to: 'joshual@sonance.com',  // Replace with your recipient email
-  from: 'verified-email@yourdomain.com',  // Use your verified sender email
+  from: 'sonance991@gmail.com',  // Use your verified sender email
   subject: 'Test Email from SendGrid',
   text: 'This is a test email to verify SendGrid integration.'
 };
