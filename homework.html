@@ -1,102 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework Assignments</title>
-    <style><style>
-        body, html {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 90%;
-            max-width: 700px;
-            padding: 40px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .question {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        .button {
-            margin: 20px 10px;
-            padding: 15px 30px;
-            font-size: 1em;
-            color: white;
-            background-color: #1e94c2;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #166b8e;
-        }
-        .progress {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #666;
-            display: none;  /* Hide progress initially */
-        }
-    </style>
-        body, html {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 90%;
-            max-width: 700px;
-            padding: 40px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .question {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        .button {
-            margin: 20px 10px;
-            padding: 15px 30px;
-            font-size: 1em;
-            color: white;
-            background-color: #1e94c2;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #166b8e;
-        }
-        .progress {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #666;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Homework Assignments</title>
+        <style>
+            body, html {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 90%;
+                max-width: 700px;
+                padding: 40px;
+                background-color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                text-align: center;
+            }
+            .question {
+                display: none;
+            }
+            .active {
+                display: block;
+            }
+            .button {
+                margin: 20px 10px;
+                padding: 15px 30px;
+                font-size: 1em;
+                color: white;
+                background-color: #1e94c2;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .button:hover {
+                background-color: #166b8e;
+            }
+            .progress {
+                margin-top: 20px;
+                font-size: 1em;
+                color: #666;
+                display: none;  /* Hide progress initially */
+            }
+        </style>
+    </head>    
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
