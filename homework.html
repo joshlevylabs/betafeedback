@@ -75,35 +75,37 @@
                 - Please gauge the brightness of the status LED in 'LOW' brightness mode.</p>
                 <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
                 <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc1_text" placeholder="Enter details..."></textarea>
             </div>
 
             <div class="question" id="arc2">
-                <p>2. Protection LED timing. The protection LED was delayed in previous builds, causing a delay potentially confusing users.</p>
+                <p>2. Protection LED timing. Was the protection LED delayed, potentially confusing users?</p>
                 <p><strong>Procedure:</strong><br>
-                - Use amp in normal mode with audio playback<br>
-                - Short circuit left and right speaker together<br>
+                - Use amp in normal mode with audio playback.<br>
+                - Short circuit left and right speakers together.<br>
                 - Record time between audio OFF and protection LED displayed.</p>
-                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
+                <p>How long was the delay?</p>
+                <input type="text" id="arc2_text" placeholder="Enter time in seconds...">
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'Completed')">Submit</button>
             </div>
 
             <div class="question" id="arc3">
-                <p>3. Mute volume release. Ensure that when the amp is muted, pressing volume up or down unmutes the amp.</p>
+                <p>3. Mute volume release. Does the amp unmute when pressing volume up/down?</p>
                 <p><strong>Procedure:</strong><br>
                 - Use amp in normal mode with audio playback.<br>
                 - Select MUTE option with TV remote.<br>
-                - Press volume up or down with TV remote.</p>
+                - Press volume up or down.</p>
                 <button type="button" class="button" onclick="recordAnswer('arc3', 'Yes')">Yes</button>
                 <button type="button" class="button" onclick="recordAnswer('arc3', 'No')">No</button>
             </div>
 
             <div class="question" id="arc4">
-                <p>4. TV mute CEC command stays in mute state after 30 seconds of mute.</p>
-                <p><strong>Procedure:</strong><br>
-                - Verify that the TV mute CEC command operates correctly.<br>
-                - Wait 30 seconds and ensure ARC does not restore output automatically.</p>
+                <p>4. TV mute CEC command. Does the TV remain muted after 30 seconds?</p>
                 <button type="button" class="button" onclick="recordAnswer('arc4', 'Yes')">Yes</button>
                 <button type="button" class="button" onclick="recordAnswer('arc4', 'No')">No</button>
+                <p>Explain if you faced issues:</p>
+                <textarea id="arc4_text" placeholder="Explain issues..."></textarea>
             </div>
 
             <div class="question" id="arc5">
@@ -238,6 +240,13 @@
 
             function recordAnswer(questionId, answer) {
                 responses[questionId] = answer;
+                
+                // Check for text input and save it if filled
+                const textInput = document.getElementById(`${questionId}_text`);
+                if (textInput && textInput.value) {
+                    responses[`${questionId}_text`] = textInput.value;
+                }
+                
                 navigate(1);
             }
 
