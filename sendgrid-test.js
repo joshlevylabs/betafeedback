@@ -7,7 +7,12 @@ const msg = {
   to: 'joshual@sonance.com',  // Replace with your recipient email
   from: 'sonance991@gmail.com',  // Use your verified sender email
   subject: 'Test Email from SendGrid',
-  text: 'This is a test email to verify SendGrid integration.'
+  text: 'This is a test email to verify SendGrid integration.',
+  html: '<strong>This is a test email to verify SendGrid integration.</strong>',
+  headers: {
+    'Precedence': 'bulk',  // Marks as non-spam bulk email
+    'List-Unsubscribe': '<mailto:unsubscribe@sonance.com>'  // Optional
+  }
 };
 
 sgMail.send(msg)
