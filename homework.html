@@ -139,35 +139,30 @@
             }
 
             document.getElementById('homeworkForm').onsubmit = async function(e) {
-            e.preventDefault();
-            console.log('Form submission initiated');
+                e.preventDefault();
+                console.log('Form submission initiated');
 
-            try {
-                const response = await fetch('/submit-homework', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(responses)
-                });
+                try {
+                    const response = await fetch('/submit-homework', {  // This path must match server route
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(responses)
+                    });
 
-                console.log('Raw response:', response);  // Log the entire response
+                    const textResponse = await response.text();
+                    console.log('Response Text:', textResponse);
 
-                const textResponse = await response.text();
-                console.log('Response Text:', textResponse);  // Log raw text to inspect errors
-
-                // Try to parse JSON only if the response is ok and has correct content type
-                if (response.ok) {
-                    const result = JSON.parse(textResponse);
-                    console.log('Result:', result);  // Log parsed JSON
-                    window.location.href = '/thank-you.html';
-                } else {
-                    console.error('Submission Error:', textResponse);
-                    alert('Submission failed: ' + textResponse);
+                    if (response.ok) {
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        console.error('Submission Error:', textResponse);
+                        alert('Submission failed: ' + textResponse);
+                    }
+                } catch (error) {
+                    console.error('Submission Error (catch block):', error);
+                    alert('Error submitting. Please check your connection and try again.');
                 }
-            } catch (error) {
-                console.error('Submission Error (catch block):', error);
-                alert('Error submitting. Please check your connection and try again.');
-            }
-        };
+            };
 
         </script>
     </div>

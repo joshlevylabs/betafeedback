@@ -18,7 +18,6 @@ app.post('/submit-homework', (req, res) => {
     console.log('Request body:', req.body);
 
     if (!req.body || Object.keys(req.body).length === 0) {
-        console.error('Empty request body');
         return res.status(400).json({ error: 'No data submitted' });
     }
 
@@ -26,8 +25,8 @@ app.post('/submit-homework', (req, res) => {
     console.log('Form Data:', formData);
 
     const mailOptions = {
-        to: 'joshual@sonance.com',    // Replace with recipient email
-        from: 'sonance991@gmail.com', // Verified sender email
+        to: 'joshual@sonance.com',    
+        from: 'sonance991@gmail.com', 
         subject: 'Homework Assignment Submission',
         text: formatEmail(formData)
     };
@@ -35,14 +34,11 @@ app.post('/submit-homework', (req, res) => {
     sgMail
         .send(mailOptions)
         .then(() => {
-            console.log('Email sent successfully.');
             res.status(200).json({ message: 'Email sent successfully.' });
         })
         .catch((error) => {
-            console.error('Error sending email:', error.response.body);  // Log the exact SendGrid error
-            res.status(500).json({ error: 'Failed to send email.', details: error.response.body });
+            res.status(500).json({ error: 'Failed to send email.' });
         });
-
 });
 
 // Helper to format email content
