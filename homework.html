@@ -98,12 +98,14 @@
             let responses = {};
             let currentIndex = 0;
             let currentPath = [];
+            let deviceType = '';
 
             const arcQuestions = ['arc1', 'arc2'];
             const narcQuestions = ['narc1'];
             const submitPage = 'submitPage';
 
             function nextQuestion(device) {
+                deviceType = device;  // Store device type (ARC or NARC)
                 document.getElementById('q1').classList.remove('active');
                 currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
@@ -138,12 +140,14 @@
                 document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
 
+            // Submit form data to the server
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
-                console.log('Form submission initiated');
+                
+                responses['deviceType'] = deviceType;  // Include device type in submission
 
                 try {
-                    const response = await fetch('/submit-homework', {  // This path must match server route
+                    const response = await fetch('/submit-homework', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(responses)
@@ -163,7 +167,6 @@
                     alert('Error submitting. Please check your connection and try again.');
                 }
             };
-
         </script>
     </div>
 </body>
