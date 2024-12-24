@@ -105,11 +105,89 @@
                 <button type="button" class="button" onclick="recordAnswer('arc4', 'No')">No</button>
             </div>
 
+            <div class="question" id="arc5">
+                <p>5. IR Learning Setup</p>
+                <p>Procedure: Program remote and test power ON/OFF.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc5', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc5', 'No')">No</button>
+            </div>
+
+            <div class="question" id="arc6">
+                <p>6. Input Switchover Behavior</p>
+                <p>Procedure: Test dual source switchover.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc6', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc6', 'No')">No</button>
+            </div>
+
+            <div class="question" id="arc7">
+                <p>7. DSP EQ Frequency Adjustment</p>
+                <p>Procedure: Rapidly adjust EQ and monitor for issues.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc7', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc7', 'No')">No</button>
+            </div>
+
+            <div class="question" id="arc8">
+                <p>8. Factory Reset</p>
+                <p>Procedure: Reset amp and verify settings.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc8', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc8', 'No')">No</button>
+            </div>
+
             <!-- NARC Questions -->
             <div class="question" id="narc1">
-                <p>1. Is the NARC connecting to Bluetooth properly?</p>
-                <button type="button" class="button" onclick="recordAnswer('narc1', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('narc1', 'No')">No</button>
+                <p>1. LED brightness check. The LED can be distracting for users who prefer a more subdued lighting environment.</p>
+                <p><strong>Procedure:</strong><br>
+                - Go into your Sonance app and select low brightness mode to enable this feature.<br>
+                - Please gauge the brightness of the status LED in 'LOW' brightness mode.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc2">
+                <p>2. Protection LED timing. The protection LED was delayed in previous builds, causing a delay potentially confusing users.</p>
+                <p><strong>Procedure:</strong><br>
+                - Use amp in normal mode with audio playback<br>
+                - Short circuit left and right speaker together<br>
+                - Record time between audio OFF and protection LED displayed.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc2', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc3">
+                <p>4. Mute command stays in mute state after 30 seconds of mute.</p>
+                <p><strong>Procedure:</strong><br>
+                - Verify that the mute command operates correctly.<br>
+                - Wait 30 seconds and ensure NARC does not restore output automatically.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc4', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc4', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc4">
+                <p>5. IR Learning Setup</p>
+                <p>Procedure: Program remote and test power ON/OFF.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc5', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc5', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc5">
+                <p>6. Input Switchover Behavior</p>
+                <p>Procedure: Test dual source switchover.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc6', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc6', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc6">
+                <p>7. DSP EQ Frequency Adjustment</p>
+                <p>Procedure: Rapidly adjust EQ and monitor for issues.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc7', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc7', 'No')">No</button>
+            </div>
+
+            <div class="question" id="narc7">
+                <p>8. Factory Reset</p>
+                <p>Procedure: Reset amp and verify settings.</p>
+                <button type="button" class="button" onclick="recordAnswer('arc8', 'Yes')">Yes</button>
+                <button type="button" class="button" onclick="recordAnswer('arc8', 'No')">No</button>
             </div>
 
             <!-- Submit Page -->
@@ -128,8 +206,8 @@
             let currentPath = [];
             let deviceType = '';
 
-            const arcQuestions = ['arc1', 'arc2','arc3', 'arc4'];
-            const narcQuestions = ['narc1','narc2'];
+            const arcQuestions = ['arc1', 'arc2','arc3', 'arc4','arc5', 'arc6','arc7', 'arc8'];
+            const narcQuestions = ['narc1','narc2','narc3','narc4','narc5','narc6','narc7'];
             const firmwareVersions = {
                 ARC: '1.59',
                 NARC: '1.58b'
