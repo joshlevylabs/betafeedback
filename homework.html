@@ -77,15 +77,12 @@
 
             <!-- ARC Questions -->
             <div class="question" id="arc1">
-                <p>1. LED brightness check. The LED can be distracting for users who prefer a more subdued lighting environment.</p>
-                <p><strong>Procedure:</strong><br>
-                - Go into your Sonance app and select low brightness mode to enable this feature.<br>
-                - Please gauge the brightness of the status LED in 'LOW' brightness mode.</p>
-                <p><strong>Question:</strong> Is the LED brightness acceptable when set to low brightness mode?</p>
-                <button type="button" class="button" onclick="recordAnswer('arc1', 'Yes')">Yes</button>
-                <button type="button" class="button" onclick="recordAnswer('arc1', 'No')">No</button>
+                <p>1. Is the LED brightness acceptable when set to low brightness mode?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc1', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc1', 'No', this)">No</button>
                 <p>Provide additional feedback (optional):</p>
                 <textarea id="arc1_text" placeholder="Enter details..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
             </div>
 
             <div class="question" id="arc2">
