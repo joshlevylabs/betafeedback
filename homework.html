@@ -54,8 +54,10 @@
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
-        <p><strong>Firmware Version:</strong> 1.59</p> <!-- Firmware Version -->
-        
+        <p id="firmwareInfo" style="display: none;">
+            <strong>Firmware Version:</strong> <span id="firmwareVersion"></span>
+        </p>
+
         <form id="homeworkForm">
             <!-- Device Selection -->
             <div class="question active" id="q1">
@@ -66,7 +68,7 @@
 
             <!-- ARC Questions -->
             <div class="question" id="arc1">
-                <p>1. LED brightness check. The LED can be distracting for users who prefer a more subdued lighting environment. </p>
+                <p>1. LED brightness check. The LED can be distracting for users who prefer a more subdued lighting environment.</p>
                 <p><strong>Procedure:</strong><br>
                 - Go into your Sonance app and select low brightness mode to enable this feature.<br>
                 - Please gauge the brightness of the status LED in 'LOW' brightness mode.</p>
@@ -85,11 +87,11 @@
             </div>
 
             <div class="question" id="arc3">
-                <p>3. Mute volume release. Ensure that when the amp is muted, that when you hit volume up or down, the amp becomes unmuted.</p>
+                <p>3. Mute volume release. Ensure that when the amp is muted, pressing volume up or down unmutes the amp.</p>
                 <p><strong>Procedure:</strong><br>
-                - Use amp in normal mode with audio playback<br>
-                - Select MUTE option with TV remote<br>
-                - Select volume up or down with TV remote.</p>
+                - Use amp in normal mode with audio playback.<br>
+                - Select MUTE option with TV remote.<br>
+                - Press volume up or down with TV remote.</p>
                 <button type="button" class="button" onclick="recordAnswer('arc3', 'Yes')">Yes</button>
                 <button type="button" class="button" onclick="recordAnswer('arc3', 'No')">No</button>
             </div>
@@ -115,7 +117,7 @@
                 <p>Thank you for completing the questions!</p>
                 <button type="submit" class="button">Submit Responses</button>
             </div>
-        
+
             <div class="progress" id="progress">Question 1 of 3</div>
             <button type="button" class="button" id="prevButton" onclick="prevQuestion()" style="display: none;">Previous</button>
         </form>
@@ -126,8 +128,8 @@
             let currentPath = [];
             let deviceType = '';
 
-            const arcQuestions = ['arc1', 'arc2', 'arc3', 'arc4'];
-            const narcQuestions = ['narc1', 'narc2'];
+            const arcQuestions = ['arc1', 'arc2'];
+            const narcQuestions = ['narc1'];
             const firmwareVersions = {
                 ARC: '1.59',
                 NARC: '1.58b'
@@ -135,14 +137,19 @@
 
             function nextQuestion(device) {
                 deviceType = device;
-                document.getElementById('q1').classList.remove('active');
 
-                // Update firmware version dynamically
-                document.getElementById('firmwareVersion').textContent = firmwareVersions[device];
+                // Display firmware info after selecting device
+                const firmwareInfo = document.getElementById('firmwareInfo');
+                const firmwareVersion = document.getElementById('firmwareVersion');
+
+                firmwareVersion.textContent = firmwareVersions[device];
+                firmwareInfo.style.display = 'block';
+
+                document.getElementById('q1').classList.remove('active');
 
                 currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
-                document.getElementById(currentPath[currentIndex]).classList.add('active');
+                document.getElementById(currentPath[currentIndex]).classList.add('active');  // Show first question immediately
                 document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
@@ -160,7 +167,7 @@
                 document.getElementById(currentPath[currentIndex]).classList.remove('active');
                 currentIndex += direction;
                 if (currentIndex >= currentPath.length) {
-                    document.getElementById(submitPage).classList.add('active');
+                    document.getElementById('submitPage').classList.add('active');
                 } else {
                     document.getElementById(currentPath[currentIndex]).classList.add('active');
                 }
@@ -175,7 +182,7 @@
             document.getElementById('homeworkForm').onsubmit = async function(e) {
                 e.preventDefault();
                 
-                responses['deviceType'] = deviceType;  // Include device type in submission
+                responses['deviceType'] = deviceType;
 
                 try {
                     const response = await fetch('/submit-homework', {
@@ -185,17 +192,14 @@
                     });
 
                     const textResponse = await response.text();
-                    console.log('Response Text:', textResponse);
 
                     if (response.ok) {
                         window.location.href = '/thank-you.html';
                     } else {
-                        console.error('Submission Error:', textResponse);
                         alert('Submission failed: ' + textResponse);
                     }
                 } catch (error) {
-                    console.error('Submission Error (catch block):', error);
-                    alert('Error submitting. Please check your connection and try again.');
+                    alert('Error submitting. Please try again.');
                 }
             };
         </script>
