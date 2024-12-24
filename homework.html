@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Homework Assignments</title>
-        <style>
-            body, html {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #f4f4f4;
-            }
-            .container {
-                width: 90%;
-                max-width: 700px;
-                padding: 40px;
-                background-color: white;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 10px;
-                text-align: center;
-            }
-            .question {
-                display: none;
-            }
-            .active {
-                display: block;
-            }
-            .button {
-                margin: 20px 10px;
-                padding: 15px 30px;
-                font-size: 1em;
-                color: white;
-                background-color: #1e94c2;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .button:hover {
-                background-color: #166b8e;
-            }
-            .progress {
-                margin-top: 20px;
-                font-size: 1em;
-                color: #666;
-                display: none;  /* Hide progress initially */
-            }
-        </style>
-    </head>    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Assignments</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .button {
+            margin: 20px 10px;
+            padding: 15px 30px;
+            font-size: 1em;
+            color: white;
+            background-color: #1e94c2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .button:hover {
+            background-color: #166b8e;
+        }
+        .selected {
+            background-color: #1177aa;
+            transform: scale(1.05);
+        }
+        .progress {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+            display: none;
+        }
+        .next-button {
+            margin-top: 30px;
+            display: none;
+        }
+    </style>
+</head>
 <body>
     <div class="container">
         <h1>Homework Assignments</h1>
@@ -234,44 +242,52 @@
             let currentPath = [];
             let deviceType = '';
 
-            const arcQuestions = ['arc1', 'arc2','arc3', 'arc4','arc5', 'arc6','arc7', 'arc8'];
-            const narcQuestions = ['narc1','narc2','narc3','narc4','narc5','narc6','narc7'];
+            const arcQuestions = ['arc1', 'arc2'];
             const firmwareVersions = {
                 ARC: '1.59',
                 NARC: '1.58b'
             };
-
+            
             function nextQuestion(device) {
                 deviceType = device;
 
-                // Display firmware info after selecting device
+                // Display firmware info
                 const firmwareInfo = document.getElementById('firmwareInfo');
                 const firmwareVersion = document.getElementById('firmwareVersion');
 
                 firmwareVersion.textContent = firmwareVersions[device];
                 firmwareInfo.style.display = 'block';
 
-                // Show progress bar
+                // Show progress
                 document.getElementById('progress').style.display = 'block';
 
                 document.getElementById('q1').classList.remove('active');
 
-                currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
+                currentPath = device === 'ARC' ? arcQuestions : [];
                 currentIndex = 0;
                 document.getElementById(currentPath[currentIndex]).classList.add('active');
                 document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
 
-            function recordAnswer(questionId, answer) {
+            function selectAnswer(questionId, answer, button) {
                 responses[questionId] = answer;
-                
-                // Check for text input and save it if filled
+
+                // Highlight selected button
+                const buttons = button.parentNode.querySelectorAll('.button');
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+
+                // Show Next button
+                const nextButton = button.parentNode.querySelector('.next-button');
+                nextButton.style.display = 'inline-block';
+            }
+
+            function recordTextAnswer(questionId) {
                 const textInput = document.getElementById(`${questionId}_text`);
                 if (textInput && textInput.value) {
-                    responses[`${questionId}_text`] = textInput.value;
+                    responses[questionId] = textInput.value;
                 }
-                
                 navigate(1);
             }
 
