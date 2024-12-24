@@ -228,26 +228,12 @@
             let currentPath = [];
             let deviceType = '';
 
-            const arcQuestions = {
-                'arc1': '1. Is the LED brightness acceptable in low brightness mode?',
-                'arc2': '2. Was the protection LED delayed, potentially confusing users?',
-                'arc3': '3. Did the amp unmute when pressing volume up or down?',
-                'arc4': '4. Did the TV remain muted after 30 seconds?',
-                'arc5': '5. Was the remote successfully programmed to control power ON/OFF?',
-                'arc6': '6. Did the amp switch inputs correctly during dual-source switchover?',
-                'arc7': '7. Were any issues observed during rapid DSP EQ adjustments?',
-                'arc8': '8. Did the amp reset to factory defaults successfully?'
-            };
-
-            const narcQuestions = {
-                'narc1': '1. Is the LED brightness acceptable for NARC in low brightness mode?',
-                'narc2': '2. Was the NARC protection LED delayed, potentially confusing users?',
-                'narc3': '3. Did the NARC amp unmute when pressing volume up or down?',
-                'narc4': '4. Did the NARC TV remain muted after 30 seconds?',
-                'narc5': '5. Was the NARC remote successfully programmed to control power ON/OFF?',
-                'narc6': '6. Did the NARC amp switch inputs correctly during dual-source switchover?',
-                'narc7': '7. Were any issues observed during rapid DSP EQ adjustments on NARC?'
-            };
+            const arcQuestions = [
+                'arc1', 'arc2', 'arc3', 'arc4', 'arc5', 'arc6', 'arc7', 'arc8'
+            ];
+            const narcQuestions = [
+                'narc1', 'narc2', 'narc3', 'narc4', 'narc5', 'narc6', 'narc7'
+            ];
             
             const firmwareVersions = {
                 ARC: '1.59',
@@ -257,47 +243,43 @@
             function nextQuestion(device) {
                 deviceType = device;
 
-                // Display firmware info
                 const firmwareInfo = document.getElementById('firmwareInfo');
                 const firmwareVersion = document.getElementById('firmwareVersion');
-
                 firmwareVersion.textContent = firmwareVersions[device];
                 firmwareInfo.style.display = 'block';
 
-                // Show progress
-                document.getElementById('progress').style.display = 'block';
-
                 document.getElementById('q1').classList.remove('active');
 
-                currentPath = device === 'ARC' ? Object.keys(arcQuestions) : Object.keys(narcQuestions);
+                currentPath = device === 'ARC' ? arcQuestions : narcQuestions;
                 currentIndex = 0;
-                document.getElementById('q1').classList.remove('active');
                 loadQuestion();
                 document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
 
             function loadQuestion() {
+                document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
                 const currentQuestionId = currentPath[currentIndex];
-                const questionText = deviceType === 'ARC' ? arcQuestions[currentQuestionId] : narcQuestions[currentQuestionId];
+                let questionDiv = document.getElementById(currentQuestionId);
 
-                const container = document.querySelector('.container');
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question active';
-                questionDiv.innerHTML = `
-                    <p>${questionText}</p>
-                    <button type="button" class="button" onclick="selectAnswer('${currentQuestionId}', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('${currentQuestionId}', 'No', this)">No</button>
-                    <p>Provide additional feedback (optional):</p>
-                    <textarea id="${currentQuestionId}_text" placeholder="Enter details..."></textarea>
-                    <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
-                `;
-                container.appendChild(questionDiv);
+                if (!questionDiv) {
+                    questionDiv = document.createElement('div');
+                    questionDiv.className = 'question active';
+                    questionDiv.id = currentQuestionId;
+                    questionDiv.innerHTML = `
+                        <p>${currentIndex + 1}. Sample question for ${currentQuestionId}</p>
+                        <button type="button" class="button" onclick="selectAnswer('${currentQuestionId}', 'Yes', this)">Yes</button>
+                        <button type="button" class="button" onclick="selectAnswer('${currentQuestionId}', 'No', this)">No</button>
+                        <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+                    `;
+                    document.querySelector('.container').appendChild(questionDiv);
+                }
+
+                questionDiv.classList.add('active');
             }
 
             function selectAnswer(questionId, answer, button) {
                 responses[questionId] = answer;
-
                 const buttons = button.parentNode.querySelectorAll('.button');
                 buttons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
@@ -306,25 +288,13 @@
                 nextButton.style.display = 'inline-block';
             }
 
-            function recordTextAnswer(questionId) {
-                const textInput = document.getElementById(`${questionId}_text`);
-                if (textInput && textInput.value) {
-                    responses[questionId] = textInput.value;
-                }
-                navigate(1);
-            }
-
-            function prevQuestion() {
-                navigate(-1);
-            }
-
             function navigate(direction) {
                 document.getElementById(currentPath[currentIndex]).classList.remove('active');
                 currentIndex += direction;
                 if (currentIndex >= currentPath.length) {
                     document.getElementById('submitPage').classList.add('active');
                 } else {
-                    document.getElementById(currentPath[currentIndex]).classList.add('active');
+                    loadQuestion();
                 }
                 updateProgress();
             }
@@ -332,31 +302,6 @@
             function updateProgress() {
                 document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
-
-            // Submit form data to the server
-            document.getElementById('homeworkForm').onsubmit = async function(e) {
-                e.preventDefault();
-                
-                responses['deviceType'] = deviceType;
-
-                try {
-                    const response = await fetch('/submit-homework', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(responses)
-                    });
-
-                    const textResponse = await response.text();
-
-                    if (response.ok) {
-                        window.location.href = '/thank-you.html';
-                    } else {
-                        alert('Submission failed: ' + textResponse);
-                    }
-                } catch (error) {
-                    alert('Error submitting. Please try again.');
-                }
-            };
         </script>
     </div>
 </body>
