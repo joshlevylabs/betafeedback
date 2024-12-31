@@ -24,7 +24,7 @@
   "routes": [
     {
       "src": "/submit-homework",
-      "dest": "/api/server"
+      "dest": "/api/server.js"
     },
     {
       "src": "/api/(.*)",
