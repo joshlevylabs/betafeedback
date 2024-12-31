@@ -246,53 +246,22 @@
 
     <!-- Quick Start Guide Section -->
     <section class="guide-section">
-        <h2>Quick Start Guides</h2>
-        <div>
-            <a href="/public/2024_UA2-125ARC_QuickstartGuide.pdf" class="button quickstart-guide" data-guide="ARC" target="_blank">
-                UA-125 ARC Quick Start Guide
-            </a>
-            <a href="/2024_UA2-125_QuickstartGuide.pdf" 
-                class="button quickstart-guide"
-                data-guide="REG"
+        <div class="guide-content">
+            <h2>Quick Start Guides</h2>
+            <div class="button-container">
+                <a href="/public/2024_UA2-125ARC_QuickstartGuide.pdf" 
+                class="button quickstart-guide" 
+                data-guide="ARC" 
+                target="_blank">
+                    UA-125 ARC Quick Start Guide
+                </a>
+                <a href="/2024_UA2-125_QuickstartGuide.pdf" 
+                class="button quickstart-guide" 
+                data-guide="REG" 
                 target="_blank">
                     UA-125 Quick Start Guide
-            </a>
-            <script>
-                // Debugging event for button clicks
-                document.querySelectorAll('.quickstart-guide').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const guideType = event.target.dataset.guide;
-                        const href = event.target.getAttribute('href');
-                
-                        console.log(`Attempting to load ${guideType} Quick Start Guide.`);
-                        console.log(`Expected URL path: ${href}`);
-                
-                        fetch(href, { method: 'HEAD' })
-                            .then(response => {
-                                if (response.ok) {
-                                    console.log(`${guideType} Guide found at: ${href}`);
-                                } else {
-                                    console.error(`${guideType} Guide not found. Response:`, response.status, response.statusText);
-                                    event.preventDefault();
-                                    alert(`
-                                        ❌ The ${guideType} Quick Start Guide could not be found at:
-                                        ${href}
-                                        
-                                        Please verify that the file exists in the 'public' directory on the server.
-                                    `);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error fetching the guide:', error);
-                                alert(`
-                                    🚨 Error reaching the server to load the ${guideType} Quick Start Guide.
-                                    Please try again later or contact support if the issue persists.
-                                `);
-                                event.preventDefault();
-                            });
-                    });
-                });
-            </script>            
+                </a>
+            </div>
         </div>
     </section>
 
