@@ -15,11 +15,6 @@
     {
       "src": "thank-you.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "public/(.*)",
-      "dest": "/$1",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -41,7 +36,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/public/$1"
     }
   ]
 }
