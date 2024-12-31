@@ -83,7 +83,7 @@
     <div class="container">
         <h1>Homework Assignments</h1>
         <p id="firmwareInfo" style="display: none;">
-            <strong>Firmware Version:</strong> <span id="firmwareVersion"></span>
+            <strong>Latest Firmware Version:</strong> <span id="firmwareVersion"></span>
         </p>
 
         <form id="homeworkForm">
@@ -324,7 +324,7 @@
             let currentIndex = 0;
             let currentPath = [];
             let deviceType = '';
-
+        
             const arcQuestionsText = {
                 arc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
                 arc2: 'Verify the protection LED. Is it working without delays?',
@@ -335,7 +335,7 @@
                 arc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?',
                 arc8: 'Did the amp reset to factory defaults successfully?'
             };
-
+        
             const narcQuestionsText = {
                 narc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
                 narc2: 'Verify the protection LED. Is it working without delays?',
@@ -345,7 +345,7 @@
                 narc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
                 narc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?'
             };
-            
+        
             const firmwareVersions = { ARC: '1.59', NARC: '1.58b' };
             
             function nextQuestion(device) {
@@ -356,7 +356,6 @@
                 currentPath = device === 'ARC' ? Object.keys(arcQuestionsText) : Object.keys(narcQuestionsText);
                 currentIndex = 0;
                 loadQuestion();
-                document.getElementById('prevButton').style.display = 'inline-block';
                 updateProgress();
             }
 
@@ -367,12 +366,16 @@
 
             function selectAnswer(questionId, answer, button) {
                 responses[questionId] = answer;
+
+                // Highlight the selected button
                 const buttons = button.parentNode.querySelectorAll('.button');
                 buttons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
 
-                const nextButton = button.parentNode.querySelector('.next-button');
-                nextButton.style.display = 'inline-block';
+                // Enable the next button
+                const nextButton = document.getElementById(`next_${questionId}`);
+                nextButton.classList.add('enabled');
+                nextButton.disabled = false;
             }
 
             function navigate(direction) {
@@ -381,6 +384,15 @@
                 if (currentIndex >= currentPath.length) {
                     document.getElementById('submitPage').classList.add('active');
                 } else {
+                    loadQuestion();
+                }
+                updateProgress();
+            }
+
+            function prevQuestion() {
+                if (currentIndex > 0) {
+                    document.getElementById(currentPath[currentIndex]).classList.remove('active');
+                    currentIndex -= 1;
                     loadQuestion();
                 }
                 updateProgress();
@@ -397,7 +409,7 @@
                 document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
 
-            document.getElementById('homeworkForm').onsubmit = async function(e) {
+            document.getElementById('homeworkForm').onsubmit = async function (e) {
                 e.preventDefault();
                 responses['deviceType'] = deviceType;
                 responses['email'] = document.getElementById('emailInput').value;
