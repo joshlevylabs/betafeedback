@@ -5,6 +5,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "public/*",
       "use": "@vercel/static"
     },
@@ -33,6 +37,10 @@
     {
       "src": "/thank-you",
       "dest": "/thank-you.html"
+    },
+    {
+      "src": "/submit-homework",
+      "dest": "/api/index.js"
     },
     {
       "src": "/(.*)",

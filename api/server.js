@@ -53,17 +53,13 @@ app.post('/submit-homework', (req, res) => {
 
     const mailOptions = {
         to: 'joshual@sonance.com',
-        from: 'sonance991@gmail.com',  // Use verified sender
+        from: 'sonance991@gmail.com',
         subject: 'Homework Submission',
         text: emailContent,
         html: `<div style="font-family: Arial, sans-serif;">
                    <h2>Homework Submission</h2>
                    ${emailContent}
-               </div>`,
-        headers: {
-            'Precedence': 'bulk',
-            'List-Unsubscribe': '<mailto:unsubscribe@sonance.com>'
-        }
+               </div>`
     };
 
     sgMail.send(mailOptions)
@@ -73,12 +69,10 @@ app.post('/submit-homework', (req, res) => {
         })
         .catch((error) => {
             console.error('❌ Error sending email:', error.response.body);
-            res.status(500).json({ 
-                error: 'Failed to send email.', 
-                details: error.response.body
-            });
+            res.status(500).json({ error: 'Failed to send email.', details: error.response.body });
         });
 });
+
 
 // Helper to format email content
 function formatEmail(data) {
