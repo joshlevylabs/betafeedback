@@ -415,17 +415,20 @@
                 responses['email'] = document.getElementById('emailInput').value;
 
                 // Create a formatted email body
-                let emailBody = 'Homework Submission:\n';
+                let emailBody = 'Homework Submission:\n\n';
                 const selectedQuestions = deviceType === 'ARC' ? arcQuestionsText : narcQuestionsText;
                 let counter = 1;
+
                 Object.keys(selectedQuestions).forEach(key => {
                     if (responses[key]) {
                         emailBody += `${counter}. ${selectedQuestions[key]}\n`;
-                        emailBody += `- Answer: ${responses[key]}\n`;
+                        emailBody += `   - Answer: ${responses[key]}\n`;
+                        
                         const feedback = document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value.trim() : '';
                         if (feedback) {
-                            emailBody += `- Feedback: ${feedback}\n`;
+                            emailBody += `   - Feedback: ${feedback}\n`;
                         }
+                        emailBody += '\n';
                         counter++;
                     }
                 });
