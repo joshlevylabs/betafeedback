@@ -18,6 +18,7 @@
     },
     {
       "src": "public/(.*)",
+      "dest": "/$1",
       "use": "@vercel/static"
     }
   ],
@@ -40,7 +41,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/public/$1"
+      "dest": "/$1"
     }
   ]
 }
