@@ -9,10 +9,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "public/*",
-      "use": "@vercel/static"
-    },
-    {
       "src": "homework.html",
       "use": "@vercel/static"
     },
@@ -29,10 +25,6 @@
     {
       "src": "/api/(.*)",
       "dest": "/api/server.js"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
     },
     {
       "src": "/homework",
