@@ -15,7 +15,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+    
         /* Body and Font Styles */
         body, html {
             font-family: 'Arial', sans-serif;
@@ -23,9 +23,9 @@
             height: 100%;
             overflow-x: hidden;
             background-color: #1f2933;
-        }
+        }   
 
-        /* Hero Section */
+         /* Hero Section */
         .hero {
             position: relative;
             width: 100%;
@@ -39,6 +39,7 @@
             text-align: center;
         }
 
+        /* Background Overlay */
         .hero::before {
             content: '';
             position: absolute;
@@ -50,7 +51,7 @@
             z-index: 1;
         }
 
-        /* Hero Content with Border */
+        /* Hero Content */
         .hero-content {
             position: relative;
             z-index: 2;
@@ -60,12 +61,35 @@
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
+
         .hero h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        /* Button Section for Quick Start Guides */
+        .guide-section {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .guide-section h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         /* Custom Buttons */
@@ -174,7 +198,7 @@
             color: #ccc;
         }
 
-        /* Responsive Design */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .hero {
                 height: 75vh;
@@ -184,12 +208,12 @@
                 font-size: 1.8em;
             }
 
-            .button {
-                width: 90%;
-            }
-
             .button-container {
                 flex-direction: column;
+            }
+
+            .button {
+                width: 90%;
             }
         }
     </style>
@@ -197,26 +221,30 @@
 </head>
 <body>
 
-    <!-- Hero Section -->
+    <!-- Hero Section --> 
     <section class="hero">
         <div class="hero-content">
             <h1>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</h1>
-            
-            <!-- Custom Feedback Button -->
+
+            <!-- Feedback Button -->
             <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
 
-            <div class="button-container">
-                <a href="2024_UA2-125ARC_QuickstartGuide.pdf" class="button guide-button" target="_blank">
-                    UA-125 ARC Quick Start Guide
-                </a>
-                <a href="2024_UA2-125_QuickstartGuide.pdf" class="button guide-button" target="_blank">
-                    UA-125 Quick Start Guide
-                </a>
-            </div>            
-
-            <!-- Latest Homework Assignments Button -->
+            <!-- Homework Assignments Button -->
             <a href="homework.html" class="button" target="_blank">
                 Latest Homework Assignments
+            </a>
+        </div>
+    </section>
+    
+    <!-- Quick Start Guide Section -->
+    <section class="guide-section">
+        <h2>Quick Start Guides</h2>
+        <div class="button-container">
+            <a href="2024_UA2-125ARC_QuickstartGuide.pdf" class="button" target="_blank">
+                UA-125 ARC Quick Start Guide
+            </a>
+            <a href="2024_UA2-125_QuickstartGuide.pdf" class="button" target="_blank">
+                UA-125 Quick Start Guide
             </a>
         </div>
     </section>
