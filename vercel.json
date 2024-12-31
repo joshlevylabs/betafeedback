@@ -24,7 +24,7 @@
   "routes": [
     {
       "src": "/submit-homework",
-      "dest": "/api/server.js"
+      "dest": "/api/server"
     },
     {
       "src": "/",
@@ -37,10 +37,6 @@
     {
       "src": "/thank-you",
       "dest": "/thank-you.html"
-    },
-    {
-      "src": "/submit-homework",
-      "dest": "/api/server.js"
     },
     {
       "src": "/(.*)",

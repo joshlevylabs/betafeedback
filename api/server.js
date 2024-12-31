@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Debugging middleware to log all incoming requests
 app.use((req, res, next) => {
     console.log(`🔍 Received request: ${req.method} ${req.url}`);
+    console.log(`🔍 Request to: ${req.url}`);
     next();
 });
 
@@ -61,6 +62,9 @@ app.post('/submit-homework', (req, res) => {
                    ${emailContent}
                </div>`
     };
+
+    console.log('🔔 POST /submit-homework hit');
+    res.json({ message: 'Homework submitted successfully' });
 
     sgMail.send(mailOptions)
         .then(() => {
