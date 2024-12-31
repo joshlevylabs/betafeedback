@@ -89,9 +89,21 @@ app.post('/submit-homework', (req, res) => {
             res.status(200).json({ message: 'Email sent successfully.' });
         })
         .catch((error) => {
-            console.error('❌ Error sending email:', error.response.body);
-            res.status(500).json({ error: 'Failed to send email.', details: error.response.body });
+            if (error.response && error.response.body) {
+                console.error('❌ Error sending email:', error.response.body);
+                res.status(500).json({
+                    error: 'Failed to send email.',
+                    details: error.response.body
+                });
+            } else {
+                console.error('❌ SendGrid error (no response body):', error.message);
+                res.status(500).json({
+                    error: 'Failed to send email.',
+                    details: error.message
+                });
+            }
         });
+
 });
 
 app.post('/api/server', (req, res) => {
