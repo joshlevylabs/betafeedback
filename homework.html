@@ -78,12 +78,151 @@
         </p>
 
         <form id="homeworkForm">
+            <!-- Device Selection -->
             <div class="question active" id="q1">
                 <p>Are you using an ARC or a NARC?</p>
                 <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
                 <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
             </div>
 
+            <!-- ARC Questions -->
+            <div class="question" id="arc1">
+                <p>1. Is the LED brightness acceptable when set to low brightness mode?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc1', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc1', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc1_text" placeholder="Enter details..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc2">
+                <p>2. Was the protection LED delayed, potentially confusing users?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc2', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc2', 'No', this)">No</button>
+                <p>How long was the delay? (optional)</p>
+                <input type="text" id="arc2_text" placeholder="Enter time in seconds...">
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc3">
+                <p>3. Did the amp unmute successfully when the volume up or down button was pressed?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc3', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc3_text" placeholder="Enter details..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc4">
+                <p>4. Did the TV remain muted after 30 seconds of activating the mute command?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
+                <p>Explain if you faced issues (optional):</p>
+                <textarea id="arc4_text" placeholder="Explain issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc5">
+                <p>5. Was the remote successfully programmed to control the amp's power ON/OFF?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc5', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc5', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc5_text" placeholder="Describe any issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc6">
+                <p>6. Did the amp switch inputs correctly when testing the dual-source switchover?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc6', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc6', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc6_text" placeholder="Describe any switchover issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc7">
+                <p>7. Were there any issues observed during rapid DSP EQ frequency adjustments?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc7', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc7', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc7_text" placeholder="Describe observed issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="arc8">
+                <p>8. Did the amp reset to factory defaults successfully?</p>
+                <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('arc8', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="arc8_text" placeholder="Describe any reset issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <!-- NARC Questions -->
+            <div class="question" id="narc1">
+                <p>1. Is the LED brightness acceptable in low brightness mode?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc1', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc1', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc1_text" placeholder="Enter details..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc2">
+                <p>2. Was the protection LED delayed, potentially confusing users?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc2', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc2', 'No', this)">No</button>
+                <p>How long was the delay? (optional)</p>
+                <input type="text" id="narc2_text" placeholder="Enter time in seconds...">
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc3">
+                <p>3. Did the mute command stay active after 30 seconds?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc3', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc3', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc3_text" placeholder="Explain any issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc4">
+                <p>4. Was the remote successfully programmed to control the amp's power ON/OFF?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc4', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc4', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc4_text" placeholder="Describe any programming issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc5">
+                <p>5. Did the amp switch inputs correctly during dual-source switchover?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc5', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc5', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc5_text" placeholder="Describe any switchover issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc6">
+                <p>6. Were there any issues observed during rapid DSP EQ frequency adjustments?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc6', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc6', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc6_text" placeholder="Describe observed issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <div class="question" id="narc7">
+                <p>7. Did the amp reset to factory defaults successfully?</p>
+                <button type="button" class="button" onclick="selectAnswer('narc7', 'Yes', this)">Yes</button>
+                <button type="button" class="button" onclick="selectAnswer('narc7', 'No', this)">No</button>
+                <p>Provide additional feedback (optional):</p>
+                <textarea id="narc7_text" placeholder="Describe any reset issues..."></textarea>
+                <button type="button" class="button next-button" onclick="navigate(1)">Next</button>
+            </div>
+
+            <!-- Submit Page -->
             <div class="question" id="submitPage">
                 <p>Thank you for completing the questions!</p>
                 <input type="email" id="emailInput" placeholder="Enter your email" oninput="validateEmail()">
@@ -100,17 +239,27 @@
             let currentPath = [];
             let deviceType = '';
 
-            const questionsText = {
+            const arcQuestionsText = {
                 arc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
                 arc2: 'Verify the protection LED. Is it working without delays?',
                 arc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
                 arc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
-                arc5: 'Was the remote successfully programmed to control the amp's power ON/OFF?',
+                arc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
                 arc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
                 arc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?',
                 arc8: 'Did the amp reset to factory defaults successfully?'
             };
 
+            const narcQuestionsText = {
+                narc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
+                narc2: 'Verify the protection LED. Is it working without delays?',
+                narc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+                narc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+                narc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
+                narc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
+                narc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?'
+            };
+            
             const firmwareVersions = { ARC: '1.59', NARC: '1.58b' };
             
             function nextQuestion(device) {
@@ -118,7 +267,7 @@
                 document.getElementById('firmwareVersion').textContent = firmwareVersions[device];
                 document.getElementById('firmwareInfo').style.display = 'block';
                 document.getElementById('q1').classList.remove('active');
-                currentPath = Object.keys(questionsText);
+                currentPath = device === 'ARC' ? Object.keys(arcQuestionsText) : Object.keys(narcQuestionsText);
                 currentIndex = 0;
                 loadQuestion();
                 document.getElementById('prevButton').style.display = 'inline-block';
@@ -130,11 +279,36 @@
                 document.getElementById(currentPath[currentIndex]).classList.add('active');
             }
 
+            function selectAnswer(questionId, answer, button) {
+                responses[questionId] = answer;
+                const buttons = button.parentNode.querySelectorAll('.button');
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+
+                const nextButton = button.parentNode.querySelector('.next-button');
+                nextButton.style.display = 'inline-block';
+            }
+
+            function navigate(direction) {
+                document.getElementById(currentPath[currentIndex]).classList.remove('active');
+                currentIndex += direction;
+                if (currentIndex >= currentPath.length) {
+                    document.getElementById('submitPage').classList.add('active');
+                } else {
+                    loadQuestion();
+                }
+                updateProgress();
+            }
+
             function validateEmail() {
                 const email = document.getElementById('emailInput').value;
                 const submitButton = document.getElementById('submitButton');
                 const isValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
                 submitButton.disabled = !isValid;
+            }
+            
+            function updateProgress() {
+                document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
 
             document.getElementById('homeworkForm').onsubmit = async function(e) {
@@ -143,8 +317,9 @@
                 responses['email'] = document.getElementById('emailInput').value;
                 
                 let emailBody = 'Homework Submission\n';
+                const selectedQuestions = deviceType === 'ARC' ? arcQuestionsText : narcQuestionsText;
                 Object.keys(responses).forEach(key => {
-                    const questionText = questionsText[key] || key;
+                    const questionText = selectedQuestions[key] || key;
                     emailBody += `${questionText}\nAnswer: ${responses[key]}\n`;
                 });
                 
