@@ -411,11 +411,13 @@
 
             document.getElementById('homeworkForm').onsubmit = async function (e) {
                 e.preventDefault();
+                const email = document.getElementById('emailInput').value;
                 responses['deviceType'] = deviceType;
-                responses['email'] = document.getElementById('emailInput').value;
 
                 // Create a formatted email body
                 let emailBody = 'Homework Submission:\n\n';
+                emailBody += `Email: ${email}\n\n`;
+
                 const selectedQuestions = deviceType === 'ARC' ? arcQuestionsText : narcQuestionsText;
                 let counter = 1;
 
@@ -423,7 +425,7 @@
                     if (responses[key]) {
                         emailBody += `${counter}. ${selectedQuestions[key]}\n`;
                         emailBody += `   - Answer: ${responses[key]}\n`;
-                        
+
                         const feedback = document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value.trim() : '';
                         if (feedback) {
                             emailBody += `   - Feedback: ${feedback}\n`;
@@ -437,8 +439,9 @@
                     const response = await fetch('/submit-homework', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ responses, emailBody })
+                        body: JSON.stringify({ emailBody })  // Send only emailBody
                     });
+
                     if (response.ok) {
                         window.location.href = '/thank-you.html';
                     } else {
@@ -448,6 +451,7 @@
                     alert('Error submitting.');
                 }
             };
+
 
         </script>
     </div>
