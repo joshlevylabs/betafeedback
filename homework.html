@@ -322,7 +322,7 @@
                 Object.keys(selectedQuestions).forEach(key => {
                     if (responses[key]) {
                         emailBody += `${counter}. ${selectedQuestions[key]}\nAnswer: ${responses[key]}\n`;
-                        const feedback = document.getElementById(`${key}_text`).value;
+                        const feedback = document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value : '';
                         if (feedback) {
                             emailBody += `Feedback: ${feedback}\n`;
                         }
