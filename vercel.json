@@ -5,6 +5,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "homework.html",
       "use": "@vercel/static"
     },
@@ -29,6 +33,10 @@
     {
       "src": "/thank-you",
       "dest": "/thank-you.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
