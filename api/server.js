@@ -11,6 +11,8 @@ app.use(cors());
 
 // Set up SendGrid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+console.log('🔑 SENDGRID API KEY:', process.env.SENDGRID_API_KEY ? 'Exists' : 'Missing');
+
 
 // Serve static files from public directory at the project root
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -83,17 +85,25 @@ app.post('/submit-homework', (req, res) => {
                </div>`
     };
 
+    console.log('📧 Sending email to:', mailOptions.to);
+
     sgMail.send(mailOptions)
         .then(() => {
             console.log('✅ Email sent successfully.');
+            res.status(200).json({ message: 'Homework submitted successfully' });
         })
         .catch((error) => {
-            console.error('❌ Error sending email:', error.message);
+            console.error('❌ Error sending email:', error.response ? error.response.body : error.message);
+            res.status(500).json({
+                error: 'Failed to send email.',
+                details: error.response ? error.response.body : error.message
+            });
         });
 });
 
 
 app.post('/api/server', (req, res) => {
+    console.log('🔔 POST /api/server hit');
     const formData = req.body;
     const emailContent = formatEmail(formData);
 
@@ -108,32 +118,27 @@ app.post('/api/server', (req, res) => {
                </div>`
     };
 
-    console.log('🔔 POST /api/server hit');
-    res.json({ message: 'Homework submitted successfully' });
-
     sgMail.send(mailOptions)
         .then(() => {
-            console.log('✅ Email sent successfully.');
+            console.log('✅ Email sent successfully from /api/server.');
             res.status(200).json({ message: 'Email sent successfully.' });
         })
         .catch((error) => {
-            console.error('❌ Error sending email:', error.response.body);
-            res.status(500).json({ error: 'Failed to send email.', details: error.response.body });
+            console.error('❌ Error sending email (POST /api/server):', error.response ? error.response.body : error.message);
+            res.status(500).json({ error: 'Failed to send email.', details: error.response ? error.response.body : error.message });
         });
 });
-
 
 function formatEmail(data) {
     let emailBody = `Homework Submission:\n\n`;
     emailBody += `Email: ${data.email}\n\n`;
     emailBody += `Questions:\n`;
 
-    // Determine which question map to use (ARC or NARC)
     const questionMap = data.deviceType === 'ARC' ? arcQuestionMap : narcQuestionMap;
 
     let counter = 1;
     for (const [key, value] of Object.entries(data.responses)) {
-        const question = questionMap[key] || key;  // Fallback to key if not found
+        const question = questionMap[key] || key;
         emailBody += `${counter}. ${question}\n`;
         emailBody += `   - Answer: ${value.answer}\n`;
 
