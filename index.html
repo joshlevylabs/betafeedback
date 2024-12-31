@@ -37,20 +37,37 @@
             text-align: center;
         }
 
-        /* Hero Content */
-        .hero-content {
+        /* Hero and Guide Content Alignment */
+        .hero-content, .guide-box {
             position: relative;
             max-width: 600px;
             width: 90%;
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
+
+        /* Hero Text */
+        .hero h1, .guide-box h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;  /* Black text for contrast */
+        }
+
+        /* Quick Start Guide Box */
+        .guide-box {
+            background-color: #f4f4f4;  /* Light background for quick start section */
+            margin: 40px auto;
+        }
+
 
         .hero h1 {
             font-size: 2.5em;
@@ -231,11 +248,11 @@
     <section class="hero">
         <div class="hero-content">
             <h1>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</h1>
-    
+
             <div class="vertical-buttons">
                 <!-- Feedback Button -->
                 <a href="#" id="myCustomTrigger" class="button">Create Feedback Ticket</a>
-    
+
                 <!-- Homework Assignments Button -->
                 <a href="homework.html" class="button" target="_blank">
                     Latest Homework Assignments
@@ -250,7 +267,7 @@
             <h2>Quick Start Guides</h2>
 
             <!-- New Container for Quick Start Guides -->
-            <div class="hero-content">
+            <div class="guide-box">
                 <h1>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</h1>
                 
                 <div class="vertical-buttons">
