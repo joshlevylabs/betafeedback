@@ -82,12 +82,23 @@ app.post('/submit-homework', (req, res) => {
 
 // Helper to format email content
 function formatEmail(data) {
-    let emailBody = '<ol>';
-    for (const [key, value] of Object.entries(data)) {
+    let emailBody = `Homework Submission:\n\n`;
+    emailBody += `Email: ${data.email}\n\n`;
+    emailBody += `Questions:\n`;
+
+    let counter = 1;
+    for (const [key, value] of Object.entries(data.responses)) {
         const question = questionMap[key] || key;  // Fallback to ID if no match
-        emailBody += `<li><strong>${question}</strong><br>Answer: ${value}</li>`;
+        emailBody += `${counter}. ${question}\n`;
+        emailBody += `   - Answer: ${value.answer}\n`;
+
+        if (value.feedback) {
+            emailBody += `   - Feedback: ${value.feedback}\n`;
+        }
+        emailBody += `\n`;
+        counter++;
     }
-    emailBody += '</ol>';
+    
     return emailBody;
 }
 
