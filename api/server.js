@@ -12,7 +12,7 @@ app.use(cors());
 // Set up SendGrid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Serve static files directly from the root directory (for Vercel)
+// Serve static files from public directory at the project root
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Debugging middleware to log all incoming requests
@@ -30,8 +30,16 @@ app.get('/:filename', (req, res) => {
 
     res.sendFile(filePath, (err) => {
         if (err) {
-            console.error('❌ Error serving file:', err.message);
-            res.status(404).send(`404 - File Not Found: ${req.params.filename}`);
+            console.error(`❌ Error serving file: ${err.message}`);
+            console.error(`👉 Full Path: ${filePath}`);
+            console.error(`🔧 Troubleshooting: Ensure the file exists in the 'public' directory and the path is correct.`);
+            
+            res.status(404).send(`
+                <h1>404 - File Not Found</h1>
+                <p>The requested file <strong>${req.params.filename}</strong> could not be found at the expected location:</p>
+                <code>${filePath}</code>
+                <p>Please verify the file exists and try again.</p>
+            `);
         } else {
             console.log(`✅ Successfully served: ${req.params.filename}`);
         }
