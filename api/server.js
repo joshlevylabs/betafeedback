@@ -66,6 +66,9 @@ const narcQuestionMap = {
 
 // API Endpoint for Homework Submission
 app.post('/submit-homework', (req, res) => {
+    console.log('🔔 POST /submit-homework hit via direct route');
+    res.json({ message: 'Homework submitted successfully' });
+
     const formData = req.body;
     const emailContent = formatEmail(formData);
 
@@ -80,24 +83,12 @@ app.post('/submit-homework', (req, res) => {
                </div>`
     };
 
-    console.log('🔔 POST /submit-homework hit');
-
-    // SendGrid Email
     sgMail.send(mailOptions)
         .then(() => {
             console.log('✅ Email sent successfully.');
-            res.status(200).json({ message: 'Homework submitted successfully' });  // Send response here
         })
         .catch((error) => {
-            if (res.headersSent) {
-                console.error('❌ SendGrid error (no response body):', error.message);
-                return;
-            }
             console.error('❌ Error sending email:', error.message);
-            res.status(500).json({
-                error: 'Failed to send email.',
-                details: error.message
-            });
         });
 });
 
