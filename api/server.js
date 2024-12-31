@@ -77,6 +77,35 @@ app.post('/submit-homework', (req, res) => {
         });
 });
 
+app.post('/api/server', (req, res) => {
+    const formData = req.body;
+    const emailContent = formatEmail(formData);
+
+    const mailOptions = {
+        to: 'joshual@sonance.com',
+        from: 'sonance991@gmail.com',
+        subject: 'Homework Submission',
+        text: emailContent,
+        html: `<div style="font-family: Arial, sans-serif;">
+                   <h2>Homework Submission</h2>
+                   ${emailContent}
+               </div>`
+    };
+
+    console.log('🔔 POST /api/server hit');
+    res.json({ message: 'Homework submitted successfully' });
+
+    sgMail.send(mailOptions)
+        .then(() => {
+            console.log('✅ Email sent successfully.');
+            res.status(200).json({ message: 'Email sent successfully.' });
+        })
+        .catch((error) => {
+            console.error('❌ Error sending email:', error.response.body);
+            res.status(500).json({ error: 'Failed to send email.', details: error.response.body });
+        });
+});
+
 
 // Helper to format email content
 function formatEmail(data) {
