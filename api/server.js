@@ -47,6 +47,28 @@ app.get('/:filename', (req, res) => {
     });
 });
 
+const arcQuestionMap = {
+    arc1: "Enable low brightness mode. Is the LED brightness acceptable?",
+    arc2: "Verify the protection LED. Is it working without delays?",
+    arc3: "Did the amp unmute successfully when the volume up or down button was pressed?",
+    arc4: "Did the TV remain muted after 30 seconds of activating the mute command?",
+    arc5: "Was the remote successfully programmed to control the amp's power ON/OFF?",
+    arc6: "Did the amp switch inputs correctly when testing the dual-source switchover?",
+    arc7: "Were there any issues observed during rapid DSP EQ frequency adjustments?",
+    arc8: "Did the amp reset to factory defaults successfully?"
+};
+
+const narcQuestionMap = {
+    narc1: "Enable low brightness mode. Is the LED brightness acceptable?",
+    narc2: "Verify the protection LED. Is it working without delays?",
+    narc3: "Did the amp unmute successfully when the volume up or down button was pressed?",
+    narc4: "Did the TV remain muted after 30 seconds of activating the mute command?",
+    narc5: "Was the remote successfully programmed to control the amp's power ON/OFF?",
+    narc6: "Did the amp switch inputs correctly when testing the dual-source switchover?",
+    narc7: "Were there any issues observed during rapid DSP EQ frequency adjustments?"
+};
+
+
 // API Endpoint for Homework Submission
 app.post('/submit-homework', (req, res) => {
     const formData = req.body;
@@ -107,15 +129,17 @@ app.post('/api/server', (req, res) => {
 });
 
 
-// Helper to format email content
 function formatEmail(data) {
     let emailBody = `Homework Submission:\n\n`;
     emailBody += `Email: ${data.email}\n\n`;
     emailBody += `Questions:\n`;
 
+    // Determine which question map to use (ARC or NARC)
+    const questionMap = data.deviceType === 'ARC' ? arcQuestionMap : narcQuestionMap;
+
     let counter = 1;
     for (const [key, value] of Object.entries(data.responses)) {
-        const question = questionMap[key] || key;  // Fallback to ID if no match
+        const question = questionMap[key] || key;  // Fallback to key if not found
         emailBody += `${counter}. ${question}\n`;
         emailBody += `   - Answer: ${value.answer}\n`;
 

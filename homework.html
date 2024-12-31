@@ -427,6 +427,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
                             email: email,
+                            deviceType: deviceType,  // Pass ARC or NARC to the server
                             responses: structuredResponses
                         })
                     });
@@ -440,6 +441,7 @@
                     alert('Error submitting.');
                 }
             };
+
 
         </script>
     </div>
