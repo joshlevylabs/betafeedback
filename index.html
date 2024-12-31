@@ -259,11 +259,11 @@
     <!-- Quick Start Guide Section -->
     <section class="guide-section">
         <h2>Quick Start Guides</h2>
-        <div class="button-container">
-            <a href="/2024_UA2-125ARC_QuickstartGuide.pdf" class="button" target="_blank">
+        <div>
+            <a href="/2024_UA2-125ARC_QuickstartGuide.pdf" class="button quickstart-guide" data-guide="ARC">
                 UA-125 ARC Quick Start Guide
             </a>
-            <a href="/2024_UA2-125_QuickstartGuide.pdf" class="button" target="_blank">
+            <a href="/2024_UA2-125_QuickstartGuide.pdf" class="button quickstart-guide" data-guide="STANDARD">
                 UA-125 Quick Start Guide
             </a>
         </div>
@@ -359,8 +359,49 @@
 
     <!-- Footer -->
     <div class="footer">
-        &copy; 2024 Sonance Labs. All rights reserved.
+        &copy; 2024 Sonance Labs
     </div>
+
+    <!-- Debugging Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Log all link clicks for debugging
+            const guideLinks = document.querySelectorAll('.quickstart-guide');
+
+            guideLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    const guideName = event.target.dataset.guide;
+                    console.log(`Attempting to load: ${event.target.href}`);
+                    
+                    // Test loading PDF in background to catch potential 404 errors
+                    fetch(event.target.href)
+                        .then(response => {
+                            if (!response.ok) {
+                                console.error(`Failed to load ${guideName} PDF. Status: ${response.status}`);
+                                alert(`The ${guideName} Quick Start Guide could not be found. Please check the path.`);
+                            } else {
+                                console.log(`${guideName} PDF loaded successfully.`);
+                            }
+                        })
+                        .catch(err => {
+                            console.error(`Error loading ${guideName} PDF:`, err);
+                        });
+
+                    // Delay to ensure fetch call happens before navigating away
+                    setTimeout(() => {
+                        console.log(`Navigating to: ${event.target.href}`);
+                    }, 200);
+                });
+            });
+
+            // Log any resource errors (404 or otherwise)
+            window.addEventListener('error', function(event) {
+                if (event.target.tagName === 'IMG' || event.target.tagName === 'LINK' || event.target.tagName === 'SCRIPT') {
+                    console.error(`Failed to load resource: ${event.target.src || event.target.href}`);
+                }
+            });
+        });
+    </script>
 
     <!-- Jira Issue Collector Script -->
     <script type="text/javascript" src="https://sonancelabs.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/9/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=c76f517d"></script>
