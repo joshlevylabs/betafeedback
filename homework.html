@@ -229,6 +229,7 @@
             </div>
 
             <div class="progress" id="progress">Question 1 of 3</div>
+            <button type="button" class="button" id="prevButton" onclick="prevQuestion()" style="display: none;">Previous</button>
         </form>
         
         <script>
@@ -238,9 +239,26 @@
             let deviceType = '';
 
             const arcQuestionsText = {
-                arc1: 'Enable low brightness mode. Is the LED brightness acceptable?'
+                arc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
+                arc2: 'Verify the protection LED. Is it working without delays?',
+                arc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+                arc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+                arc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
+                arc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
+                arc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?',
+                arc8: 'Did the amp reset to factory defaults successfully?'
             };
 
+            const narcQuestionsText = {
+                narc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
+                narc2: 'Verify the protection LED. Is it working without delays?',
+                narc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+                narc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+                narc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
+                narc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
+                narc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?'
+            };
+            
             const firmwareVersions = { ARC: '1.59', NARC: '1.58b' };
             
             function nextQuestion(device) {
@@ -248,9 +266,11 @@
                 document.getElementById('firmwareVersion').textContent = firmwareVersions[device];
                 document.getElementById('firmwareInfo').style.display = 'block';
                 document.getElementById('q1').classList.remove('active');
-                currentPath = Object.keys(arcQuestionsText);
+                currentPath = device === 'ARC' ? Object.keys(arcQuestionsText) : Object.keys(narcQuestionsText);
                 currentIndex = 0;
                 loadQuestion();
+                document.getElementById('prevButton').style.display = 'inline-block';
+                updateProgress();
             }
 
             function loadQuestion() {
@@ -259,11 +279,35 @@
             }
 
             function selectAnswer(questionId, answer, button) {
-                responses[questionId] = {
-                    answer: answer,
-                    feedback: document.getElementById(`${questionId}_text`).value.trim()
-                };
+                responses[questionId] = answer;
+                const buttons = button.parentNode.querySelectorAll('.button');
+                buttons.forEach(btn => btn.classList.remove('selected'));
                 button.classList.add('selected');
+
+                const nextButton = button.parentNode.querySelector('.next-button');
+                nextButton.style.display = 'inline-block';
+            }
+
+            function navigate(direction) {
+                document.getElementById(currentPath[currentIndex]).classList.remove('active');
+                currentIndex += direction;
+                if (currentIndex >= currentPath.length) {
+                    document.getElementById('submitPage').classList.add('active');
+                } else {
+                    loadQuestion();
+                }
+                updateProgress();
+            }
+
+            function validateEmail() {
+                const email = document.getElementById('emailInput').value;
+                const submitButton = document.getElementById('submitButton');
+                const isValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+                submitButton.disabled = !isValid;
+            }
+            
+            function updateProgress() {
+                document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${currentPath.length}`;
             }
 
             document.getElementById('homeworkForm').onsubmit = async function(e) {
@@ -299,12 +343,7 @@
                     alert('Error submitting.');
                 }
             };
-
-            function validateEmail() {
-                const email = document.getElementById('emailInput').value;
-                const submitButton = document.getElementById('submitButton');
-                submitButton.disabled = !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-            }
+            
         </script>
     </div>
 </body>
