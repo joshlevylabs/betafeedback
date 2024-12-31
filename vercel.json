@@ -34,5 +34,8 @@
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ]
+  ],
+  "static": {
+    "directory": "public"
+  }
 }
