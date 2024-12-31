@@ -13,7 +13,7 @@ app.use(cors());
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Serve static files directly from the root directory (for Vercel)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Debugging middleware to log all incoming requests
 app.use((req, res, next) => {
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 // Serve static files like PDFs from 'public' directory
 app.get('/:filename', (req, res) => {
-    const filePath = path.join(__dirname, 'public', req.params.filename);
+    const filePath = path.join(__dirname, '..', 'public', req.params.filename);
 
     console.log(`📂 Attempting to serve file: ${req.params.filename}`);
     console.log(`🔍 Resolved file path: ${filePath}`);
