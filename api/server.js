@@ -81,35 +81,26 @@ app.post('/submit-homework', (req, res) => {
     };
 
     console.log('🔔 POST /submit-homework hit');
-    res.json({ message: 'Homework submitted successfully' });
 
+    // SendGrid Email
     sgMail.send(mailOptions)
         .then(() => {
             console.log('✅ Email sent successfully.');
-            res.status(200).json({ message: 'Email sent successfully.' });
-            return;  // Prevents the catch block from running
+            res.status(200).json({ message: 'Homework submitted successfully' });  // Send response here
         })
         .catch((error) => {
             if (res.headersSent) {
                 console.error('❌ SendGrid error (no response body):', error.message);
                 return;
             }
-
-            if (error.response && error.response.body) {
-                console.error('❌ Error sending email:', error.response.body);
-                res.status(500).json({
-                    error: 'Failed to send email.',
-                    details: error.response.body
-                });
-            } else {
-                console.error('❌ SendGrid error (no response body):', error.message);
-                res.status(500).json({
-                    error: 'Failed to send email.',
-                    details: error.message
-                });
-            }
+            console.error('❌ Error sending email:', error.message);
+            res.status(500).json({
+                error: 'Failed to send email.',
+                details: error.message
+            });
         });
 });
+
 
 app.post('/api/server', (req, res) => {
     const formData = req.body;
