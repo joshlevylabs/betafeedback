@@ -87,8 +87,14 @@ app.post('/submit-homework', (req, res) => {
         .then(() => {
             console.log('✅ Email sent successfully.');
             res.status(200).json({ message: 'Email sent successfully.' });
+            return;  // Prevents the catch block from running
         })
         .catch((error) => {
+            if (res.headersSent) {
+                console.error('❌ SendGrid error (no response body):', error.message);
+                return;
+            }
+
             if (error.response && error.response.body) {
                 console.error('❌ Error sending email:', error.response.body);
                 res.status(500).json({
@@ -103,7 +109,6 @@ app.post('/submit-homework', (req, res) => {
                 });
             }
         });
-
 });
 
 app.post('/api/server', (req, res) => {
