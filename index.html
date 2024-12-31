@@ -23,10 +23,10 @@
             height: 100%;
             overflow-x: hidden;
             background-color: #1f2933;
-        }   
+        } 
 
          /* Hero Section */
-        .hero {
+         .hero {
             position: relative;
             width: 100%;
             height: 100vh;
@@ -47,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);  /* Dark overlay for contrast */
+            background: rgba(0, 0, 0, 0.5);  /* Slight dark overlay for contrast */
             z-index: 1;
         }
 
@@ -55,16 +55,21 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            padding: 50px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero h1 {
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -92,6 +97,14 @@
             flex-wrap: wrap;
         }
 
+        /* Vertically Aligned Buttons */
+        .vertical-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
         /* Custom Buttons */
         .button {
             background-color: #1e94c2;
@@ -104,6 +117,13 @@
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             text-align: center;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #1177aa;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
         }
 
         .button-container {
@@ -208,12 +228,12 @@
                 font-size: 1.8em;
             }
 
-            .button-container {
-                flex-direction: column;
+            .vertical-buttons {
+                width: 100%;
             }
 
             .button {
-                width: 90%;
+                width: 100%;
             }
         }
     </style>
@@ -226,16 +246,18 @@
         <div class="hero-content">
             <h1>SONANCE UA 2-125 ARC<br>SONANCE UA 2-125</h1>
 
-            <!-- Feedback Button -->
-            <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
+            <div class="vertical-buttons">
+                <!-- Feedback Button -->
+                <a href="#" id="myCustomTrigger" class="button">Provide Feedback</a>
 
-            <!-- Homework Assignments Button -->
-            <a href="homework.html" class="button" target="_blank">
-                Latest Homework Assignments
-            </a>
+                <!-- Homework Assignments Button -->
+                <a href="homework.html" class="button" target="_blank">
+                    Latest Homework Assignments
+                </a>
+            </div>
         </div>
     </section>
-    
+
     <!-- Quick Start Guide Section -->
     <section class="guide-section">
         <h2>Quick Start Guides</h2>
