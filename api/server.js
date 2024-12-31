@@ -15,12 +15,28 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Serve static files directly from the root directory (for Vercel)
 app.use(express.static(path.join(__dirname)));
 
-// Question mapping (for full question content)
-const questionMap = {
-    arc1: "1. Enable low brightness mode. Is the LED brightness acceptable?",
-    arc2: "2. Verify the protection LED. Is it working without delays?",
-    narc1: "1. Is the NARC connecting to Bluetooth properly?"
-};
+// Debugging middleware to log all incoming requests
+app.use((req, res, next) => {
+    console.log(`🔍 Received request: ${req.method} ${req.url}`);
+    next();
+});
+
+// Handle PDF and static file requests with detailed logging
+app.get('/:filename', (req, res) => {
+    const filePath = path.join(__dirname, req.params.filename);
+
+    console.log(`📂 Attempting to serve file: ${req.params.filename}`);
+    console.log(`🔍 Resolved file path: ${filePath}`);
+
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error('❌ Error serving file:', err.message);
+            res.status(404).send(`404 - File Not Found: ${req.params.filename}`);
+        } else {
+            console.log(`✅ Successfully served: ${req.params.filename}`);
+        }
+    });
+});
 
 // API Endpoint for Homework Submission
 app.post('/submit-homework', (req, res) => {

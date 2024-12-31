@@ -260,12 +260,43 @@
     <section class="guide-section">
         <h2>Quick Start Guides</h2>
         <div>
-            <a href="/2024_UA2-125ARC_QuickstartGuide.pdf" class="button quickstart-guide" data-guide="ARC">
-                UA-125 ARC Quick Start Guide
+            <a href="/2024_UA2-125ARC_QuickstartGuide.pdf" 
+                class="button quickstart-guide"
+                data-guide="ARC"
+                target="_blank">
+                    UA-125 ARC Quick Start Guide
+                </a>
+            <a href="/2024_UA2-125_QuickstartGuide.pdf" 
+                class="button quickstart-guide"
+                data-guide="REG"
+                target="_blank">
+                    UA-125 Quick Start Guide
             </a>
-            <a href="/2024_UA2-125_QuickstartGuide.pdf" class="button quickstart-guide" data-guide="STANDARD">
-                UA-125 Quick Start Guide
-            </a>
+            <script>
+                // Debugging event for button clicks
+                document.querySelectorAll('.quickstart-guide').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const guideType = event.target.dataset.guide;
+                        const href = event.target.getAttribute('href');
+            
+                        console.log(`Attempting to load ${guideType} Quick Start Guide.`);
+                        console.log(`Expected URL path: ${href}`);
+            
+                        fetch(href, { method: 'HEAD' })
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log(`${guideType} Guide found at: ${href}`);
+                                } else {
+                                    console.error(`${guideType} Guide not found. Response:`, response.status, response.statusText);
+                                    alert(`The ${guideType} Quick Start Guide could not be found. Please check the path.`);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching the guide:', error);
+                            });
+                    });
+                });
+            </script>
         </div>
     </section>
 
