@@ -69,7 +69,6 @@ const narcQuestionMap = {
 // API Endpoint for Homework Submission
 app.post('/submit-homework', (req, res) => {
     console.log('🔔 POST /submit-homework hit via direct route');
-    res.json({ message: 'Homework submitted successfully' });
 
     const formData = req.body;
     const emailContent = formatEmail(formData);
@@ -88,8 +87,8 @@ app.post('/submit-homework', (req, res) => {
     console.log('📧 Sending email to:', mailOptions.to);
 
     sgMail.send(mailOptions)
-        .then(() => {
-            console.log('✅ Email sent successfully.');
+        .then((result) => {
+            console.log('✅ Email sent successfully. Response:', result);
             res.status(200).json({ message: 'Homework submitted successfully' });
         })
         .catch((error) => {
@@ -99,6 +98,7 @@ app.post('/submit-homework', (req, res) => {
                 details: error.response ? error.response.body : error.message
             });
         });
+
 });
 
 
