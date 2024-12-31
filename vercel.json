@@ -5,7 +5,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "api/index.js",
+      "src": "api/server.js",
       "use": "@vercel/node"
     },
     {
@@ -40,7 +40,7 @@
     },
     {
       "src": "/submit-homework",
-      "dest": "/api/index.js"
+      "dest": "/api/server.js"
     },
     {
       "src": "/(.*)",
