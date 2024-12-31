@@ -318,9 +318,16 @@
                 
                 let emailBody = 'Homework Submission\n';
                 const selectedQuestions = deviceType === 'ARC' ? arcQuestionsText : narcQuestionsText;
-                Object.keys(responses).forEach(key => {
-                    const questionText = selectedQuestions[key] || key;
-                    emailBody += `${questionText}\nAnswer: ${responses[key]}\n`;
+                let counter = 1;
+                Object.keys(selectedQuestions).forEach(key => {
+                    if (responses[key]) {
+                        emailBody += `${counter}. ${selectedQuestions[key]}\nAnswer: ${responses[key]}\n`;
+                        const feedback = document.getElementById(`${key}_text`).value;
+                        if (feedback) {
+                            emailBody += `Feedback: ${feedback}\n`;
+                        }
+                        counter++;
+                    }
                 });
                 
                 try {
