@@ -33,6 +33,9 @@
       {
         "src": "/thank-you",
         "dest": "/thank-you.html"
-      }
+      },
+      { 
+        "src": "/(.*)",
+        "dest": "/public/$1" }
     ]
 }
