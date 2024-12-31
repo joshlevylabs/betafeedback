@@ -412,34 +412,23 @@
             document.getElementById('homeworkForm').onsubmit = async function (e) {
                 e.preventDefault();
                 const email = document.getElementById('emailInput').value;
-                responses['deviceType'] = deviceType;
 
-                // Create a formatted email body
-                let emailBody = 'Homework Submission:\n\n';
-                emailBody += `Email: ${email}\n\n`;
-
-                const selectedQuestions = deviceType === 'ARC' ? arcQuestionsText : narcQuestionsText;
-                let counter = 1;
-
-                Object.keys(selectedQuestions).forEach(key => {
-                    if (responses[key]) {
-                        emailBody += `${counter}. ${selectedQuestions[key]}\n`;
-                        emailBody += `   - Answer: ${responses[key]}\n`;
-
-                        const feedback = document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value.trim() : '';
-                        if (feedback) {
-                            emailBody += `   - Feedback: ${feedback}\n`;
-                        }
-                        emailBody += '\n';
-                        counter++;
-                    }
+                const structuredResponses = {};
+                Object.keys(responses).forEach(key => {
+                    structuredResponses[key] = {
+                        answer: responses[key],
+                        feedback: document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value.trim() : ''
+                    };
                 });
 
                 try {
                     const response = await fetch('/submit-homework', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ emailBody })  // Send only emailBody
+                        body: JSON.stringify({ 
+                            email: email,
+                            responses: structuredResponses
+                        })
                     });
 
                     if (response.ok) {
@@ -451,7 +440,6 @@
                     alert('Error submitting.');
                 }
             };
-
 
         </script>
     </div>
