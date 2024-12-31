@@ -1,10 +1,6 @@
 {
   "builds": [
     {
-      "src": "api/server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "index.html",
       "use": "@vercel/static"
     },
@@ -33,6 +29,10 @@
     {
       "src": "/thank-you",
       "dest": "/thank-you.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
