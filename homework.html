@@ -88,17 +88,38 @@
 
         <form id="homeworkForm">
             <div class="question active" id="q1">
-                <p>Are you using an ARC or a NARC?</p>
+                <p>1. Are you using an UA-125 ARC or a UA-125?</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="nextQuestion('ARC')">ARC</button>
-                    <button type="button" class="button" onclick="nextQuestion('NARC')">NARC</button>
+                    <button type="button" class="button" onclick="nextQuestion('ARC')">UA-125 ARC</button>
+                    <button type="button" class="button" onclick="nextQuestion('NARC')">UA-125</button>
                 </div>
             </div>
 
             <!-- ARC Questions -->
+
             <div class="question" id="arc1">
-                <p><strong>1. Is the LED brightness acceptable when set to low brightness mode?</strong></p>
-                <p class="context">Context: The LED should dim appropriately to avoid glare in dark environments.</p>
+                <p><strong>2. Update the firmware to the latest version (1.60b).</strong></p>
+                <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
+                <p class="context">Context: The NARC LED should dim to prevent excessive brightness in dark environments.</p>
+                <textarea class="feedback" id="arcFwUpdate" placeholder="Provide your feedback here..."></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="question" id="arc2">
+                <p><strong>3. What TV make and model are you using with your ARC?</strong></p>
+                <textarea class="feedback" id="arcTvModel" placeholder="Enter your TV make and model"></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="question" id="arc3">
+                <p><strong>4. Enable low brightness mode. Is the LED brightness acceptable when set to low brightness mode?</strong></p>
+                <p class="context">Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc1', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('arc1', 'No', this)">No</button>
@@ -110,9 +131,12 @@
                 </div>
             </div>
             
-            <div class="question" id="arc2">
-                <p><strong>2. Was the protection LED delayed, potentially confusing users?</strong></p>
-                <p class="context">Context: The protection LED should activate immediately to signal system faults.</p>
+            <div class="question" id="arc4">
+                <p><strong>5. Was the protection LED delayed, potentially confusing users?</strong></p>
+                <p class="context">Instructions: Drive the amp into OVP:<br>
+                   - Option 1: Short outputs with copper wire<br>
+                   - Option 2: Use a large input signal and max out input trims/volume/output trim in the app.<br>
+                   When the CLIP LED turns on, record the timing of LED engagement.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc2', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('arc2', 'No', this)">No</button>
@@ -123,9 +147,10 @@
                     <button type="button" class="next-button" id="next_arc2" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
+
             
-            <div class="question" id="arc3">
-                <p><strong>3. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
+            <div class="question" id="arc5">
+                <p><strong>6. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
                 <p class="context">Context: The amp should unmute instantly to reflect user input accurately.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
@@ -138,8 +163,8 @@
                 </div>
             </div>
             
-            <div class="question" id="arc4">
-                <p><strong>4. Did the TV remain muted after 30 seconds of activating the mute command?</strong></p>
+            <div class="question" id="arc6">
+                <p><strong>7. Did the TV remain muted after 30 seconds of activating the mute command?</strong></p>
                 <p class="context">Context: The TV should maintain mute status until unmuted by the user.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
@@ -152,51 +177,37 @@
                 </div>
             </div>
             
-            <div class="question" id="arc5">
-                <p><strong>5. Was the remote successfully programmed to control the amp's power ON/OFF?</strong></p>
-                <p class="context">Context: The remote should power the amp on and off without issues.</p>
-                <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc5', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc5', 'No', this)">No</button>
-                </div>
-                <textarea class="feedback" id="arc5_text" placeholder="Describe any issues (optional)..."></textarea>
-                <div>
-                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc5" disabled onclick="navigate(1)">Next</button>
-                </div>
-            </div>
-
-            <div class="question" id="arc6">
-                <p><strong>6. Did the amp switch inputs correctly when testing the dual-source switchover?</strong></p>
-                <p class="context">Context: The amp should seamlessly switch inputs between sources.</p>
-                <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc6', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc6', 'No', this)">No</button>
-                </div>
-                <textarea class="feedback" id="arc6_text" placeholder="Describe any switchover issues (optional)..."></textarea>
-                <div>
-                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc6" disabled onclick="navigate(1)">Next</button>
-                </div>
-            </div>
-
             <div class="question" id="arc7">
-                <p><strong>7. Were there any issues observed during rapid DSP EQ frequency adjustments?</strong></p>
-                <p class="context">Context: The DSP EQ should respond smoothly without glitches when adjusting frequencies rapidly.</p>
+                <p><strong>8. Test all IR programming functions with your TV remote. Do they work?</strong></p>
+                <p class="context">Instructions: Connect the IR sensor to the IR port and test the following learning commands in the Sonarc App:<br>
+                   - Power ON/OFF/TOGGLE<br>
+                   - Volume UP/DOWN (-1 and -3)<br>
+                   - Mute ON/OFF/TOGGLE</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc7', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc7', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
                 </div>
-                <textarea class="feedback" id="arc7_text" placeholder="Describe observed issues (optional)..."></textarea>
+                <textarea class="feedback" id="arc5_text" placeholder="Describe any issues"></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc7" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
             <div class="question" id="arc8">
-                <p><strong>8. Did the amp reset to factory defaults successfully?</strong></p>
-                <p class="context">Context: The amp should reset to factory settings without errors when prompted.</p>
+                <p><strong>9. Play the following content at full volume with appropriate load settings:</strong></p>
+                <p>1. <a href="https://www.youtube.com/watch?v=x6TZW1opzFo" target="_blank">https://www.youtube.com/watch?v=x6TZW1opzFo</a><br>
+                   2. <a href="https://www.youtube.com/watch?v=Iv1ncpySOAY" target="_blank">https://www.youtube.com/watch?v=Iv1ncpySOAY</a></p>
+                <textarea class="feedback" id="arc6_text" placeholder="Describe your experience and any observations..."></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="question" id="arc9">
+                <p><strong>10. Did the amp reset to factory defaults successfully?</strong></p>
+                <p class="context">Context: The amp should reset to factory settings without errors when prompted. Go to the Factory Reset setting in the Sonarc App (under the main menu option "Profile Backup/Restore").</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('arc8', 'No', this)">No</button>
@@ -211,7 +222,7 @@
             <!-- NARC Questions -->
 
             <div class="question" id="narc1">
-                <p><strong>1. Is the LED brightness acceptable in low brightness mode?</strong></p>
+                <p><strong>2. Enable low brightness mode. Is the LED brightness acceptable in low brightness mode?</strong></p>
                 <p class="context">Context: The NARC LED should dim to prevent excessive brightness in dark environments.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('narc1', 'Yes', this)">Yes</button>
@@ -225,8 +236,11 @@
             </div>
 
             <div class="question" id="narc2">
-                <p><strong>2. Was the protection LED delayed, potentially confusing users?</strong></p>
-                <p class="context">Context: The protection LED should illuminate instantly if a system fault is detected.</p>
+                <p><strong>3. Was the protection LED delayed, potentially confusing users?</strong></p>
+                <p class="context">Instructions: Drive the amp into OVP:<br>
+                   - Option 1: Short outputs with copper wire<br>
+                   - Option 2: Use a large input signal and max out input trims/volume/output trim in the app.<br>
+                   When the CLIP LED turns on, record the timing of LED engagement.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('narc2', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('narc2', 'No', this)">No</button>
@@ -237,9 +251,22 @@
                     <button type="button" class="next-button" id="next_narc2" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
-
             <div class="question" id="narc3">
-                <p><strong>3. Did the mute command stay active after 30 seconds?</strong></p>
+                <p><strong>4. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
+                <p class="context">Context: The amp should unmute instantly to reflect user input accurately.</p>
+                <div class="answer-buttons">
+                    <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc3', 'No', this)">No</button>
+                </div>
+                <textarea class="feedback" id="arc3_text" placeholder="Provide additional feedback (optional)..."></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button" id="next_arc3" disabled onclick="navigate(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="question" id="narc4">
+                <p><strong>5. Did the mute command stay active after 30 seconds?</strong></p>
                 <p class="context">Context: Mute should remain active until unmuted manually by the user.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('narc3', 'Yes', this)">Yes</button>
@@ -252,23 +279,12 @@
                 </div>
             </div>
 
-            <div class="question" id="narc4">
-                <p><strong>4. Was the remote successfully programmed to control the amp's power ON/OFF?</strong></p>
-                <p class="context">Context: The remote should reliably power the amp on and off without errors.</p>
-                <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('narc4', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('narc4', 'No', this)">No</button>
-                </div>
-                <textarea class="feedback" id="narc4_text" placeholder="Describe any programming issues (optional)..."></textarea>
-                <div>
-                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_narc4" disabled onclick="navigate(1)">Next</button>
-                </div>
-            </div>
-
             <div class="question" id="narc5">
-                <p><strong>5. Did the amp switch inputs correctly during dual-source switchover?</strong></p>
-                <p class="context">Context: The amp should switch between input sources without interruption.</p>
+                <p><strong>6. Test all IR programming functions with your TV remote.</strong></p>
+                <p class="context">Please record your TV model and test the following:<br>
+                   - Power ON/OFF/TOGGLE<br>
+                   - Volume UP/DOWN (-1 and -3)<br>
+                   - Mute ON/OFF/TOGGLE</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('narc5', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('narc5', 'No', this)">No</button>
@@ -281,22 +297,8 @@
             </div>
 
             <div class="question" id="narc6">
-                <p><strong>6. Were there any issues observed during rapid DSP EQ frequency adjustments?</strong></p>
-                <p class="context">Context: The DSP EQ should not experience lag during frequency adjustments.</p>
-                <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('narc6', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('narc6', 'No', this)">No</button>
-                </div>
-                <textarea class="feedback" id="narc6_text" placeholder="Describe observed issues (optional)..."></textarea>
-                <div>
-                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_narc6" disabled onclick="navigate(1)">Next</button>
-                </div>
-            </div>
-
-            <div class="question" id="narc7">
                 <p><strong>7. Did the amp reset to factory defaults successfully?</strong></p>
-                <p class="context">Context: The amp should reset to factory settings without failure.</p>
+                <p class="context">Context: The amp should reset to factory settings without errors when prompted. Go to the Factory Reset setting in the Sonarc App (under the main menu option "Profile Backup/Restore").</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('narc7', 'Yes', this)">Yes</button>
                     <button type="button" class="button" onclick="selectAnswer('narc7', 'No', this)">No</button>
@@ -326,27 +328,27 @@
             let deviceType = '';
         
             const arcQuestionsText = {
-                arc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
-                arc2: 'Verify the protection LED. Is it working without delays?',
-                arc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
-                arc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
-                arc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
-                arc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
-                arc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?',
-                arc8: 'Did the amp reset to factory defaults successfully?'
+                arc1: 'Update FW. What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?',
+                arc2: 'What TV make and model are you using with your ARC?',
+                arc3: 'Enable low brightness mode. Is the LED brightness acceptable? Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).',
+                arc4: 'Was the protection LED delayed, potentially confusing users?',
+                arc5: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+                arc6: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+                arc7: 'Test all IR programming functions with your TV remote.',
+                arc8: 'Play the following content at full volume with appropriate load settings',
+                arc9: ' Did the amp reset to factory defaults successfully?'
             };
         
             const narcQuestionsText = {
                 narc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
-                narc2: 'Verify the protection LED. Is it working without delays?',
+                narc2: 'Was the protection LED delayed, potentially confusing users?',
                 narc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
                 narc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
-                narc5: 'Was the remote successfully programmed to control the amp\'s power ON/OFF?',
-                narc6: 'Did the amp switch inputs correctly when testing the dual-source switchover?',
-                narc7: 'Were there any issues observed during rapid DSP EQ frequency adjustments?'
+                narc5: 'Test all IR programming functions with your TV remote',
+                narc6: 'Did the amp reset to factory defaults successfully?'
             };
         
-            const firmwareVersions = { ARC: '1.59', NARC: '1.59' };
+            const firmwareVersions = { ARC: '1.60b', NARC: '1.60a' };
             
             function nextQuestion(device) {
                 deviceType = device;
