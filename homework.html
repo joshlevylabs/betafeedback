@@ -97,7 +97,7 @@
 
             <!-- ARC Questions -->
 
-            <div class="question active" id="arc1">
+            <div class="question" id="arc1">
                 <p><strong>2. Update the firmware to the latest version (1.60b).</strong></p>
                 <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
                 <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
@@ -109,7 +109,7 @@
             </div>
             
 
-            <div class="question active" id="arc2">
+            <div class="question" id="arc2">
                 <p><strong>3. What TV make and model are you using with your ARC?</strong></p>
                 <textarea class="feedback" id="arc2_text" placeholder="Enter your TV make and model"></textarea>
                 <div>
@@ -209,7 +209,7 @@
                 </div>
             </div>
 
-            <div class="question active" id="arc9">
+            <div class="question" id="arc9">
                 <p><strong>10. Play the following content at full volume with appropriate load settings:</strong></p>
                 <p>1. <a href="https://www.youtube.com/watch?v=x6TZW1opzFo" target="_blank">https://www.youtube.com/watch?v=x6TZW1opzFo</a><br>
                    2. <a href="https://www.youtube.com/watch?v=Iv1ncpySOAY" target="_blank">https://www.youtube.com/watch?v=Iv1ncpySOAY</a></p>
@@ -236,11 +236,11 @@
 
             <!-- NARC Questions -->
 
-            <div class="question active" id="narc0">
+            <div class="question" id="narc0">
                 <p><strong>2. Update the firmware to the latest version (1.60a).</strong></p>
                 <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
                 <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
-                <textarea class="feedback" id="arc1_text" placeholder="Provide your feedback here..."></textarea>
+                <textarea class="feedback" id="narc0_text" placeholder="Provide your feedback here..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
                     <button type="button" class="next-button" id="next_narc0" disabled onclick="navigate(1)">Next</button>
@@ -424,34 +424,34 @@
                 updateProgress();
             }
             document.addEventListener("DOMContentLoaded", function () {
-            
-            // Function to enable the Next button when user types in textarea
-            function enableNextButtonOnInput(textareaId, buttonId) {
-                const textarea = document.getElementById(textareaId);
-                const nextButton = document.getElementById(buttonId);
+                // Function to enable the Next button when user types in textarea
+                function enableNextButtonOnInput(textareaId, buttonId) {
+                    const textarea = document.getElementById(textareaId);
+                    const nextButton = document.getElementById(buttonId);
 
-                if (textarea && nextButton) {
-                    textarea.addEventListener("input", function () {
-                        if (textarea.value.trim().length > 0) {
-                            nextButton.classList.add("enabled");
-                            nextButton.disabled = false;
-                        } else {
-                            nextButton.classList.remove("enabled");
-                            nextButton.disabled = true;
-                        }
-                    });
+                    if (textarea && nextButton) {
+                        textarea.addEventListener("input", function () {
+                            if (textarea.value.trim().length > 0) {
+                                nextButton.classList.add("enabled");
+                                nextButton.disabled = false;
+                            } else {
+                                nextButton.classList.remove("enabled");
+                                nextButton.disabled = true;
+                            }
+                        });
+                    }
                 }
-            }
 
-            // Enable the Next button when user types in arc1_text
-            enableNextButtonOnInput("arc1_text", "next_arc1");
-            enableNextButtonOnInput("arc2_text", "next_arc2");
-            enableNextButtonOnInput("arc3_text", "next_arc3");
-            enableNextButtonOnInput("arc4_text", "next_arc4");
-            enableNextButtonOnInput("arc5_text", "next_arc5");
-            enableNextButtonOnInput("arc6_text", "next_arc6");
-        });
-
+                // Enable the Next button when user types in specific textareas
+                enableNextButtonOnInput("arc1_text", "next_arc1");
+                enableNextButtonOnInput("arc2_text", "next_arc2");
+                enableNextButtonOnInput("arc3_text", "next_arc3");
+                enableNextButtonOnInput("arc4_text", "next_arc4");
+                enableNextButtonOnInput("arc5_text", "next_arc5");
+                enableNextButtonOnInput("arc6_text", "next_arc6");
+                enableNextButtonOnInput("arc6_text", "next_arc9"); // Added for arc9
+                enableNextButtonOnInput("narc0_text", "next_narc0"); // Added for narc0
+            });
 
             function prevQuestion() {
                 if (currentIndex > 0) {
