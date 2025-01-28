@@ -45,24 +45,25 @@ app.get('/:filename', (req, res) => {
 });
 
 const arcQuestionMap = {
-    arc1: "Enable low brightness mode. Is the LED brightness acceptable?",
-    arc2: "Verify the protection LED. Is it working without delays?",
-    arc3: "Did the amp unmute successfully when the volume up or down button was pressed?",
-    arc4: "Did the TV remain muted after 30 seconds of activating the mute command?",
-    arc5: "Was the remote successfully programmed to control the amp's power ON/OFF?",
-    arc6: "Did the amp switch inputs correctly when testing the dual-source switchover?",
-    arc7: "Were there any issues observed during rapid DSP EQ frequency adjustments?",
-    arc8: "Did the amp reset to factory defaults successfully?"
+    arc1: 'Update FW. What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?',
+    arc2: 'What TV make and model are you using with your ARC?',
+    arc3: 'Did you notice any issues when using eARC or ARC settings on your TV?.',
+    arc4: 'Enable low brightness mode. Is the LED brightness acceptable? Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).',
+    arc5: 'Was the protection LED delayed, potentially confusing users?',
+    arc6: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+    arc7: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+    arc8: 'Test all IR programming functions with your TV remote.',
+    arc9: 'Play the following content at full volume with appropriate load settings',
+    arc10: ' Did the amp reset to factory defaults successfully?'
 };
 
 const narcQuestionMap = {
-    narc1: "Enable low brightness mode. Is the LED brightness acceptable?",
-    narc2: "Verify the protection LED. Is it working without delays?",
-    narc3: "Did the amp unmute successfully when the volume up or down button was pressed?",
-    narc4: "Did the TV remain muted after 30 seconds of activating the mute command?",
-    narc5: "Was the remote successfully programmed to control the amp's power ON/OFF?",
-    narc6: "Did the amp switch inputs correctly when testing the dual-source switchover?",
-    narc7: "Were there any issues observed during rapid DSP EQ frequency adjustments?"
+    narc1: 'Enable low brightness mode. Is the LED brightness acceptable?',
+    narc2: 'Was the protection LED delayed, potentially confusing users?',
+    narc3: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+    narc4: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+    narc5: 'Test all IR programming functions with your TV remote',
+    narc6: 'Did the amp reset to factory defaults successfully?'
 };
 
 
