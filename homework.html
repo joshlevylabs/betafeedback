@@ -100,7 +100,7 @@
             <div class="question" id="arc1">
                 <p><strong>2. Update the firmware to the latest version (1.60b).</strong></p>
                 <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
-                <p class="context">Context: The NARC LED should dim to prevent excessive brightness in dark environments.</p>
+                <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
                 <textarea class="feedback" id="arcFwUpdate" placeholder="Provide your feedback here..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
@@ -118,7 +118,21 @@
             </div>
 
             <div class="question" id="arc3">
-                <p><strong>4. Enable low brightness mode. Is the LED brightness acceptable when set to low brightness mode?</strong></p>
+                <p><strong>4. Did you notice any issues when using eARC or ARC settings on your TV?</strong></p>
+                <p class="context">Test by switching the eARC setting from <strong>OFF</strong> to <strong>Auto</strong>. "Auto" enables eARC functionality. Ensure the TV outputs sound correctly in both settings.</p>
+                <div class="answer-buttons">
+                    <button type="button" class="button" onclick="selectAnswer('arc-earc', 'No Issues', this)">No Issues</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc-earc', 'Issues Observed', this)">Issues Observed</button>
+                </div>
+                <textarea class="feedback" id="arcEarcFeedback" placeholder="Describe any issues or observations with eARC or ARC settings (optional)..."></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                </div>
+            </div>
+
+            <div class="question" id="arc4">
+                <p><strong>5. Enable low brightness mode. Is the LED brightness acceptable when set to low brightness mode?</strong></p>
                 <p class="context">Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc1', 'Yes', this)">Yes</button>
@@ -131,8 +145,8 @@
                 </div>
             </div>
             
-            <div class="question" id="arc4">
-                <p><strong>5. Was the protection LED delayed, potentially confusing users?</strong></p>
+            <div class="question" id="arc5">
+                <p><strong>6. Was the protection LED delayed, potentially confusing users?</strong></p>
                 <p class="context">Instructions: Drive the amp into OVP:<br>
                    - Option 1: Short outputs with copper wire<br>
                    - Option 2: Use a large input signal and max out input trims/volume/output trim in the app.<br>
@@ -149,8 +163,8 @@
             </div>
 
             
-            <div class="question" id="arc5">
-                <p><strong>6. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
+            <div class="question" id="arc6">
+                <p><strong>7. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
                 <p class="context">Context: The amp should unmute instantly to reflect user input accurately.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
@@ -163,8 +177,8 @@
                 </div>
             </div>
             
-            <div class="question" id="arc6">
-                <p><strong>7. Did the TV remain muted after 30 seconds of activating the mute command?</strong></p>
+            <div class="question" id="arc7">
+                <p><strong>8. Did the TV remain muted after 30 seconds of activating the mute command?</strong></p>
                 <p class="context">Context: The TV should maintain mute status until unmuted by the user.</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
@@ -177,8 +191,8 @@
                 </div>
             </div>
             
-            <div class="question" id="arc7">
-                <p><strong>8. Test all IR programming functions with your TV remote. Do they work?</strong></p>
+            <div class="question" id="arc8">
+                <p><strong>9. Test all IR programming functions with your TV remote. Do they work?</strong></p>
                 <p class="context">Instructions: Connect the IR sensor to the IR port and test the following learning commands in the Sonarc App:<br>
                    - Power ON/OFF/TOGGLE<br>
                    - Volume UP/DOWN (-1 and -3)<br>
@@ -194,8 +208,8 @@
                 </div>
             </div>
 
-            <div class="question" id="arc8">
-                <p><strong>9. Play the following content at full volume with appropriate load settings:</strong></p>
+            <div class="question" id="arc9">
+                <p><strong>10. Play the following content at full volume with appropriate load settings:</strong></p>
                 <p>1. <a href="https://www.youtube.com/watch?v=x6TZW1opzFo" target="_blank">https://www.youtube.com/watch?v=x6TZW1opzFo</a><br>
                    2. <a href="https://www.youtube.com/watch?v=Iv1ncpySOAY" target="_blank">https://www.youtube.com/watch?v=Iv1ncpySOAY</a></p>
                 <textarea class="feedback" id="arc6_text" placeholder="Describe your experience and any observations..."></textarea>
@@ -205,8 +219,8 @@
                 </div>
             </div>
 
-            <div class="question" id="arc9">
-                <p><strong>10. Did the amp reset to factory defaults successfully?</strong></p>
+            <div class="question" id="arc10">
+                <p><strong>11. Did the amp reset to factory defaults successfully?</strong></p>
                 <p class="context">Context: The amp should reset to factory settings without errors when prompted. Go to the Factory Reset setting in the Sonarc App (under the main menu option "Profile Backup/Restore").</p>
                 <div class="answer-buttons">
                     <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
@@ -330,13 +344,14 @@
             const arcQuestionsText = {
                 arc1: 'Update FW. What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?',
                 arc2: 'What TV make and model are you using with your ARC?',
-                arc3: 'Enable low brightness mode. Is the LED brightness acceptable? Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).',
-                arc4: 'Was the protection LED delayed, potentially confusing users?',
-                arc5: 'Did the amp unmute successfully when the volume up or down button was pressed?',
-                arc6: 'Did the TV remain muted after 30 seconds of activating the mute command?',
-                arc7: 'Test all IR programming functions with your TV remote.',
-                arc8: 'Play the following content at full volume with appropriate load settings',
-                arc9: ' Did the amp reset to factory defaults successfully?'
+                arc3: 'Did you notice any issues when using eARC or ARC settings on your TV?.',
+                arc4: 'Enable low brightness mode. Is the LED brightness acceptable? Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).',
+                arc5: 'Was the protection LED delayed, potentially confusing users?',
+                arc6: 'Did the amp unmute successfully when the volume up or down button was pressed?',
+                arc7: 'Did the TV remain muted after 30 seconds of activating the mute command?',
+                arc8: 'Test all IR programming functions with your TV remote.',
+                arc9: 'Play the following content at full volume with appropriate load settings',
+                arc10: ' Did the amp reset to factory defaults successfully?'
             };
         
             const narcQuestionsText = {
