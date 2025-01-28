@@ -135,13 +135,13 @@ function formatEmail(data) {
     emailBody += `Email: ${data.email}\n\n`;
     emailBody += `Questions:\n`;
 
-    const questionMap = data.deviceType === 'UA125 ARC' ? arcQuestionMap : narcQuestionMap;
+    const questionMap = data.deviceType === 'UA-125 ARC' ? arcQuestionMap : narcQuestionMap;
 
     let counter = 1;
     for (const [key, value] of Object.entries(data.responses)) {
         const question = questionMap[key] || key;
         emailBody += `${counter}. ${question}\n`;
-        emailBody += `   - Answer: ${value.answer || 'No answer'}\n`;
+        emailBody += `   - Answer: ${value.answer}\n`;
 
         if (value.feedback) {
             emailBody += `   - Feedback: ${value.feedback}\n`;
@@ -149,10 +149,9 @@ function formatEmail(data) {
         emailBody += `\n`;
         counter++;
     }
-
+    
     return emailBody;
 }
-
 
 // Start the server (only for local development)
 if (process.env.NODE_ENV !== 'production') {
