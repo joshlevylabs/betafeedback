@@ -382,7 +382,10 @@
             }
 
             function selectAnswer(questionId, answer, button) {
-                responses[questionId] = answer;
+                if (!responses[questionId]) {
+                    responses[questionId] = {};
+                }
+                responses[questionId].answer = answer;
 
                 // Highlight the selected button
                 const buttons = button.parentNode.querySelectorAll('.button');
@@ -391,9 +394,12 @@
 
                 // Enable the next button
                 const nextButton = document.getElementById(`next_${questionId}`);
-                nextButton.classList.add('enabled');
-                nextButton.disabled = false;
+                if (nextButton) {
+                    nextButton.classList.add('enabled');
+                    nextButton.disabled = false;
+                }
             }
+
 
             function navigate(direction) {
                 document.getElementById(currentPath[currentIndex]).classList.remove('active');
