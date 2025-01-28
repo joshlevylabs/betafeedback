@@ -101,19 +101,19 @@
                 <p><strong>2. Update the firmware to the latest version (1.60b).</strong></p>
                 <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
                 <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
-                <textarea class="feedback" id="arcFwUpdate" placeholder="Provide your feedback here..."></textarea>
+                <textarea class="feedback" id="arc1_text" placeholder="Provide your feedback here..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc1" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
             <div class="question" id="arc2">
                 <p><strong>3. What TV make and model are you using with your ARC?</strong></p>
-                <textarea class="feedback" id="arcTvModel" placeholder="Enter your TV make and model"></textarea>
+                <textarea class="feedback" id="arc2_text" placeholder="Enter your TV make and model"></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc2" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -121,13 +121,13 @@
                 <p><strong>4. Did you notice any issues when using eARC or ARC settings on your TV?</strong></p>
                 <p class="context">Test by switching the eARC setting from <strong>OFF</strong> to <strong>Auto</strong>. "Auto" enables eARC functionality. Ensure the TV outputs sound correctly in both settings.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc-earc', 'No Issues', this)">No Issues</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc-earc', 'Issues Observed', this)">Issues Observed</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc3', 'No Issues', this)">No Issues</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc3', 'Issues Observed', this)">Issues Observed</button>
                 </div>
-                <textarea class="feedback" id="arcEarcFeedback" placeholder="Describe any issues or observations with eARC or ARC settings (optional)..."></textarea>
+                <textarea class="feedback" id="arc3_text" placeholder="Describe any issues or observations with eARC or ARC settings (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc3" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -135,13 +135,13 @@
                 <p><strong>5. Enable low brightness mode. Is the LED brightness acceptable when set to low brightness mode?</strong></p>
                 <p class="context">Test with different input sources (Analog and Digital) as well as Switchover behaviors (MUTE/MIX/DUCK).</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc1', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc1', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
                 </div>
-                <textarea class="feedback" id="arc1_text" placeholder="Provide additional feedback (optional)..."></textarea>
+                <textarea class="feedback" id="arc4_text" placeholder="Provide additional feedback (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc1" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc4" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
             
@@ -152,13 +152,13 @@
                    - Option 2: Use a large input signal and max out input trims/volume/output trim in the app.<br>
                    When the CLIP LED turns on, record the timing of LED engagement.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc2', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc2', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc5', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc5', 'No', this)">No</button>
                 </div>
-                <input type="text" class="feedback" id="arc2_text" placeholder="How long was the delay? (optional)">
+                <input type="text" class="feedback" id="arc5_text" placeholder="How long was the delay? (optional)">
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc2" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc5" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -167,13 +167,13 @@
                 <p><strong>7. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
                 <p class="context">Context: The amp should unmute instantly to reflect user input accurately.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc3', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc6', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc6', 'No', this)">No</button>
                 </div>
                 <textarea class="feedback" id="arc3_text" placeholder="Provide additional feedback (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc3" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc6" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
             
@@ -181,13 +181,13 @@
                 <p><strong>8. Did the TV remain muted after 30 seconds of activating the mute command?</strong></p>
                 <p class="context">Context: The TV should maintain mute status until unmuted by the user.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc7', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc7', 'No', this)">No</button>
                 </div>
-                <textarea class="feedback" id="arc4_text" placeholder="Explain if you faced issues (optional)..."></textarea>
+                <textarea class="feedback" id="arc7_text" placeholder="Explain if you faced issues (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc4" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc7" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
             
@@ -198,13 +198,13 @@
                    - Volume UP/DOWN (-1 and -3)<br>
                    - Mute ON/OFF/TOGGLE</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc4', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc4', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc8', 'No', this)">No</button>
                 </div>
-                <textarea class="feedback" id="arc5_text" placeholder="Describe any issues"></textarea>
+                <textarea class="feedback" id="arc8_text" placeholder="Describe any issues"></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc8" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -215,7 +215,7 @@
                 <textarea class="feedback" id="arc6_text" placeholder="Describe your experience and any observations..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button enabled" onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc9" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -223,13 +223,13 @@
                 <p><strong>11. Did the amp reset to factory defaults successfully?</strong></p>
                 <p class="context">Context: The amp should reset to factory settings without errors when prompted. Go to the Factory Reset setting in the Sonarc App (under the main menu option "Profile Backup/Restore").</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc8', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc8', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc10', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('arc10', 'No', this)">No</button>
                 </div>
                 <textarea class="feedback" id="arc8_text" placeholder="Describe any reset issues (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc8" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_arc10" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -269,13 +269,13 @@
                 <p><strong>4. Did the amp unmute successfully when the volume up or down button was pressed?</strong></p>
                 <p class="context">Context: The amp should unmute instantly to reflect user input accurately.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('arc3', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('arc3', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc3', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc3', 'No', this)">No</button>
                 </div>
                 <textarea class="feedback" id="arc3_text" placeholder="Provide additional feedback (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_arc3" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_narc3" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -283,13 +283,13 @@
                 <p><strong>5. Did the mute command stay active after 30 seconds?</strong></p>
                 <p class="context">Context: Mute should remain active until unmuted manually by the user.</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('narc3', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('narc3', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc4', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc4', 'No', this)">No</button>
                 </div>
                 <textarea class="feedback" id="narc3_text" placeholder="Provide additional feedback (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_narc3" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_narc4" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
@@ -314,13 +314,13 @@
                 <p><strong>7. Did the amp reset to factory defaults successfully?</strong></p>
                 <p class="context">Context: The amp should reset to factory settings without errors when prompted. Go to the Factory Reset setting in the Sonarc App (under the main menu option "Profile Backup/Restore").</p>
                 <div class="answer-buttons">
-                    <button type="button" class="button" onclick="selectAnswer('narc7', 'Yes', this)">Yes</button>
-                    <button type="button" class="button" onclick="selectAnswer('narc7', 'No', this)">No</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc6', 'Yes', this)">Yes</button>
+                    <button type="button" class="button" onclick="selectAnswer('narc6', 'No', this)">No</button>
                 </div>
                 <textarea class="feedback" id="narc7_text" placeholder="Describe reset issues (optional)..."></textarea>
                 <div>
                     <button type="button" class="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" class="next-button" id="next_narc7" disabled onclick="navigate(1)">Next</button>
+                    <button type="button" class="next-button" id="next_narc6" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
 
