@@ -97,7 +97,7 @@
 
             <!-- ARC Questions -->
 
-            <div class="question" id="arc1">
+            <div class="question active" id="arc1">
                 <p><strong>2. Update the firmware to the latest version (1.60b).</strong></p>
                 <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
                 <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
@@ -107,8 +107,9 @@
                     <button type="button" class="next-button" id="next_arc1" disabled onclick="navigate(1)">Next</button>
                 </div>
             </div>
+            
 
-            <div class="question" id="arc2">
+            <div class="question active" id="arc2">
                 <p><strong>3. What TV make and model are you using with your ARC?</strong></p>
                 <textarea class="feedback" id="arc2_text" placeholder="Enter your TV make and model"></textarea>
                 <div>
@@ -234,6 +235,17 @@
             </div>
 
             <!-- NARC Questions -->
+
+            <div class="question" id="narc0">
+                <p><strong>2. Update the firmware to the latest version (1.60a).</strong></p>
+                <p><strong>What firmware version are you updating FROM? What type of device are you using, and what version of the Sonarc app is installed?</strong></p>
+                <p class="context">Context: There have been previous issues updating FW if the Sonarc App is not updated prior to updating amp FW.</p>
+                <textarea class="feedback" id="arc1_text" placeholder="Provide your feedback here..."></textarea>
+                <div>
+                    <button type="button" class="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button" id="next_narc0" disabled onclick="navigate(1)">Next</button>
+                </div>
+            </div>
 
             <div class="question" id="narc1">
                 <p><strong>2. Enable low brightness mode. Is the LED brightness acceptable in low brightness mode?</strong></p>
@@ -411,6 +423,35 @@
                 }
                 updateProgress();
             }
+            document.addEventListener("DOMContentLoaded", function () {
+            
+            // Function to enable the Next button when user types in textarea
+            function enableNextButtonOnInput(textareaId, buttonId) {
+                const textarea = document.getElementById(textareaId);
+                const nextButton = document.getElementById(buttonId);
+
+                if (textarea && nextButton) {
+                    textarea.addEventListener("input", function () {
+                        if (textarea.value.trim().length > 0) {
+                            nextButton.classList.add("enabled");
+                            nextButton.disabled = false;
+                        } else {
+                            nextButton.classList.remove("enabled");
+                            nextButton.disabled = true;
+                        }
+                    });
+                }
+            }
+
+            // Enable the Next button when user types in arc1_text
+            enableNextButtonOnInput("arc1_text", "next_arc1");
+            enableNextButtonOnInput("arc2_text", "next_arc2");
+            enableNextButtonOnInput("arc3_text", "next_arc3");
+            enableNextButtonOnInput("arc4_text", "next_arc4");
+            enableNextButtonOnInput("arc5_text", "next_arc5");
+            enableNextButtonOnInput("arc6_text", "next_arc6");
+        });
+
 
             function prevQuestion() {
                 if (currentIndex > 0) {
