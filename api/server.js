@@ -131,27 +131,27 @@ app.post('/api/server', (req, res) => {
 });
 
 function formatEmail(data) {
-    let emailBody = `Homework Submission:\n\n`;
-    emailBody += `Email: ${data.email}\n\n`;
-    emailBody += `Questions:\n`;
+    let emailBody = `<strong>Homework Submission</strong><br><br>`;
+    emailBody += `<strong>Email:</strong> ${data.email}<br><br>`;
+    emailBody += `<strong>Questions:</strong><br>`;
 
-    const questionMap = data.deviceType === 'UA-125 ARC' ? arcQuestionMap : narcQuestionMap;
+    const questionMap = data.deviceType === 'ARC' ? arcQuestionMap : narcQuestionMap;
 
     let counter = 1;
     for (const [key, value] of Object.entries(data.responses)) {
-        const question = questionMap[key] || key;
-        emailBody += `${counter}. ${question}\n`;
-        emailBody += `   - Answer: ${value.answer}\n`;
+        const question = questionMap[key] || key; // Use the mapped question or fallback to key
+        const answer = value.answer ? JSON.stringify(value.answer).replace(/['"]+/g, '') : 'No Answer'; // Safely extract answer
+        const feedback = value.feedback || 'No Feedback Provided'; // Safely extract feedback
 
-        if (value.feedback) {
-            emailBody += `   - Feedback: ${value.feedback}\n`;
-        }
-        emailBody += `\n`;
+        emailBody += `<p><strong>${counter}. ${question}</strong><br>`;
+        emailBody += `<strong>Answer:</strong> ${answer}<br>`;
+        emailBody += `<strong>Feedback:</strong> ${feedback}</p>`;
         counter++;
     }
-    
+
     return emailBody;
 }
+
 
 // Start the server (only for local development)
 if (process.env.NODE_ENV !== 'production') {

@@ -475,13 +475,26 @@
 
             document.getElementById('homeworkForm').onsubmit = async function (e) {
                 e.preventDefault();
+
                 const email = document.getElementById('emailInput').value;
 
+                // Ensure all questions are captured
+                currentPath.forEach((questionId) => {
+                    const feedbackInput = document.getElementById(`${questionId}_text`);
+                    if (!responses[questionId]) {
+                        responses[questionId] = {};
+                    }
+
+                    if (feedbackInput) {
+                        responses[questionId].feedback = feedbackInput.value.trim();
+                    }
+                });
+
                 const structuredResponses = {};
-                Object.keys(responses).forEach(key => {
+                Object.keys(responses).forEach((key) => {
                     structuredResponses[key] = {
-                        answer: responses[key],
-                        feedback: document.getElementById(`${key}_text`) ? document.getElementById(`${key}_text`).value.trim() : ''
+                        answer: responses[key].answer || 'No Answer', // Default if no answer selected
+                        feedback: responses[key].feedback || 'No Feedback Provided', // Default if no feedback
                     };
                 });
 
@@ -489,11 +502,11 @@
                     const response = await fetch('/submit-homework', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
+                        body: JSON.stringify({
                             email: email,
-                            deviceType: deviceType,  // Pass ARC or NARC to the server
-                            responses: structuredResponses
-                        })
+                            deviceType: deviceType,
+                            responses: structuredResponses,
+                        }),
                     });
 
                     if (response.ok) {
@@ -505,7 +518,6 @@
                     alert('Error submitting.');
                 }
             };
-
 
         </script>
     </div>
