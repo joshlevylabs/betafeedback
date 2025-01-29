@@ -54,7 +54,7 @@ const arcQuestionMap = {
     arc7: 'Did the TV remain muted after 30 seconds of activating the mute command?',
     arc8: 'Test all IR programming functions with your TV remote.',
     arc9: 'Play the following content at full volume with appropriate load settings',
-    arc10: ' Did the amp reset to factory defaults successfully?'
+    arc10: 'Did the amp reset to factory defaults successfully?'
 };
 
 const narcQuestionMap = {
@@ -135,13 +135,16 @@ function formatEmail(data) {
     emailBody += `<strong>Email:</strong> ${data.email}<br><br>`;
     emailBody += `<strong>Questions:</strong><br>`;
 
+    // Use the correct question map
     const questionMap = data.deviceType === 'ARC' ? arcQuestionMap : narcQuestionMap;
 
     let counter = 1;
-    for (const [key, value] of Object.entries(data.responses)) {
-        const question = questionMap[key] || key; // Use the mapped question or fallback to key
-        const answer = value.answer ? JSON.stringify(value.answer).replace(/['"]+/g, '') : 'No Answer'; // Safely extract answer
-        const feedback = value.feedback || 'No Feedback Provided'; // Safely extract feedback
+    for (const key of Object.keys(questionMap)) { 
+        const question = questionMap[key]; 
+        const response = data.responses[key] || { answer: "No Answer", feedback: "No Feedback Provided" }; 
+        
+        const answer = response.answer ? response.answer : 'No Answer';
+        const feedback = response.feedback && response.feedback.trim().length > 0 ? response.feedback : 'No Feedback Provided';
 
         emailBody += `<p><strong>${counter}. ${question}</strong><br>`;
         emailBody += `<strong>Answer:</strong> ${answer}<br>`;

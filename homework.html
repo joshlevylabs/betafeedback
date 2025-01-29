@@ -363,7 +363,7 @@
                 arc7: 'Did the TV remain muted after 30 seconds of activating the mute command?',
                 arc8: 'Test all IR programming functions with your TV remote.',
                 arc9: 'Play the following content at full volume with appropriate load settings',
-                arc10: ' Did the amp reset to factory defaults successfully?'
+                arc10: 'Did the amp reset to factory defaults successfully?'
             };
         
             const narcQuestionsText = {
@@ -478,24 +478,18 @@
 
                 const email = document.getElementById('emailInput').value;
 
-                // Ensure all questions are captured
-                currentPath.forEach((questionId) => {
+                // Iterate through all questions to ensure feedback is captured
+                Object.keys(arcQuestionsText).concat(Object.keys(narcQuestionsText)).forEach((questionId) => {
                     const feedbackInput = document.getElementById(`${questionId}_text`);
                     if (!responses[questionId]) {
-                        responses[questionId] = {};
+                        responses[questionId] = { answer: "No Answer" };
                     }
 
                     if (feedbackInput) {
                         responses[questionId].feedback = feedbackInput.value.trim();
+                    } else {
+                        responses[questionId].feedback = "No Feedback Provided";
                     }
-                });
-
-                const structuredResponses = {};
-                Object.keys(responses).forEach((key) => {
-                    structuredResponses[key] = {
-                        answer: responses[key].answer || 'No Answer', // Default if no answer selected
-                        feedback: responses[key].feedback || 'No Feedback Provided', // Default if no feedback
-                    };
                 });
 
                 try {
@@ -505,7 +499,7 @@
                         body: JSON.stringify({
                             email: email,
                             deviceType: deviceType,
-                            responses: structuredResponses,
+                            responses: responses
                         }),
                     });
 
