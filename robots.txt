@@ -1,2 +1,7 @@
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /private/
+Disallow: /hidden/
+
+# Prevent web crawlers from indexing the entire website
+Noindex: /
