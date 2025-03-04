@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Groups - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <h1>Manage Groups</h1>
+    <form action="/admin/groups" method="GET" class="search-form">
+      <input type="text" name="search" placeholder="Search groups by name or description" value="<%= search || '' %>">
+      <button type="submit">Search</button>
+    </form>
+    <a href="/admin/groups/add" class="button">Add New Group</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% groups.forEach(group => { %>
+          <tr>
+            <td><%= group.name %></td>
+            <td><%= group.description %></td>
+            <td>
+              <a href="/admin/groups/edit/<%= group.id %>" class="btn">Edit</a>
+              <form action="/admin/groups/delete/<%= group.id %>" method="POST" style="display: inline;">
+                <button type="submit" onclick="return confirm('Are you sure?')" class="btn delete">Delete</button>
+              </form>
+              <a href="/admin/groups/manage-users/<%= group.id %>" class="btn">Manage Users</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

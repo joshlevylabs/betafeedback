@@ -1,0 +1,12 @@
+<h1><%= groupName %> FAQs</h1>
+<a href="/admin/groups/<%= groupId %>/faqs/add">Add FAQ</a>
+<% faqs.forEach(faq => { %>
+  <div>
+    <h3><%= faq.question %></h3>
+    <p><%= faq.answer %></p>
+    <a href="/admin/groups/<%= groupId %>/faqs/<%= faq.id %>/edit">Edit</a>
+    <form action="/admin/groups/<%= groupId %>/faqs/<%= faq.id %>/delete" method="POST" style="display:inline;">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+<% }) %>

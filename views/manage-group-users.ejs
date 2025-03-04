@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Users in Group - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <h1>Manage Users in Group: <%= group.name %></h1>
+    <form action="/admin/groups/manage-users/<%= group.id %>" method="POST">
+        <% users.forEach(user => { %>
+            <label style="display: flex; align-items: center;">
+              <% if (user.profile_image) { %>
+                <img 
+                  src="<%= user.profile_image %>" 
+                  alt="<%= user.name %>'s profile image" 
+                  style="width: 20px; height: 20px; border-radius: 50%; margin-right: 5px;"
+                >
+              <% } else { %>
+                <i class="fas fa-user-circle" style="font-size: 20px; margin-right: 5px;"></i>
+              <% } %>
+              <input 
+                type="checkbox" 
+                name="userIds[]" 
+                value="<%= user.id %>" 
+                <%= user.is_member ? 'checked' : '' %>
+              >
+              <%= user.name %>
+            </label><br>
+          <% }) %>
+      <button type="submit">Update Users</button>
+    </form>
+  </div>
+</body>
+</html>

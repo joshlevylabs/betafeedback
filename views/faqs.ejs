@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>FAQs - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <h1>Frequently Asked Questions</h1>
+    <% if (user.is_admin) { %>
+      <a href="/admin/groups/faqs" class="button">Manage All FAQs</a>
+    <% } %>
+    <% groups.forEach(group => { %>
+      <h2><%= group.name %> FAQs</h2>
+      <% if (user.is_admin) { %>
+        <a href="/admin/groups/<%= group.id %>/faqs" class="button">Manage <%= group.name %> FAQs</a>
+      <% } %>
+      <% group.faqs.forEach(faq => { %>
+        <div class="faq-item">
+          <h3><%= faq.question %> <span class="faq-toggle">+</span></h3>
+          <div class="faq-answer">
+            <p><%= faq.answer %></p>
+          </div>
+        </div>
+      <% }) %>
+    <% }) %>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const faqItems = document.querySelectorAll(".faq-item");
+      faqItems.forEach(item => {
+        item.addEventListener("click", function() {
+          const answer = item.querySelector(".faq-answer");
+          const toggle = item.querySelector(".faq-toggle");
+          const isOpen = answer.style.display === "block";
+          answer.style.display = isOpen ? "none" : "block";
+          toggle.textContent = isOpen ? "+" : "-";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

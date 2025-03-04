@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= assignment.title %> - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <div class="assignment-header">
+      <h1><%= assignment.title %></h1>
+      <p><%= assignment.description %></p>
+    </div>
+    <div class="assignment-info">
+        <% if (assignment.requirements) { %>
+          <div class="requirements">
+            <h2>Requirements</h2>
+            <p><%= assignment.requirements %></p>
+          </div>
+        <% } %>
+        <% if (typeof relatedDownloads !== 'undefined' && relatedDownloads.length > 0) { %>
+          <div class="related-downloads">
+            <h2>Related Downloads</h2>
+            <ul>
+              <% relatedDownloads.forEach(download => { %>
+                <li><a href="<%= download.file_path %>" target="_blank"><%= download.file_name %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+      </div>
+    <% if (hasSubmitted) { %>
+      <p>You have already submitted this assignment.</p>
+    <% } else { %>
+      <form action="/submit-assignment" method="POST">
+        <input type="hidden" name="assignmentId" value="<%= assignment.id %>">
+        <div id="questionsContainer">
+          <% questions.forEach((question, index) => { %>
+            <div class="question-card" <%= index === 0 ? '' : 'style="display: none;"' %>>
+              <div class="question-status">
+                Question <%= index + 1 %> of <%= questions.length %>
+              </div>
+              <% if (question.context) { %>
+                <p class="context"><strong>Context:</strong> <%= question.context %></p>
+              <% } %>
+              <% if (question.photo_path) { %>
+                <% question.photo_path.split(',').forEach(photo => { %>
+                  <img src="<%= photo %>" alt="Question Photo" class="question-media">
+                <% }) %>
+              <% } %>
+              <% if (question.video_path) { %>
+                <video src="<%= question.video_path %>" controls class="question-media"></video>
+              <% } %>
+              <p class="question-text"><strong>Question:</strong> <%= question.question %></p>
+              <% if (question.has_yes_no) { %>
+                <div class="yes-no-options">
+                  <label><input type="radio" name="yesNo[<%= index %>]" value="yes" <%= question.yes_no_required ? 'required' : '' %>> Yes</label>
+                  <label><input type="radio" name="yesNo[<%= index %>]" value="no" <%= question.yes_no_required ? 'required' : '' %>> No</label>
+                </div>
+              <% } %>
+              <% if (question.has_text_input) { %>
+                <textarea name="textAnswer[<%= index %>]" placeholder="Your answer" <%= question.text_input_required ? 'required' : '' %> class="text-input"></textarea>
+              <% } %>
+            </div>
+          <% }) %>
+        </div>
+        <div id="navigation">
+          <button type="button" id="prevButton" disabled>Previous</button>
+          <button type="button" id="nextButton">Next</button>
+          <button type="submit" id="submitButton" style="display: none;">Submit Assignment</button>
+        </div>
+      </form>
+    <% } %>
+  </div>
+  <script>
+    let currentQuestion = 0;
+    const questions = document.querySelectorAll('.question-card');
+    const totalQuestions = questions.length;
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    const submitButton = document.getElementById('submitButton');
+
+    function showQuestion(index) {
+      questions.forEach((q, i) => {
+        q.style.display = i === index ? 'block' : 'none';
+      });
+      prevButton.disabled = index === 0;
+      if (index === totalQuestions - 1) {
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'inline-block';
+      } else {
+        nextButton.style.display = 'inline-block';
+        submitButton.style.display = 'none';
+      }
+    }
+
+    function validateQuestion(index) {
+      const question = questions[index];
+      const yesNoInputs = question.querySelectorAll('input[type="radio"]');
+      const textInput = question.querySelector('.text-input');
+      const hasYesNo = yesNoInputs.length > 0;
+      const hasTextInput = !!textInput;
+      const yesNoRequired = hasYesNo && yesNoInputs[0].hasAttribute('required');
+      const textInputRequired = hasTextInput && textInput.hasAttribute('required');
+
+      if (hasYesNo && yesNoRequired) {
+        if (!Array.from(yesNoInputs).some(input => input.checked)) {
+          return false;
+        }
+      }
+      if (hasTextInput && textInputRequired) {
+        if (textInput.value.trim() === '') {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    nextButton.addEventListener('click', () => {
+      if (validateQuestion(currentQuestion)) {
+        if (currentQuestion < totalQuestions - 1) {
+          currentQuestion++;
+          showQuestion(currentQuestion);
+        }
+      } else {
+        alert('Please complete the required fields before proceeding.');
+      }
+    });
+
+    prevButton.addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    });
+
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>

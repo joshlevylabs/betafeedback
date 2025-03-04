@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Submission Details - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .details-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #00000000;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .details-container h2 {
+      margin-bottom: 20px;
+    }
+    .details-container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .details-container th, .details-container td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .details-container th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <div class="details-container">
+      <h2>Submission Details for <%= submission.user_name %> - <%= submission.assignment_title %></h2>
+      <p><strong>Email:</strong> <%= submission.user_email %></p>
+      <p><strong>Submitted At:</strong> <%= submission.submitted_at %></p>
+      <p><strong>Time to Submit:</strong>
+        <% const createdAt = new Date(submission.created_at); %>
+        <% const submittedAt = new Date(submission.submitted_at); %>
+        <% const timeDiff = submittedAt - createdAt; %>
+        <% if (timeDiff >= 0) { %>
+          <% const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); %>
+          <% const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); %>
+          <% const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); %>
+          <%= days %>d <%= hours %>h <%= minutes %>m
+        <% } else { %>
+          Not Available
+        <% } %>
+      </p>
+      <h3>Answers</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Context</th>
+            <th>Question</th>
+            <th>Yes/No Answer</th>
+            <th>Text Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (answers && answers.length > 0) { %>
+            <% answers.forEach(answer => { %>
+              <tr>
+                <td><%= answer.context || 'N/A' %></td>
+                <td><%= answer.question_text || 'N/A' %></td>
+                <td><%= answer.yes_no_answer !== null ? (answer.yes_no_answer ? 'Yes' : 'No') : 'N/A' %></td>
+                <td><%= answer.text_answer || 'N/A' %></td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="4">No answers available for this submission.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

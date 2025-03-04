@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Details - <%= group.name %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .member-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .profile-image {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+      border: 1px solid #666;
+    }
+    .default-icon {
+      font-size: 30px;
+      color: #666;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <h1>Group: <%= group.name %></h1>
+    <p><strong>Description:</strong> <%= group.description || 'No description available' %></p>
+
+    <h2>Group Members</h2>
+    <ul>
+      <% members.forEach(member => { %>
+        <li class="member-info">
+          <% if (member.profile_image) { %>
+            <img src="<%= member.profile_image %>" alt="<%= member.name %>'s Profile Image" class="profile-image">
+          <% } else { %>
+            <i class="fas fa-user-circle default-icon"></i>
+          <% } %>
+          <span><%= member.name %></span>
+        </li>
+      <% }) %>
+    </ul>
+
+    <h2>Your Submitted Assignments</h2>
+    <% if (submissions.length > 0) { %>
+      <ul>
+        <% submissions.forEach(submission => { %>
+          <li><%= submission.content %> (Submitted on <%= submission.submitted_at %>)</li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No submissions yet.</p>
+    <% } %>
+
+    <h2>Outstanding Assignments</h2>
+    <% if (outstandingAssignments.length > 0) { %>
+      <ul>
+        <% outstandingAssignments.forEach(assignment => { %>
+          <li>
+            <strong><%= assignment.title %></strong>: <%= assignment.description %>
+            <a href="/assignments/submit/<%= assignment.id %>" class="button">Submit</a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No outstanding assignments.</p>
+    <% } %>
+
+    <h2>All Group Assignments</h2>
+    <ul>
+      <% assignments.forEach(assignment => { %>
+        <li><strong><%= assignment.title %></strong>: <%= assignment.description %></li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>

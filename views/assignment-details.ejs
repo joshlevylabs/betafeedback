@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Assignment Details - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* [Existing styles unchanged] */
+  </style>
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <%- include('partials/header') %>
+    <div class="details-container">
+      <h1>Assignment Details</h1>
+      <h2>Title: <%= assignment.title %></h2>
+      <p><strong>Description:</strong> <%= assignment.description || 'No description provided' %></p>
+      <p><strong>Assigned to Groups:</strong> <%= groups.map(g => g.name).join(', ') %></p>
+      <h2>Submission Overview</h2>
+      <% const totalUsers = users.length; %>
+      <% const submittedCount = submittedUsers.length; %>
+      <% const outstandingCount = totalUsers - submittedCount; %>
+      <% const percentage = totalUsers > 0 ? Math.round((submittedCount / totalUsers) * 100) : 0; %>
+      <p>Submitted: <%= submittedCount %> / <%= totalUsers %> (<%= percentage %>%)</p>
+      <div class="progress-bar">
+        <div class="progress" data-width="<%= percentage %>"></div>
+      </div>
+      <h3>User Submissions</h3>
+      <ul class="user-list">
+        <% if (submittedUsers.length === 0) { %>
+          <li>No submissions yet</li>
+        <% } else { %>
+          <% submittedUsers.forEach(user => { %>
+            <li class="submitted"><i class="fas fa-check"></i> <%= user.name %></li>
+          <% }) %>
+        <% } %>
+      </ul>
+      <a href="/admin/assignments/<%= assignment.id %>/results" class="button">Show Results</a>
+      <h3>Users Outstanding</h3>
+      <ul class="user-list">
+        <% const notSubmitted = users.filter(u => !submittedUsers.some(su => su.id === u.id)); %>
+        <% if (notSubmitted.length === 0) { %>
+          <li>All users have submitted</li>
+        <% } else { %>
+          <% notSubmitted.forEach(user => { %>
+            <li class="not-submitted"><i class="fas fa-times"></i> <%= user.name %></li>
+          <% }) %>
+        <% } %>
+      </ul>
+      <button id="delete-assignment-button" class="delete-button" data-assignment-id="<%= assignment.id %>">Delete Assignment</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.progress').forEach(function(element) {
+        const width = element.getAttribute('data-width');
+        if (width) {
+          element.style.width = width + '%';
+        }
+      });
+
+      document.getElementById('delete-assignment-button').addEventListener('click', function() {
+        const assignmentId = this.getAttribute('data-assignment-id');
+        deleteAssignment(assignmentId);
+      });
+    });
+
+    function deleteAssignment(assignmentId) {
+      if (confirm('Are you sure you want to delete this assignment? This action cannot be undone.')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/admin/assignments/delete/${assignmentId}`;
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+  </script>
+</body>
+</html>

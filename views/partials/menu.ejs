@@ -1,0 +1,57 @@
+<nav style="position: fixed; left: 0; top: 60px; width: 220px; height: calc(100% - 60px); background-color: #323f48; padding: 20px;">
+    <ul style="list-style: none;">
+      <li style="margin-bottom: 20px;">
+        <a href="/dashboard" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+      <li style="margin-bottom: 20px;">
+        <a href="/feedback" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-comment"></i> Submit Feedback
+        </a>
+      </li>
+      <li style="margin-bottom: 20px;">
+        <a href="/assignments" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-book"></i> HW Assignments
+        </a>
+      </li>
+      <li style="margin-bottom: 20px;">
+        <a href="/downloads" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-download"></i> Downloads
+        </a>
+      </li>
+      <li style="margin-bottom: 20px;">
+        <a href="/faqs" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-question-circle"></i> FAQs
+        </a>
+      </li>
+      <% if (isAdmin) { %>
+        <li style="margin-bottom: 20px;">
+          <a href="/admin/assignments" style="color: #fff; text-decoration: none;">
+            <i class="fas fa-list-alt"></i> Manage HW
+          </a>
+        </li>
+        <li style="margin-bottom: 20px;">
+            <a href="/submissions" style="color: #fff; text-decoration: none;">
+              <i class="fas fa-inbox"></i> Submissions
+            </a>
+          </li>
+        <li style="margin-bottom: 20px;">
+          <a href="/admin/users" style="color: #fff; text-decoration: none;">
+            <i class="fas fa-users"></i> Manage Users
+          </a>
+        </li>
+        <li style="margin-bottom: 20px;">
+            <a href="/admin/groups" style="color: #fff; text-decoration: none;">
+              <i class="fas fa-project-diagram"></i> Manage Groups
+            </a>
+          </li>
+      <% } %>
+      <li style="margin-bottom: 20px;">
+        <a href="/logout" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();" style="color: #fff; text-decoration: none;">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+        <form id="logoutForm" action="/logout" method="POST" style="display: none;"></form>
+      </li>
+    </ul>
+  </nav>

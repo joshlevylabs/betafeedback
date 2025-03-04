@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="sonancebeta.ico" type="image/x-icon">
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and font styles */
+        body, html {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #1f2933;
+        }
+
+        /* Hero section for centering */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #1f2933;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Form container */
+        .hero-content {
+            position: relative;
+            max-width: 600px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #f4f4f4; /* Light background like guide-box */
+        }
+
+        /* Heading */
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000; /* Black text for light background */
+        }
+
+        /* Form inputs */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Submit button */
+        .button {
+            background-color: #1e94c2;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            border: none;
+        }
+
+        .button:hover {
+            background-color: #1177aa;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Paragraph and link */
+        p {
+            margin-top: 20px;
+            color: #000; /* Black text for light background */
+        }
+
+        a {
+            color: #1e94c2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #323f48;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                height: 75vh;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            if (response.ok) {
+                alert('Logged in successfully');
+                window.location.href = '/dashboard';
+            } else {
+                alert('Login failed');
+            }
+        });
+    </script>
+</body>
+</html>

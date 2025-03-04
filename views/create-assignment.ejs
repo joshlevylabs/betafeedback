@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Assignment - SONANCE Beta Program</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .question-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    .media-container { margin-top: 10px; }
+    .uploaded-file { display: flex; align-items: center; margin: 5px 0; }
+    .uploaded-file img, .uploaded-file video { max-width: 100px; max-height: 100px; margin-right: 10px; }
+    .delete-btn { color: red; cursor: pointer; margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <%- include('partials/menu', { isAdmin: user.is_admin }) %>
+  <div class="main-content">
+    <h1>Create New Homework Assignment</h1>
+    <form action="/create-assignment" method="POST" id="assignmentForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+      <label for="requirements">Requirements (optional):</label>
+      <textarea id="requirements" name="requirements"></textarea>
+
+      <h2>Assign to Groups</h2>
+      <div id="groupSelection">
+        <% groups.forEach(group => { %>
+          <label>
+            <input type="checkbox" name="groupIds[]" value="<%= group.id %>" class="group-checkbox">
+            <%= group.name %>
+          </label><br>
+        <% }) %>
+      </div>
+
+      <h2>Related Downloads</h2>
+      <div id="relatedDownloads"></div>
+
+      <h2>Questions</h2>
+      <div id="questionsContainer">
+        <div class="question-card" data-question-index="0">
+          <label>Context (optional):</label>
+          <textarea name="context[]"></textarea>
+          <label>Question/Task (required):</label>
+          <textarea name="question[]" required></textarea>
+          <div class="media-container">
+            <h3>Photos</h3>
+            <button type="button" class="add-photo">Add Photo</button>
+            <div class="photo-inputs"></div>
+            <div class="uploaded-photos"></div>
+          </div>
+          <div class="media-container">
+            <h3>Video</h3>
+            <button type="button" class="add-video">Add Video</button>
+            <div class="video-inputs"></div>
+            <div class="uploaded-videos"></div>
+          </div>
+          <div class="toggle-container">
+            <label class="toggle-label">
+              <input type="checkbox" name="hasYesNo[]" value="1">
+              <span class="toggle-button">Include Yes/No</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" name="yesNoRequired[]" value="1">
+              <span class="toggle-button">Yes/No Required</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" name="hasTextInput[]" value="1">
+              <span class="toggle-button">Include Text Input</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" name="textInputRequired[]" value="1">
+              <span class="toggle-button">Text Input Required</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button type="button" id="addQuestion">Add Another Question</button>
+        <button type="submit" class="button">Create Assignment</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    let questionCount = 0;
+  
+    function addQuestion() {
+      questionCount++;
+      const container = document.getElementById('questionsContainer');
+      const newQuestion = document.createElement('div');
+      newQuestion.className = 'question-card';
+      newQuestion.dataset.questionIndex = questionCount;
+      newQuestion.innerHTML = `
+        <label>Context (optional):</label>
+        <textarea name="context[]"></textarea>
+        <label>Question/Task (required):</label>
+        <textarea name="question[]" required></textarea>
+        <div class="media-container">
+          <h3>Photos</h3>
+          <button type="button" class="add-photo">Add Photo</button>
+          <div class="photo-inputs"></div>
+          <div class="uploaded-photos"></div>
+        </div>
+        <div class="media-container">
+          <h3>Video</h3>
+          <button type="button" class="add-video">Add Video</button>
+          <div class="video-inputs"></div>
+          <div class="uploaded-videos"></div>
+        </div>
+        <div class="toggle-container">
+          <label class="toggle-label">
+            <input type="checkbox" name="hasYesNo[]" value="1">
+            <span class="toggle-button">Include Yes/No</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" name="yesNoRequired[]" value="1">
+            <span class="toggle-button">Yes/No Required</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" name="hasTextInput[]" value="1">
+            <span class="toggle-button">Include Text Input</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" name="textInputRequired[]" value="1">
+            <span class="toggle-button">Text Input Required</span>
+          </label>
+        </div>
+      `;
+      container.appendChild(newQuestion);
+      attachMediaEvents(newQuestion);
+    }
+  
+    function attachMediaEvents(questionCard) {
+      const questionIndex = questionCard.dataset.questionIndex;
+  
+      // Add Photo
+      questionCard.querySelector('.add-photo').addEventListener('click', () => {
+        const photoInputs = questionCard.querySelector('.photo-inputs');
+        const inputDiv = document.createElement('div');
+        inputDiv.innerHTML = `
+          <input type="file" accept="image/*">
+          <button type="button" class="upload-btn">Upload</button>
+          <button type="button" class="cancel-btn">Cancel</button>
+        `;
+        photoInputs.appendChild(inputDiv);
+  
+        const fileInput = inputDiv.querySelector('input[type="file"]');
+        const uploadBtn = inputDiv.querySelector('.upload-btn');
+        const cancelBtn = inputDiv.querySelector('.cancel-btn');
+  
+        uploadBtn.addEventListener('click', () => uploadFile(fileInput, 'photo', questionIndex, inputDiv));
+        cancelBtn.addEventListener('click', () => photoInputs.removeChild(inputDiv));
+      });
+  
+      // Add Video
+      questionCard.querySelector('.add-video').addEventListener('click', () => {
+        const videoInputs = questionCard.querySelector('.video-inputs');
+        const inputDiv = document.createElement('div');
+        inputDiv.innerHTML = `
+          <input type="file" accept="video/*">
+          <button type="button" class="upload-btn">Upload</button>
+          <button type="button" class="cancel-btn">Cancel</button>
+        `;
+        videoInputs.appendChild(inputDiv);
+  
+        const fileInput = inputDiv.querySelector('input[type="file"]');
+        const uploadBtn = inputDiv.querySelector('.upload-btn');
+        const cancelBtn = inputDiv.querySelector('.cancel-btn');
+  
+        uploadBtn.addEventListener('click', () => uploadFile(fileInput, 'video', questionIndex, inputDiv));
+        cancelBtn.addEventListener('click', () => videoInputs.removeChild(inputDiv));
+      });
+    }
+  
+    async function uploadFile(input, type, questionIndex, inputDiv) {
+      if (!input.files || input.files.length === 0) {
+        alert('Please select a file first');
+        return;
+      }
+      const formData = new FormData();
+      formData.append(type, input.files[0]);
+      const endpoint = type === 'photo' ? '/upload-photo' : '/upload-video';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        const container = input.closest('.question-card');
+        const uploadedContainer = container.querySelector(type === 'photo' ? '.uploaded-photos' : '.uploaded-videos');
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'uploaded-file';
+        fileDiv.dataset.fileId = data.fileId;
+        fileDiv.innerHTML = `
+          ${type === 'photo' ? `<img src="${data.path}" alt="Uploaded photo">` : `<video src="${data.path}" controls></video>`}
+          <span>${input.files[0].name}</span>
+          <i class="fas fa-trash delete-btn"></i>
+          <input type="hidden" name="${type}Paths[${questionIndex}][]" value="${data.path}">
+        `;
+        uploadedContainer.appendChild(fileDiv);
+        inputDiv.remove();
+  
+        fileDiv.querySelector('.delete-btn').addEventListener('click', () => deleteFile(fileDiv, data.fileId));
+      } catch (err) {
+        alert('Upload failed: ' + err.message);
+      }
+    }
+  
+    async function deleteFile(fileDiv, fileId) {
+      try {
+        const response = await fetch('/delete-file', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileId })
+        });
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        fileDiv.remove();
+      } catch (err) {
+        alert('Deletion failed: ' + err.message);
+      }
+    }
+  
+    // Initialize existing question cards
+    document.querySelectorAll('.question-card').forEach(attachMediaEvents);
+    document.getElementById('addQuestion').addEventListener('click', addQuestion);
+  
+    // Group and downloads logic
+    document.querySelectorAll('.group-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const selectedGroups = Array.from(document.querySelectorAll('.group-checkbox:checked')).map(cb => cb.value);
+        fetchRelatedDownloads(selectedGroups);
+      });
+    });
+  
+    async function fetchRelatedDownloads(groupIds) {
+      if (groupIds.length === 0) {
+        document.getElementById('relatedDownloads').innerHTML = '';
+        return;
+      }
+      const response = await fetch(`/api/downloads?groupIds=${groupIds.join(',')}`);
+      const downloads = await response.json();
+      const container = document.getElementById('relatedDownloads');
+      const groupedDownloads = downloads.reduce((acc, download) => {
+        const groupId = download.group_id;
+        if (!acc[groupId]) {
+          acc[groupId] = { name: download.group_name, files: [] };
+        }
+        acc[groupId].files.push(download);
+        return acc;
+      }, {});
+  
+      let html = '';
+      for (const groupId in groupedDownloads) {
+        html += `<h3>${groupedDownloads[groupId].name}</h3>`;
+        groupedDownloads[groupId].files.forEach(download => {
+          html += `
+            <div>
+              <input type="checkbox" name="relatedDownloads[${groupId}][]" value="${download.id}">
+              ${download.file_name}
+            </div>
+          `;
+        });
+      }
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

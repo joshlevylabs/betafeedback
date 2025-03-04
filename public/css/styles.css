@@ -1,0 +1,707 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Font Styles */
+body, html {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #1f2933;
+  }
+
+  h1, h2, h3, p, a, li, button, input, textarea {
+    font-family: 'Roboto', sans-serif;
+  }
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('/public/BETA_AMP_PAGE.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hero and Guide Content Alignment */
+.hero-content, .guide-box {
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Hero Text */
+.hero h1, .guide-box h1 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;  /* Black text for contrast */
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 4px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #3a4854; /* Subtle hover background */
+    color: #1e94c2;
+  }
+  
+  nav ul li a i {
+    margin-right: 10px; /* Adds spacing between icon and text */
+  }
+
+  .main-content {
+    margin-left: 220px;
+    padding: 20px;
+    padding-top: 80px;
+    background-color: transparent; /* Changed from #2a3742 */
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 1000;
+}
+
+.header .logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+li {
+margin-bottom: 20px; /* Space between list items */
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers buttons; use 'space-around' for even spacing */
+    flex-direction: column;
+    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+    gap: 20px; /* Space between buttons */
+    margin: 20px 0; /* Vertical spacing around the container */
+}
+
+/* Primary Button */
+.button {
+    padding: 10px 20px; /* Compact size */
+    font-size: 0.9em; /* Slightly smaller text */
+    background-color: #1e94c2; /* Matches your current theme */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-flex; /* Aligns icon and text */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.3s ease; /* Hover effect */
+}
+
+/* Icon inside buttons */
+.button i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Ensure lists and forms don’t overlap */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .button {
+        width: 100%; /* Full-width on mobile for better usability */
+    }
+}
+
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #3a4854; /* Dark input background */
+    color: #fff;
+    border: 1px solid #4a5864;
+    border-radius: 4px;
+  }
+
+/* Specific adjustments for submissions or nested content */
+h2, h3 {
+margin-top: 20px;
+}
+
+.submissions-list ul {
+margin-left: 20px;
+}
+
+.submissions-list li {
+margin-bottom: 10px;
+}
+
+/* Quick Start Guide Box */
+.guide-box {
+    background-color: #f4f4f4;  /* Light background for quick start section */
+    margin: 40px auto;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;  /* Black text */
+}
+
+/* Quick Start Guide Section */
+.guide-section {
+    background-color: #323f48;  /* Dark background for entire section */
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.guide-section h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #fff;  /* White font for "Quick Start Guides" */
+}
+
+.button-container {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Vertically Aligned Buttons */
+.vertical-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Base Button Style */
+base-button, button, .button, .btn {
+    background-color: #1e94c2;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Matches Delete button size */
+    font-size: 0.9em;
+}
+
+.base-button:hover, button:hover, .button:hover, .btn:hover {
+    background-color: #1177aa;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn.delete {
+    background-color: #e74c3c;
+}
+
+.btn.delete:hover {
+    background-color: #c0392b;
+}
+
+/* General Form Button */
+button {
+    padding: 10px;
+    font-size: 0.9em;
+    background-color: #1e94c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Optional: Specific tweak for table buttons */
+table .btn {
+    min-width: 100px; /* Ensures all buttons align neatly */
+    text-align: center;
+}
+
+/* Search Form Specifics */
+.search-form button {
+    padding: 8px 16px; /* Already set, kept for clarity */
+}
+
+.guide-button {
+    width: auto;
+}
+
+  /* General Form Reset */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: none;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    padding: 8px;
+}
+
+.search-form button {
+    padding: 8px 16px;
+}
+
+/* Group Icons on Dashboard */
+.group-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between icons */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.group-icons li {
+    display: flex;
+    flex-direction: column; /* Stacks icon and name vertically */
+    align-items: center;    /* Centers them horizontally */
+    padding: 10px;
+}
+
+.group-icons i {
+    font-size: 2em;         /* Size of the icon */
+    color: #1e94c2;         /* Icon color (adjust as needed) */
+    margin-bottom: 5px;     /* Space between icon and name */
+}
+
+.group-icons i:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+    color: #1177aa; /* Darker blue on hover */
+}
+
+.group-name {
+    font-size: 0.9em;       /* Size of the group name */
+    color: #fff;            /* Text color (adjust to match your theme) */
+    text-align: center;     /* Center-align the text */
+}
+
+.group-link {
+    text-decoration: none;  /* Remove underline from link */
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    text-align: left;
+    max-width: 800px;
+    margin: auto;
+    color: #333;
+}
+
+.faq-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.faq-item p {
+    margin: 10px 0;
+    color: #555;
+  }
+
+.faq-item h3 {
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faq-item .faq-answer {
+    display: none;
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+.faq-toggle {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #1e94c2;
+}
+
+/* Indentation and Styling for Lists */
+.faq-answer ul, .faq-answer ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.faq-answer ul li, .faq-answer ol li {
+    margin-bottom: 10px;
+}
+
+/* Emphasis for subheadings */
+.faq-answer .section-title {
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.05em;
+}
+
+.assignment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Changed from space-around for better alignment */
+  }
+  
+  .assignment-card {
+    background-color: #1e94c2; /* Default color (can be overridden) */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 300px;
+    text-align: center;
+  }
+
+  .assignment-card.unsubmitted {
+    background-color: #e74c3c; /* Red for unsubmitted */
+  }
+  
+  .assignment-card.submitted {
+    background-color: #2ecc71; /* Green for submitted */
+  }
+  
+  .assignment-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .assignment-card.unsubmitted {
+    background-color: #e74c3c; /* Red for unsubmitted */
+  }
+  
+  .assignment-card.submitted {
+    background-color: #2ecc71; /* Green for submitted */
+  }
+
+  .assignment-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .assignment-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .assignment-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .assignment-status {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  .assignment-date,
+  .assignment-groups {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .assignment-info {
+    margin: 20px auto; /* Center horizontally */
+    max-width: 800px; /* Limit width */
+    text-align: center; /* Center inline content */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    color: #000; /* Ensure text is readable */
+  }
+  
+  .assignment-info .requirements,
+  .assignment-info .related-downloads {
+    text-align: left; /* Left-align text within sections */
+    margin-bottom: 20px;
+  }
+
+  .requirements {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000; /* Add this line to set text color to black */
+}
+
+  .question-card {
+    background-color: white;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+    color: black; /* Ensures all text is black */
+  }
+  
+  .question-status {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .context, .question-text {
+    margin-bottom: 20px;
+  }
+
+  .question-text {
+    font-size: 1.5em;
+    font-weight: bold; /* Larger and bold question text */
+  }
+  
+  .yes-no-options {
+    margin-bottom: 20px;
+  }
+  
+  .text-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .question-media {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  #navigation {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #navigation button {
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
+
+  .toggle-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .toggle-label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .toggle-button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+  .toggle-label input {
+    display: none; /* Hide the checkbox */
+  }
+  .toggle-label input:checked + .toggle-button {
+    background-color: #1e94c2;
+    color: white;
+  }
+
+  .delete-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .delete-button:hover {
+    background-color: #c0392b;
+  }
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #333;
+  }
+  
+  .profile-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px 0;
+    background: #ddd;
+  }
+  
+  .profile-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #323f48;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+
+
+  label {
+    font-weight: bold;
+  }
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button {
+    padding: 10px;
+    background-color: #1e94c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #1177aa;
+  }
+
+  
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        height: 75vh;
+    }
+
+    .hero h1 {
+        font-size: 1.8em;
+    }
+
+    .vertical-buttons {
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
