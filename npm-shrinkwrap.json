@@ -27,6 +27,7 @@
         "nodemailer": "^6.10.0",
         "nodemailer-sendgrid-transport": "^0.2.0",
         "nth-check": "^2.1.1",
+        "pg": "^8.13.3",
         "sendgrid": "^5.2.3",
         "sqlite3": "^5.1.7",
         "taffydb": "^2.7.3",
