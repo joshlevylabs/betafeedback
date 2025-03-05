@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const express = require('express');
 const session = require('express-session');
 const pool = require('./db'); 
@@ -14,8 +14,8 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.set('views', path.join(__dirname, '..', 'views'));
 
 app.get('/api/debug', (req, res) => {
     const fs = require('fs');
@@ -572,7 +572,8 @@ app.get('/admin/users/add', isAuthenticated, isAdmin, (req, res) => {
     if (uploadedFiles.has(fileId)) {
       const file = uploadedFiles.get(fileId);
       const fs = require('fs');
-      const filePath = path.join(__dirname, 'public', file.path);
+      const filename = path.basename(file.path);
+      const filePath = path.join(__dirname, '..', 'public', 'uploads', filename);
       fs.unlink(filePath, (err) => {
         if (err) console.error('Error deleting file:', err);
       });

@@ -1,0 +1,55 @@
+Here's my file tree: 
+
+├───api
+│   ├───db.js
+│   ├───server.js
+├───public
+│   ├───2024_UA2-125ARC_QuickstartGuide.pdf
+│   ├───2024_UA2-125_QuickstartGuide.pdf
+│   ├───home.html
+│   ├───login.html
+│   ├───register.html
+│   ├───robots.txt
+│   ├───sonance-logo.png
+│   ├───sonancebeta.ico
+│   ├───css
+│   │   └───styles.css
+│   ├───icons
+│   │   ├───icon1.png
+│   │   └───icon2 .png
+│   └───uploads
+└───views
+│   ├───add-group.ejs
+│   ├───add-user.ejs
+│   ├───admin-all-faqs.ejs
+│   ├───admin-faqs.ejs
+│   ├───admin-groups.ejs
+│   ├───assignment-details.ejs
+│   ├───assignment-results.ejs
+│   ├───assignment.ejs
+│   ├───create-assignment.ejs
+│   ├───created-assignments.ejs
+│   ├───dashboard.ejs
+│   ├───downloads.ejs
+│   ├───edit-group.ejs
+│   ├───edit-user.ejs
+│   ├───faqs.ejs
+│   ├───feedback.ejs
+│   ├───group-details.ejs
+│   ├───manage-group-users.ejs
+│   ├───submission-details.ejs
+│   ├───edit-user.ejs
+│   ├───submissions.ejs
+│   ├───user-groups.ejs
+    └───partials
+│   │   ├───header.ejs
+│   │   └───menu.ejs
+├───.env
+├───init-db.js
+├───package-lock.json
+├───package.json
+├───users.db
+├───vercel.json
+
+
+
