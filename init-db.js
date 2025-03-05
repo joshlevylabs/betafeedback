@@ -1,5 +1,5 @@
-const pool = require('./db');
-const { initializeDatabase } = require('./db');
+const pool = require('./api/db');
+const { initializeDatabase } = require('./api/db');
 
 (async () => {
   await initializeDatabase();

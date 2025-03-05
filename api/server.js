@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const pool = require('./db'); // Adjusted path since server.js is in /api
+const pool = require('./db'); 
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -121,7 +121,7 @@ app.use(session({
       res.redirect('/');
     }
   }
-  
+
   function isAdmin(req, res, next) {
     if (req.user && req.user.is_admin) next();
     else res.status(403).send('Forbidden');
