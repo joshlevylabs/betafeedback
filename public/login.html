@@ -161,15 +161,22 @@
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
+                redirect: 'follow' // Follow redirects
             });
             if (response.ok) {
+                // Check if redirected to dashboard
+                if (response.redirected) {
+                window.location.href = response.url;
+                } else {
                 alert('Logged in successfully');
                 window.location.href = '/api/dashboard';
+                }
             } else {
-                alert('Login failed');
+                const errorText = await response.text();
+                alert(`Login failed: ${errorText}`);
             }
-        });
+            });
     </script>
 </body>
 </html>

@@ -101,17 +101,23 @@ app.use(session({
   })();
 
   async function isAuthenticated(req, res, next) {
+    console.log('Checking authentication, session ID:', req.session.userId);
     if (req.session.userId) {
       try {
         const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [req.session.userId]);
-        if (rows.length === 0) return res.redirect('/');
+        if (rows.length === 0) {
+          console.log('User not found in database');
+          return res.redirect('/');
+        }
         req.user = rows[0];
+        console.log('User authenticated:', req.user.email);
         next();
       } catch (err) {
         console.error('Error fetching user:', err);
         res.redirect('/');
       }
     } else {
+      console.log('No session found');
       res.redirect('/');
     }
   }
@@ -137,8 +143,9 @@ app.use(session({
       const user = rows[0];
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        console.log(`Login successful for user: ${email}`);
-        res.status(200).send('Login successful');
+        req.session.userId = user.id; // Set the session
+        console.log(`Session set for user: ${user.id}`);
+        res.redirect('/api/dashboard'); // Redirect to dashboard
       } else {
         console.log(`Password mismatch for user: ${email}`);
         return res.status(400).send('Invalid credentials');
