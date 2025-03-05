@@ -10,10 +10,13 @@
     }
   ],
   "routes": [
-    { "src": "/.*", "dest": "/api/server" },
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(html|css|js|png|jpg|ico))",
       "dest": "/public/$1"
+    },
+    {
+      "src": "/.*",
+      "dest": "/api/server"
     }
   ]
 }
