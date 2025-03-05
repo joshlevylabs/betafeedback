@@ -14,8 +14,13 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'public'))); // Serve static files from root public directory
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'login.html');
+  res.sendFile(filePath);
+});
 
 app.use(session({
     store: new pgSession({
