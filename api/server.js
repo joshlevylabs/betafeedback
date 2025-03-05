@@ -1,7 +1,7 @@
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const express = require('express');
 const session = require('express-session');
-const pool = require('./db'); 
+const pool = require('db'); 
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
