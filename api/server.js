@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-app.get('/debug', (req, res) => {
+app.get('/api/debug', (req, res) => {
     const fs = require('fs');
     const dirPath = path.join(__dirname, '..', 'public');
     fs.readdir(dirPath, (err, files) => {
@@ -127,22 +127,30 @@ app.use(session({
   
   app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
+    console.log('Login attempt with email:', email);
+    console.log('Received password:', password);
     try {
-      const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-      if (rows.length === 0) return res.status(400).send('Invalid credentials');
-      const user = rows[0];
-      const match = await bcrypt.compare(password, user.password);
-      if (match) {
-        req.session.userId = user.id;
-        res.redirect('/dashboard');
-      } else {
-        res.status(400).send('Invalid credentials');
-      }
+        const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+        if (rows.length === 0) {
+            console.log('No user found with email:', email);
+            return res.status(400).send('Invalid credentials');
+        }
+        const user = rows[0];
+        console.log('User found:', user.email, 'Hashed password:', user.password);
+        const match = await bcrypt.compare(password, user.password);
+        console.log('Password match:', match);
+        if (match) {
+            req.session.userId = user.id;
+            console.log('Session set for user:', user.id);
+            res.redirect('/dashboard');
+        } else {
+            res.status(400).send('Invalid credentials');
+        }
     } catch (err) {
-      console.error('Error during login:', err);
-      res.status(500).send('Server error');
+        console.error('Error during login:', err);
+        res.status(500).send('Server error');
     }
-  });
+});
 
   // Logout endpoint
   app.post('/api/logout', (req, res) => {
