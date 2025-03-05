@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const pool = require('../db'); // Adjusted path since server.js is in /api
+const pool = require('./db'); // Adjusted path since server.js is in /api
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -126,31 +126,28 @@ app.use(session({
   });
   
   app.post('/api/login', async (req, res) => {
+    console.log('Received login request');
     const { email, password } = req.body;
-    console.log('Login attempt with email:', email);
-    console.log('Received password:', password);
     try {
-        const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-        if (rows.length === 0) {
-            console.log('No user found with email:', email);
-            return res.status(400).send('Invalid credentials');
-        }
-        const user = rows[0];
-        console.log('User found:', user.email, 'Hashed password:', user.password);
-        const match = await bcrypt.compare(password, user.password);
-        console.log('Password match:', match);
-        if (match) {
-            req.session.userId = user.id;
-            console.log('Session set for user:', user.id);
-            res.redirect('/api/dashboard');
-        } else {
-            res.status(400).send('Invalid credentials');
-        }
+      const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+      if (rows.length === 0) {
+        console.log(`No user found with email: ${email}`);
+        return res.status(400).send('Invalid credentials');
+      }
+      const user = rows[0];
+      const match = await bcrypt.compare(password, user.password);
+      if (match) {
+        console.log(`Login successful for user: ${email}`);
+        res.status(200).send('Login successful');
+      } else {
+        console.log(`Password mismatch for user: ${email}`);
+        return res.status(400).send('Invalid credentials');
+      }
     } catch (err) {
-        console.error('Error during login:', err);
-        res.status(500).send('Server error');
+      console.error('Error during login:', err);
+      res.status(500).send('Server error');
     }
-});
+  });
 
   // Logout endpoint
   app.post('/api/logout', (req, res) => {

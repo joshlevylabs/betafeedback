@@ -1,3 +1,7 @@
 const pool = require('./db');
-require('./db'); // Runs initializeDatabase()
-pool.end(() => console.log('Database connection closed'));
+const { initializeDatabase } = require('./db');
+
+(async () => {
+  await initializeDatabase();
+  pool.end(() => console.log('Database connection closed'));
+})();
