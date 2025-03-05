@@ -142,7 +142,7 @@ app.use(session({
         if (match) {
             req.session.userId = user.id;
             console.log('Session set for user:', user.id);
-            res.redirect('/dashboard');
+            res.redirect('/api/dashboard');
         } else {
             res.status(400).send('Invalid credentials');
         }

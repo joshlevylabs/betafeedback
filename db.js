@@ -229,19 +229,22 @@ async function initializeDatabase() {
       { name: 'Steve Bartlett', email: 'steve.bartlett-c@sonance.com', password: 'sonance991', is_admin: false },
     ];
 
-    // Add users if they don’t exist
+    // In initializeDatabase(), before the users loop
+    console.log('Starting user creation process...');
+
+    // Inside the loop, enhance logging
     for (const user of usersToAdd) {
-      const existingUser = await pool.query("SELECT * FROM users WHERE email = $1", [user.email]);
-      if (existingUser.rows.length === 0) {
+    const existingUser = await pool.query("SELECT * FROM users WHERE email = $1", [user.email]);
+    if (existingUser.rows.length === 0) {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         await pool.query(
-          "INSERT INTO users (name, email, password, is_admin) VALUES ($1, $2, $3, $4)",
-          [user.name, user.email, hashedPassword, user.is_admin]
+        "INSERT INTO users (name, email, password, is_admin) VALUES ($1, $2, $3, $4)",
+        [user.name, user.email, hashedPassword, user.is_admin]
         );
-        console.log(`Added user: ${user.email}`);
-      } else {
-        console.log(`User already exists: ${user.email}`);
-      }
+        console.log(`Successfully added user: ${user.email}`);
+    } else {
+        console.log(`User already exists in database: ${user.email}`);
+    }
     }
 
     console.log('Database initialization complete.');
@@ -255,3 +258,12 @@ initializeDatabase();
 
 // Export the pool for use in other files
 module.exports = pool;
+
+pool.connect((err, client, release) => {
+    if (err) {
+      console.error('Database connection failed:', err);
+    } else {
+      console.log('Database connected successfully');
+      release();
+    }
+  });
