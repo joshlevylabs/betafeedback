@@ -16,11 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, 'public', 'login.html');
-  res.sendFile(filePath);
-});
+    res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+  });
+  
 
 app.use(session({
     store: new pgSession({
@@ -114,10 +114,6 @@ app.use(session({
     else res.status(403).send('Forbidden');
   }
 
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
-  });
-  
   app.get('/home', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'home.html'));
   });
