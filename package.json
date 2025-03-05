@@ -4,7 +4,7 @@
   "description": "Homework submission form email handler",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node api/server.js"
   },
   "dependencies": {
     "@niledatabase/react": "^3.0.0-alpha.53",
@@ -13,6 +13,7 @@
     "axios": "^1.8.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "connect-pg-simple": "^10.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",

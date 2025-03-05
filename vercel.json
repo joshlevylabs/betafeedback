@@ -1,47 +1,16 @@
 {
   "builds": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
       "src": "api/server.js",
       "use": "@vercel/node"
     },
     {
       "src": "public/*",
       "use": "@vercel/static"
-    },
-    {
-      "src": "homework.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "thank-you.html",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/submit-homework",
-      "dest": "/api/server.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/server.js"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/homework",
-      "dest": "/homework.html"
-    },
-    {
-      "src": "/thank-you",
-      "dest": "/thank-you.html"
-    },
+    { "src": "/.*", "dest": "/api/server" },
     {
       "src": "/(.*)",
       "dest": "/public/$1"

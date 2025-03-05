@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const pool = require('./db'); // Assuming db.js exports a pg Pool
+const pool = require('../db'); // Assuming db.js exports a pg Pool
 const bcrypt = require('bcrypt');
 const app = express();
 const multer = require('multer');
@@ -1277,3 +1277,5 @@ app.get('/submissions/:submissionId/details', isAuthenticated, isAdmin, async (r
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
+
+// new comment to trigger deployment

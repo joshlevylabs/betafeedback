@@ -26,6 +26,14 @@ async function initializeDatabase() {
       )
     `);
 
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS session (
+          sid VARCHAR NOT NULL PRIMARY KEY,
+          sess JSON NOT NULL,
+          expire TIMESTAMP(6) NOT NULL
+        )
+      `);
+
     // Create groups table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS groups (
