@@ -17,10 +17,28 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+
+app.get('/debug', (req, res) => {
+    const fs = require('fs');
+    const dirPath = path.join(__dirname, '..', 'public');
+    fs.readdir(dirPath, (err, files) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error reading public directory', details: err.message });
+      }
+      res.json({ files });
+    });
   });
-  
+
+
+app.get('/', (req, res) => {
+  const filePath = path.resolve(__dirname, '..', 'public', 'login.html');
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error('Error sending login.html:', err);
+      res.status(404).send('Login page not found');
+    }
+  });
+});
 
 app.use(session({
     store: new pgSession({
