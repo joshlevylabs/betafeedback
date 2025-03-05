@@ -16,7 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/debug', (req, res) => {
     const fs = require('fs');
@@ -29,16 +28,6 @@ app.get('/debug', (req, res) => {
     });
   });
 
-
-app.get('/', (req, res) => {
-  const filePath = path.resolve(__dirname, '..', 'public', 'login.html');
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      console.error('Error sending login.html:', err);
-      res.status(404).send('Login page not found');
-    }
-  });
-});
 
 app.use(session({
     store: new pgSession({
@@ -132,11 +121,11 @@ app.use(session({
     else res.status(403).send('Forbidden');
   }
 
-  app.get('/home', isAuthenticated, (req, res) => {
+  app.get('/api/home', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'home.html'));
   });
   
-  app.post('/login', async (req, res) => {
+  app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     try {
       const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -156,12 +145,12 @@ app.use(session({
   });
 
   // Logout endpoint
-  app.post('/logout', (req, res) => {
+  app.post('/api/logout', (req, res) => {
     req.session.destroy(() => res.redirect('/'));
   });
   
 // Dashboard
-app.get('/dashboard', isAuthenticated, async (req, res) => {
+app.get('/api/dashboard', isAuthenticated, async (req, res) => {
     try {
       const groupsResult = await pool.query(
         `SELECT g.* FROM groups g
