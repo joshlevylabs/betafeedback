@@ -4,7 +4,6 @@
   "description": "Homework submission form email handler",
   "main": "server.js",
   "scripts": {
-    "start": "node api/server.js",
     "build": "node init-db.js"
   },
   "dependencies": {
